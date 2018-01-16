@@ -96,9 +96,9 @@ module.exports = {
 
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'X-Files',
+            title: 'X-FILES',
             template: path.resolve(__dirname, 'index.tmpl.html'),
-            favicon: path.resolve(__dirname, 'static/images/Newegg.ico'),
+            favicon: path.resolve(__dirname, 'static/images/20180116015033700_easyicon_net_32.ico'),
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
