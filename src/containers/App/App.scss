@@ -1,7 +1,17 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height: inherit;
+    font-family: $font-stack;
+    -webkit-font-smoothing: antialiased;
+    background: $primary-color;
 }
 
 .container {
-    color: blueviolet;
+    color: black;
+    font-size: 30px;
+    .hello {
+        @include center;
+    }
 }
