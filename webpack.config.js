@@ -98,11 +98,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'X-FILES',
             template: path.resolve(__dirname, 'index.tmpl.html'),
-<<<<<<< HEAD
             favicon: path.resolve(__dirname, 'static/images/favicon_1.ico'),
-=======
-            favicon: path.resolve(__dirname, 'static/images/20180116015033700_easyicon_net_32.ico'),
->>>>>>> a47d90e1f0e1c0aca767dd0c99e19c8e1a96fb63
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
