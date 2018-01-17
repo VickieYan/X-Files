@@ -1,17 +1,20 @@
 @import '../../styles/variables.scss';
-@import '../../styles/mixins.scss';
+@import '../../styles/placeholder.scss';
+
+html,
+body {
+    height: 100%;
+}
 
 body {
-    height: inherit;
-    font-family: $font-stack;
+    font-family: $font-stack-base;
     -webkit-font-smoothing: antialiased;
     background: $primary-color;
 }
 
 .container {
-    color: black;
+    height: inherit;
+    color: $black;
     font-size: 30px;
-    .hello {
-        @include center;
-    }
+    @extend %center;
 }

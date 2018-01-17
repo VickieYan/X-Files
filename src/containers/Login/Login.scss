@@ -1,0 +1,86 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/placeholder';
+
+.wrap {
+    box-sizing: border-box;
+    @include size(390px, 650px);
+    padding: 77px 55px 33px 55px;
+    overflow: hidden;
+    background: $white;
+    border-radius: $radius-login-wrap;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.form {
+    @include size(100%, 100%);
+    font-family: $font-stack-login;
+    .form-title {
+        display: block;
+        margin-bottom: 26px;
+        text-align: center;
+        font-size: 28px;
+        font-weight: 900;
+        line-height: 1.2em;
+        color: $black-light;
+        font-family: $font-stack-login-title;
+    }
+    .form-logo-wrap {
+        @extend .form-title;
+        padding: 8px 0;
+        margin-bottom: 26px;
+        .form-logo {
+            display: inline-block;
+            text-align: center;
+            @include size(50px, 50px);
+            border-radius: 4px;
+            font-size: 36px;
+            font-style: initial;
+            line-height: 50px;
+            color: $white;
+            background: $black-light;
+        }
+    }
+    .textfield {
+        margin-bottom: 10px;
+        width: 100% !important;
+    }
+    .form-btn-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 33px;
+    }
+    .form-btn-wrap {
+        position: relative;
+        margin: 0 auto;
+        width: 100%;
+        z-index: 1;
+        border-radius: 25px;
+        overflow: hidden;
+        &:hover .form-btn-bg {
+            left: 0;
+        }
+        .form-btn-bg {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            z-index: -1;
+            @include size(300%, 100%);
+            background: -webkit-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
+            transition: all 0.4s;
+        }
+        .form-btn {
+            @extend %button;
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+            @include size(100%, 50px);
+            color: $white;
+            text-transform: uppercase;
+            line-height: 1.2;
+            font-size: 15px;
+            font-family: Poppins-Medium;
+        }
+    }
+}
