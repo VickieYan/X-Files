@@ -15,7 +15,7 @@
     },
     "rules": {
         "indent": [
-            1,
+            0,
             4,
             {
                 "SwitchCase": 1
@@ -48,7 +48,10 @@
             1,
             "never"
         ],
-        "react/prefer-stateless-function": "off"
+        "react/prefer-stateless-function": "off",
+        "class-methods-use-this":"off",
+        "jsx-a11y/anchor-is-valid":"off",
+        "no-underscore-dangle":"off"
     },
     "plugins": [
         "react",
