@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import TextField from 'material-ui/TextField'
+import validator from '../../scripts/validator'
 import styles from './Login.scss'
 
 class Login extends Component {
@@ -9,23 +10,56 @@ class Login extends Component {
             isLogin: true,
             username: '',
             password: '',
+            usernameErrorMsg: '',
+            passwordErrorMsg: '',
         }
         this.handleClick = this.handleClick.bind(this)
         this.handleBlur = this.handleBlur.bind(this)
+        // this.handleBlurUsername = this.handleBlurUsername.bind(this)
+        // this.handleBlurPassword = this.handleBlurPassword.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleClick() {
-        this.setState(prevState => ({ isLogin: !prevState.isLogin }))
+        this.setState(prevState => ({
+            isLogin: !prevState.isLogin,
+            username: '',
+            password: '',
+            usernameErrorMsg: '',
+            passwordErrorMsg: '',
+        }))
     }
 
-    handleBlur(e) {
-        const username = e.target.value.trim()
-        const pattern = /^[a-zA-Z0-9_-]{4,16}$/
+    // handleBlurUsername(e) {
+    //     const pattern = /^[a-zA-Z0-9_-]{4,16}$/
+    //     const text = e.target.value.trim()
+    //     const username = pattern.test(text) ? text : null
 
-        if (pattern.test(username)) {
-            this.setState({ username })
+    //     this.setState({ username })
+    // }
+
+    // handleBlurPassword(e) {
+    //     console.log(e.target.value)
+    //     const pattern = /^[a-zA-Z0-9_-]{4,16}$/
+    //     const text = e.target.value.trim()
+    //     const password = pattern.test(text) ? text : null
+
+    //     this.setState({ password })
+    // }
+
+    handleBlur(e) {
+        const { target } = e
+        const text = target.value.trim()
+        const { pattern } = validator[target.name]
+        let { errorMsg } = validator[target.name]
+        const value = pattern.test(text) ? text : null
+        const msgType = { username: 'usernameErrorMsg', password: 'passwordErrorMsg' }[target.name]
+
+        if (target.name === 'password' && value && value === this.state.password) {
+            errorMsg = 'plesase check your password'
         }
+
+        this.setState({ [e.target.name]: value, [msgType]: errorMsg })
     }
 
     handleSubmit(e) {
@@ -33,14 +67,17 @@ class Login extends Component {
     }
 
     render() {
-        const { isLogin } = this.state
+        const {
+            isLogin,
+            username,
+            password,
+            usernameErrorMsg,
+            passwordErrorMsg,
+        } = this.state
         const actionText = isLogin ? 'Login' : 'Sign Up'
         const toggleText = isLogin ? 'Sign Up' : 'Login'
         const signText = isLogin ? "Don't have an account?" : 'Already have an account'
-        // const errorMsg = {
-        //     username: '请输入4-16位的英文短名，支持下划线',
-        //     password: '密码需配合英文',
-        // }
+
         return (
             <div className={styles.wrap}>
                 <form className={styles.form} onSubmit={this.handleSubmit}>
@@ -48,9 +85,11 @@ class Login extends Component {
                     <span className={styles['form-logo-wrap']}><i className={styles['form-logo']}>X</i></span>
                     <TextField
                       fullWidth
+                      type="text"
+                      name="username"
                       className={styles.textfield}
                       onBlur={this.handleBlur}
-                    //   errorText={username  }
+                      errorText={username === null && usernameErrorMsg}
                       floatingLabelText="Username"
                       floatingLabelStyle={{ top: '30px' }}
                       floatingLabelFocusStyle={{ fontSize: '20px', color: 'rgba(0, 0, 0, 0.3)', transition: 'all .4s' }}
@@ -60,7 +99,10 @@ class Login extends Component {
                     <TextField
                       fullWidth
                       type="password"
+                      name="password"
                       className={styles.textfield}
+                      onBlur={this.handleBlur}
+                      errorText={password === null && passwordErrorMsg}
                       floatingLabelText="Password"
                       floatingLabelStyle={{ top: '30px' }}
                       floatingLabelFocusStyle={{ fontSize: '20px', color: 'rgba(0, 0, 0, 0.3)', transition: 'all .4s' }}
@@ -72,7 +114,10 @@ class Login extends Component {
                             <TextField
                               fullWidth
                               type="password"
+                              name="password"
                               className={styles.textfield}
+                              onBlur={this.handleBlur}
+                              errorText={password === null && passwordErrorMsg}
                               floatingLabelText="Password"
                               floatingLabelStyle={{ top: '30px' }}
                               floatingLabelFocusStyle={{ fontSize: '20px', color: 'rgba(0, 0, 0, 0.3)', transition: 'all .4s' }}
