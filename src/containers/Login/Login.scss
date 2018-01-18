@@ -13,6 +13,7 @@
 }
 
 .form {
+    position: relative;
     @include size(100%, 100%);
     font-family: $font-stack-login;
     .form-title {
@@ -43,7 +44,6 @@
     }
     .textfield {
         margin-bottom: 10px;
-        width: 100% !important;
     }
     .form-btn-container {
         display: flex;
@@ -67,7 +67,7 @@
             left: -100%;
             z-index: -1;
             @include size(300%, 100%);
-            background: -webkit-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
+            background: -webkit-linear-gradient(right, $bule, $purple, $bule, $purple);
             transition: all 0.4s;
         }
         .form-btn {
@@ -81,6 +81,23 @@
             line-height: 1.2;
             font-size: 15px;
             font-family: Poppins-Medium;
+        }
+    }
+    .sign-wrap {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 300px;
+        transform: translatex(-50%);
+        padding-top: 120px;
+        text-align: center;
+        font-size: 13px;
+        .sign {
+            color: $gray;
+        }
+        .signup-btn {
+            @extend %button;
+            color: $black-light;
         }
     }
 }
