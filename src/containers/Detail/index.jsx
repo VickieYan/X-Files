@@ -6,7 +6,7 @@ import {
 } from 'material-ui/Stepper'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
-import AppBar from 'material-ui/AppBar'
+// import AppBar from 'material-ui/AppBar'
 // import IconButton from 'material-ui/IconButton'
 // import FontIcon from 'material-ui/FontIcon'
 import Step1 from './Step1'

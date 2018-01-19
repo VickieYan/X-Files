@@ -49,9 +49,11 @@
             "never"
         ],
         "react/prefer-stateless-function": "off",
-        "class-methods-use-this":"off",
-        "jsx-a11y/anchor-is-valid":"off",
-        "no-underscore-dangle":"off"
+        "class-methods-use-this": "off",
+        "jsx-a11y/anchor-is-valid": "off",
+        "no-underscore-dangle": "off",
+        "react/no-array-index-key": "off",
+        "react/prop-types": "off"
     },
     "plugins": [
         "react",
