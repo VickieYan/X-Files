@@ -10,69 +10,74 @@ class Login extends Component {
             isLogin: true,
             username: '',
             password: '',
-            usernameErrorMsg: '',
-            passwordErrorMsg: '',
+            isUsernameValid: null,
+            isPasswordValid: null,
+            isCheckPwValid: null,
         }
         this.handleClick = this.handleClick.bind(this)
+        this.handleFocus = this.handleFocus.bind(this)
         this.handleBlur = this.handleBlur.bind(this)
-        // this.handleBlurUsername = this.handleBlurUsername.bind(this)
-        // this.handleBlurPassword = this.handleBlurPassword.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleClick() {
         this.setState(prevState => ({
             isLogin: !prevState.isLogin,
-            username: '',
-            password: '',
-            usernameErrorMsg: '',
-            passwordErrorMsg: '',
         }))
     }
 
-    // handleBlurUsername(e) {
-    //     const pattern = /^[a-zA-Z0-9_-]{4,16}$/
-    //     const text = e.target.value.trim()
-    //     const username = pattern.test(text) ? text : null
+    handleFocus(e) {
+        // reset current status
+        const { target } = e
+        const statusType = {
+            username: 'isUsernameValid',
+            password: 'isPasswordValid',
+            checkPw: 'isCheckPwValid',
+        }[target.name]
 
-    //     this.setState({ username })
-    // }
-
-    // handleBlurPassword(e) {
-    //     console.log(e.target.value)
-    //     const pattern = /^[a-zA-Z0-9_-]{4,16}$/
-    //     const text = e.target.value.trim()
-    //     const password = pattern.test(text) ? text : null
-
-    //     this.setState({ password })
-    // }
+        this.setState({ [statusType]: null })
+    }
 
     handleBlur(e) {
         const { target } = e
         const text = target.value.trim()
         const { pattern } = validator[target.name]
-        let { errorMsg } = validator[target.name]
+        const isValid = pattern.test(text)
         const value = pattern.test(text) ? text : null
-        const msgType = { username: 'usernameErrorMsg', password: 'passwordErrorMsg' }[target.name]
+        const statusType = {
+            username: 'isUsernameValid',
+            password: 'isPasswordValid',
+            checkPw: 'isCheckPwValid',
+        }[target.name]
 
-        if (target.name === 'password' && value && value === this.state.password) {
-            errorMsg = 'plesase check your password'
+        this.setState({ [statusType]: isValid })
+
+        // check username and password
+        if (target.name !== 'checkPw') {
+            this.setState({ [e.target.name]: value })
+            return
         }
 
-        this.setState({ [e.target.name]: value, [msgType]: errorMsg })
+        // check password is equal
+        if (value !== this.state.password) {
+            this.setState({ isCheckPwValid: false })
+        }
     }
 
     handleSubmit(e) {
         e.preventDefault()
+        const { isUsernameValid, isPasswordValid, isCheckPwValid } = this.state
+        if (isUsernameValid && isPasswordValid && isCheckPwValid) {
+            // submit code here
+        }
     }
 
     render() {
         const {
             isLogin,
-            username,
-            password,
-            usernameErrorMsg,
-            passwordErrorMsg,
+            isUsernameValid,
+            isPasswordValid,
+            isCheckPwValid,
         } = this.state
         const actionText = isLogin ? 'Login' : 'Sign Up'
         const toggleText = isLogin ? 'Sign Up' : 'Login'
@@ -88,8 +93,9 @@ class Login extends Component {
                       type="text"
                       name="username"
                       className={styles.textfield}
+                      onFocus={this.handleFocus}
                       onBlur={this.handleBlur}
-                      errorText={username === null && usernameErrorMsg}
+                      errorText={isUsernameValid === false && validator.username.errorMsg}
                       floatingLabelText="Username"
                       floatingLabelStyle={{ top: '30px' }}
                       floatingLabelFocusStyle={{ fontSize: '20px', color: 'rgba(0, 0, 0, 0.3)', transition: 'all .4s' }}
@@ -101,8 +107,9 @@ class Login extends Component {
                       type="password"
                       name="password"
                       className={styles.textfield}
+                      onFocus={this.handleFocus}
                       onBlur={this.handleBlur}
-                      errorText={password === null && passwordErrorMsg}
+                      errorText={isPasswordValid === false && validator.password.errorMsg}
                       floatingLabelText="Password"
                       floatingLabelStyle={{ top: '30px' }}
                       floatingLabelFocusStyle={{ fontSize: '20px', color: 'rgba(0, 0, 0, 0.3)', transition: 'all .4s' }}
@@ -114,10 +121,11 @@ class Login extends Component {
                             <TextField
                               fullWidth
                               type="password"
-                              name="password"
+                              name="checkPw"
                               className={styles.textfield}
+                              onFocus={this.handleFocus}
                               onBlur={this.handleBlur}
-                              errorText={password === null && passwordErrorMsg}
+                              errorText={isCheckPwValid === false && validator.checkPw.errorMsg}
                               floatingLabelText="Password"
                               floatingLabelStyle={{ top: '30px' }}
                               floatingLabelFocusStyle={{ fontSize: '20px', color: 'rgba(0, 0, 0, 0.3)', transition: 'all .4s' }}

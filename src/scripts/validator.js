@@ -7,4 +7,8 @@ export default {
         pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
         errorMsg: '密码至少八个字符，至少一个字母和一个数字',
     },
+    checkPw: {
+        pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+        errorMsg: '两次输入不一致',
+    },
 }
