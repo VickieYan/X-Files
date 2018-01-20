@@ -1,0 +1,25 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.list-wrap {
+    display: flex;
+    margin-top: 200px;
+    justify-content: center;
+}
+
+.list-wrap-inner {
+    overflow: hidden;
+    width: 60%;
+}
+
+.list {
+    @include size(210px, 236px);
+    width: 160%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    transition: all .4s;
+}
+
+
