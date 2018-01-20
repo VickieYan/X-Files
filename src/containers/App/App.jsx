@@ -3,7 +3,8 @@ import { blueGrey700, white } from 'material-ui/styles/colors'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 // import styles from './App.scss'
-import Detail from '../Detail/index'
+// import Detail from '../Detail/index'
+import Home from '../Home/Home'
 
 class App extends Component {
     render() {
@@ -30,7 +31,7 @@ class App extends Component {
         })
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
-                <Detail />
+                <Home />
             </MuiThemeProvider>
         )
     }
