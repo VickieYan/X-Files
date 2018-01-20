@@ -6,9 +6,6 @@ import {
 } from 'material-ui/Stepper'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
-// import AppBar from 'material-ui/AppBar'
-// import IconButton from 'material-ui/IconButton'
-// import FontIcon from 'material-ui/FontIcon'
 import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
@@ -60,16 +57,13 @@ class MyStepper extends Component {
 
         return (
             <div className={styles.main}>
-                {/* <AppBar
-                  iconElementRight={<FlatButton label="New egg" />}
-                /> */}
                 <div style={{ width: '100%', maxWidth: 700, margin: 'auto' }}>
                     <Stepper activeStep={stepIndex}>
                         <Step>
                             <StepLabel>基本信息</StepLabel>
                         </Step>
                         <Step>
-                            <StepLabel>个人爱好</StepLabel>
+                            <StepLabel>技能爱好</StepLabel>
                         </Step>
                         <Step>
                             <StepLabel>工作贡献</StepLabel>

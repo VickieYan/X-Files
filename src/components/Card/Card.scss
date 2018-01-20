@@ -1,0 +1,15 @@
+.paper {
+    width: 100%;
+    margin: 10% 0;
+    padding: 2% 6% 4% 6%;
+    text-align: center;
+    border: 1px solid #e4ecf3;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all .3s ease;
+}
+
+.paper:hover {
+    box-shadow: 0 26px 40px -24px rgba(0, 36, 100, 0.3);
+    transform: translateY(-6px);
+}
