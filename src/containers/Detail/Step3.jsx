@@ -14,7 +14,6 @@ class Step3 extends Component {
     }
 
     handleClick() {
-        console.log(this.state.memorabilias)
         this.setState({
             memorabilias: [...this.state.memorabilias, ''],
         })
