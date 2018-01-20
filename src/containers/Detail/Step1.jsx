@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import TextField from 'material-ui/TextField'
-// import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton'
-// import ActionFavorite from 'material-ui/svg-icons/action/favorite'
-// import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import ImageUpload from '../../components/ImageUpload/ImageUpload'
 import styles from './index.scss'
+import validator from '../../scripts/validator'
 
 class Step1 extends Component {
     constructor(props) {
@@ -19,8 +17,7 @@ class Step1 extends Component {
         }
         this.handleChangeSex = this.handleChangeSex.bind(this)
         this.handleChangeSingle = this.handleChangeSingle.bind(this)
-        this.handleChangePhone = this.handleChangePhone.bind(this)
-        this.handleChangeEmail = this.handleChangeEmail.bind(this)
+        this.handleBlur = this.handleBlur.bind(this)
     }
 
     handleChangeSex(event, index, sexValue) {
@@ -31,32 +28,17 @@ class Step1 extends Component {
       this.setState({ singleValue })
     }
 
-    handleChangePhone(event) {
-      const phoneNumber = event.target.value
-      const flag = /^1[3|4|5|7|8][0-9]\d{4,8}$/.test(phoneNumber)
-      if (!flag) {
-        this.setState({
-          phoneErrorText: '您输入的手机号码有误',
-        })
-      } else {
-        this.setState({
-          phoneErrorText: null,
-        })
-      }
-    }
-
-    handleChangeEmail(event) {
-      const email = event.target.value
-      const flag = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(email)
-      if (!flag) {
-        this.setState({
-          emailErrorText: '您输入的邮箱有误',
-        })
-      } else {
-        this.setState({
-          emailErrorText: null,
-        })
-      }
+    handleBlur(event) {
+      const { target } = event
+      const text = target.value.trim()
+      const { pattern } = validator[target.name]
+      const { errorMsg } = validator[target.name]
+      const value = pattern.test(text) ? null : errorMsg
+      const statusType = {
+        phone: 'phoneErrorText',
+        email: 'emailErrorText',
+      }[target.name]
+      this.setState({ [statusType]: value })
     }
 
     render() {
@@ -75,6 +57,7 @@ class Step1 extends Component {
                       floatingLabelFixed
                     />
                     <SelectField
+                      name="sex"
                       floatingLabelText="性别"
                       value={this.state.sexValue}
                       onChange={this.handleChangeSex}
@@ -83,6 +66,7 @@ class Step1 extends Component {
                         <MenuItem value={2} primaryText="女" />
                     </SelectField>
                     <SelectField
+                      name="isSingle"
                       floatingLabelText="单身"
                       value={this.state.singleValue}
                       onChange={this.handleChangeSingle}
@@ -105,14 +89,14 @@ class Step1 extends Component {
                       floatingLabelText="手机号码"
                       floatingLabelFixed
                       errorText={this.state.phoneErrorText}
-                      onBlur={this.handleChangePhone}
+                      onBlur={this.handleBlur}
                     />
                     <TextField
-                      name="phone"
+                      name="email"
                       floatingLabelText="邮箱"
                       floatingLabelFixed
                       errorText={this.state.emailErrorText}
-                      onBlur={this.handleChangeEmail}
+                      onBlur={this.handleBlur}
                     />
                     <TextField
                       name="hometown"
