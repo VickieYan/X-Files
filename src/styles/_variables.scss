@@ -1,6 +1,27 @@
-$font-stack: 'Helvetica Neue', Helvetica, Hiragino Sans GB, 'Segoe UI', Arial, sans-serif, serif;
-$primary-color: #f2f2f2;
+// font family
+$font-stack-base       : 'Helvetica Neue', Helvetica, Hiragino Sans GB, Arial, sans-serif, serif !default;
+$font-stack-login      : Poppins-Regular, sans-serif !default;
+$font-stack-login-title: Poppins-Bold !default;
 
+// colors
+$primary-color    : #f2f2f2            !default;
+$theme-color      : rgb(69, 90, 100)   !default;
+$theme-color-light: rgb(159, 172, 179) !default;
+$white            : #fff               !default;
+$black            : #000               !default;
+$black-light      : #333               !default;
+$gray             : #666               !default;
+$gray-light       : #ccc               !default;
+$bule             : #21d4fd            !default;
+$purple           : #b721ff            !default;
+
+// background colors
+$bg-color-base: $primary-color !default;
 
 // margin
 $margin-detail-form: 10%;
+
+// radius
+$radius-base          : 50%;
+$radius-login-wrap    : 10px !default;
+$radius-login-form-btn: 25px !default;
