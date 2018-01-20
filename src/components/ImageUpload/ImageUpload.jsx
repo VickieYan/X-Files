@@ -12,6 +12,7 @@ class ImageUpload extends Component {
     }
 
     imageuploaded(res) {
+        console.log(res)
         if (res.errcode === 0) {
             this.setState({
                 src: res.data.src,
@@ -33,8 +34,8 @@ class ImageUpload extends Component {
                     <ReactCoreImageUpload
                       text="上传头像"
                       className={styles.btn}
-                      inputOfFile="files" // 上传服务器对应表单name
-                      url="http://101.198.151.190/api/upload.php" // 服务器上传位置
+                      inputOfFile="avatar" // 上传服务器对应表单name
+                      url="http://wsmis053:6141/user/testUpdate" // 服务器上传位置
                       imageUploaded={this.imageuploaded}
                       crop
                       cropBtn={{

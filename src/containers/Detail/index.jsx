@@ -16,7 +16,7 @@ class MyStepper extends Component {
         super(props)
         this.state = {
             finished: false,
-            stepIndex: 1,
+            stepIndex: 0,
         }
         this.handleNext = this.handleNext.bind(this)
         this.handlePrev = this.handlePrev.bind(this)
@@ -36,6 +36,7 @@ class MyStepper extends Component {
     }
 
     handleNext() {
+        window.scrollTo(0, 0)
         const { stepIndex } = this.state
         this.setState({
             stepIndex: stepIndex + 1,
@@ -44,6 +45,7 @@ class MyStepper extends Component {
     }
 
     handlePrev() {
+        window.scrollTo(0, 0)
         const { stepIndex } = this.state
         if (stepIndex > 0) {
             this.setState({ stepIndex: stepIndex - 1 })
