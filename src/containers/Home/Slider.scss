@@ -1,20 +1,20 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-.list-wrap {
+.wrap {
     display: flex;
     margin-top: 200px;
     justify-content: center;
 }
 
-.list-wrap-inner {
+.wrap-inner {
     position: relative;
     overflow: hidden;
     width: 60%;
+    padding: 5px 0;
 }
 
 .list {
-    @include size(210px, 236px);
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
@@ -30,14 +30,15 @@
     top: 0;
     @include size(100%, 100%);
     z-index: 999;
-    .control-left, .control-right {
+    .control-left,
+    .control-right {
         width: 60px;
         display: flex;
         align-items: center;
         opacity: 1;
         transition-delay: 0s;
         visibility: visible;
-        transition: opacity 300ms ease-in-out,visibility 0s 2s;
+        transition: opacity 300ms ease-in-out, visibility 0s 2s;
     }
     .control-left {
         background: linear-gradient(to right, #f1f1f1, rgba(255, 255, 255, 0));
