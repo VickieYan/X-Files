@@ -3,8 +3,11 @@ import { blueGrey700, white } from 'material-ui/styles/colors'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 // import styles from './App.scss'
+// import Login from '../Login/Login'
 // import Detail from '../Detail/index'
 import Home from '../Home/Home'
+// import Profile from '../Profile/Profile'
+import './App.scss'
 
 class App extends Component {
     render() {

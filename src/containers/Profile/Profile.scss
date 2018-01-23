@@ -1,0 +1,72 @@
+@import '../../styles/_variables.scss';
+@font-face
+{
+font-family: JosefinSans-Regular;
+src: url('../../../static/fonts/JosefinSans-Regular.ttf'),
+}
+@font-face
+{
+font-family: JosefinSans-Italic;
+src: url('../../../static/fonts/JosefinSans-Italic.ttf'),
+}
+
+.main {
+    width: 80%;
+    margin: 10px auto;
+    padding:20px;
+    overflow: hidden;
+    background: $white;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+}
+
+.left {
+    float: left;
+    width: 50%;
+    img {
+        width: 100%;
+        border-radius: 8px;
+    }
+}
+
+.right {
+    float: right;
+    width: 50%;
+    font-family: 'JosefinSans-Regular';
+    text-align: center;
+    .logo {
+        padding-top: 90px;
+    }
+
+    h4 {
+        margin: 15px 0;
+        font-size: 18px;
+        line-height: 1.1;
+        text-transform: uppercase;
+    }
+
+    p {
+        padding:15px 120px 15px;
+        font-family: '微软雅黑';
+        font-style: italic;
+        font-weight: 600;
+        line-height: 30px;
+        color: #585757;
+    }
+
+    .btn-group {
+        font-family: 'JosefinSans-Italic';
+        .btn {
+            margin: 30px auto;
+            width: 40%;
+        }
+    }
+
+    .icon-group {
+        margin: 10px auto;
+        display: inline-flex;
+        .icon {
+            margin: 15px;
+        }
+    }
+}
+
