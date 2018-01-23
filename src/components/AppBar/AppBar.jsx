@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import HomeIcon from 'material-ui/svg-icons/action/home'
+import HomeIcon from 'material-ui/svg-icons/action/account-circle'
 import Search from '../Search/Search'
 import styles from './AppBar.scss'
 
@@ -18,7 +18,6 @@ class AppBar extends Component {
                         </li>
                         <li className={styles.center}>
                             <span className={styles.homeIcon}><HomeIcon /></span>
-                            <span>个人中心</span>
                         </li>
                     </ul>
                 </div>

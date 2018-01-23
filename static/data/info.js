@@ -1,4 +1,7 @@
-const info = [
+import { redA700, pinkA700, purpleA700, deepPurpleA700, indigoA700, blueA700, lightBlueA700, cyanA700, tealA700, greenA700, lightGreenA700, limeA700, yellowA700, amberA700, orangeA700, deepOrangeA700 } from 'material-ui/styles/colors'
+import { red100, pink100, purple100, deepPurple100, indigo100, blue100, lightBlue100, cyan100, teal100, green100, lightGreen100, lime100, yellow100, amber100, orange100, deepOrange100 } from 'material-ui/styles/colors'
+
+export const info = [
     {
         cName: '福士苍汰',
         department: '三大不溜',
@@ -187,4 +190,70 @@ const info = [
         signature: '痛苦的时候，能坦然流露痛苦的表情，是很幸福的人；紧张的时候，能直接显露紧张的姿势，是很幸福的人。',
     },
 ]
-export default info
+
+export const info2 = [
+    {
+        title: '小寒',
+        subtitle: 'Winter is coming',
+        avatar: 'http://img.hb.aicdn.com/fbacb44ae84bf7c52e1745abbb71df31abd4213b313e0-8XMu1d_fw658',
+        img: 'http://img.hb.aicdn.com/642878cfa73e7789402f8dce0a4e2d490e5ec29f94122-dMl7u0_fw658',
+        background: lightBlue100,
+        color: '#fff',
+    },
+    {
+        title: '立春',
+        subtitle: 'Family Duty Honor',
+        avatar: 'http://img.hb.aicdn.com/c4d66d449aa2527ffb0af7e6834aae7c1b13306438ae7-h4YeES_fw658',
+        img: 'http://img.hb.aicdn.com/8827b78a11d072b744d7608108f04fcbc4f322b19fac4-Fbd6MK_fw658',
+        background: orange100,
+        color: '#fff',
+    },
+    {
+        title: '雨水',
+        subtitle: 'Fire and Blood',
+        avatar: 'http://img.hb.aicdn.com/d4a49b55156318b5b5f28af1c73a96929ce2da275fde-NhIrVJ_fw658',
+        img: 'http://img.hb.aicdn.com/63078ff57e5823d9d94aa592027cf9d4153b656da80c3-vOSyBZ_fw658',
+        background: cyan100,
+        color: '#fff',
+    },
+    {
+        title: '惊蛰',
+        subtitle: 'Hear Me Roar',
+        avatar: 'http://img.hb.aicdn.com/b97148025897236368a46c7a687698ff604e694d16031-Bk1GX0_fw658',
+        img: 'http://img.hb.aicdn.com/21ac42880bda0b11aafc231b32e80213a497ab30a948f-7Kn9za_fw658',
+        background: green100,
+        color: '#fff',
+    },
+    {
+        title: '立夏',
+        subtitle: 'growing strong',
+        avatar: 'http://img.hb.aicdn.com/cb558b3dab9db2dac15972f326e7751953147a0618d65-eCM6nc_fw658',
+        img: 'http://img.hb.aicdn.com/a50bba7a701280368e42a684eff36fef5ca3658197fdc-7kQEWb_fw658',
+        background: amber100,
+        color: '#fff',
+    },
+    {
+        title: '春分',
+        subtitle: 'Ours Is the Fury',
+        avatar: 'http://img.hb.aicdn.com/b3bcd81c745b05cbd68d771baeb4c2ca19dc277916acc-qIKrJr_fw658',
+        img: 'http://img.hb.aicdn.com/4c22753501542ec03667485970407aa872a65468b44f9-yfngEQ_fw658',
+        background: red100,
+        color: '#fff',
+    },
+    {
+        title: '清明',
+        subtitle: 'As High as Honor',
+        avatar: 'http://img.hb.aicdn.com/be9977c5dc7db47af1f27002744a10ccb909ae5221af0-rIYSHU_fw658',
+        img: 'http://img.hb.aicdn.com/988e9d0e5aa205153cb2af717cde84c1bc94fa769bef6-oCuKJM_fw658',
+        background: teal100,
+        color: '#fff',
+    },
+    {
+        title: '寒露',
+        subtitle: 'We Do Not Sow',
+        avatar: 'http://img.hb.aicdn.com/75f6404ae5d4ca6fd5a5a3fa9550504318b4bf2f22c64-2hUTPW_fw658',
+        img: 'http://img.hb.aicdn.com/b6ad2b710dda68c8d492c8ebc6f43c352cc2bad193a9f-3E0bKC_fw658',
+        background: lime100,
+        color: '#fff',
+    },
+]

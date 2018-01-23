@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import Masonry from 'react-masonry-component'
 import AppBar from '../../components/AppBar/AppBar'
 import Fiche from '../../components/Fiche/Fiche'
+import Slider from '../../components/Slider/Slider'
+import { info, info2 } from '../../../static/data/info'
 import styles from './Home.scss'
-import info from '../../../static/data/info'
 
 class Home extends Component {
     render() {
@@ -14,6 +15,7 @@ class Home extends Component {
             <div>
                 <AppBar />
                 <div className={styles.main}>
+                    <Slider data={info2} itemWidth={210} spacing={4} />
                     <Masonry
                       options={masonryOptions}
                       updateOnEachImageLoad={false}
