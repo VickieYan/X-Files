@@ -8,6 +8,24 @@ import { Card, CardHeader, CardMedia, CardTitle } from 'material-ui/Card'
 import styles from './Slider.scss'
 
 class Slider extends Component {
+    static propTypes = {
+        data: PropTypes.arrayOf(PropTypes.shape({
+            title: PropTypes.string.isRequired,
+            subtitle: PropTypes.string.isRequired,
+            avatar: PropTypes.string.isRequired,
+            img: PropTypes.string.isRequired,
+            background: PropTypes.string.isRequired,
+            color: PropTypes.string.isRequired,
+        }).isRequired).isRequired,
+        itemWidth: PropTypes.number,
+        spacing: PropTypes.number,
+    }
+
+    static defaultProps = {
+        itemWidth: 210,
+        spacing: 4,
+    }
+
     constructor() {
         super()
         this.state = { offset: 0 }
@@ -16,6 +34,9 @@ class Slider extends Component {
 
     componentDidMount() {
         this.distance = this.list.offsetWidth
+        document.addEventListener('resize', () => {
+            this.distance = this.list.offsetWidth
+        })
     }
 
     tick(offset) {
@@ -50,11 +71,20 @@ class Slider extends Component {
         }
     }
 
-    renderCard(title, subtitle, avatar, img, index) {
+    renderCard(item, index) {
         const { itemWidth, spacing } = this.props
+        const {
+            title,
+            subtitle,
+            avatar,
+            img,
+            background,
+            color,
+        } = item
         const cardStyle = {
             marginRight: `${spacing}px`,
             borderRadius: '2px',
+            backgroundColor: background,
         }
         return (
             <Card key={index} style={cardStyle}>
@@ -67,7 +97,9 @@ class Slider extends Component {
                 />
                 <CardTitle
                   title={title}
+                  titleColor={color}
                   subtitle={subtitle}
+                  subtitleColor={color}
                   style={{ marginTop: '-35px', backgoundColor: 'rgb(65, 65, 65)' }}
                 />
             </Card>
@@ -83,26 +115,26 @@ class Slider extends Component {
                 <div className={styles['wrap-inner']}>
                     <div ref={(el) => { this.list = el }} className={styles.list} style={listStyle}>
                         {data.map((item, index) =>
-                            this.renderCard(item.title, item.subtitle, item.avatar, item.img, index))
+                            this.renderCard(item, index))
                         }
                     </div>
                     <div className={styles.control}>
                         <div className={styles['control-left']}>
                             <FloatingActionButton
-                                mini
-                                backgroundColor={grey50}
-                                iconStyle={{ fill: grey900 }}
-                                onClick={this.handleClick('toLeft')}
+                              mini
+                              backgroundColor={grey50}
+                              iconStyle={{ fill: grey900 }}
+                              onClick={this.handleClick('toLeft')}
                             >
                                 <HardwareKeyboardArrowLeft />
                             </FloatingActionButton>
                         </div>
                         <div className={styles['control-right']}>
                             <FloatingActionButton
-                                mini
-                                backgroundColor={grey50}
-                                iconStyle={{ fill: grey900 }}
-                                onClick={this.handleClick('toRight')}
+                              mini
+                              backgroundColor={grey50}
+                              iconStyle={{ fill: grey900 }}
+                              onClick={this.handleClick('toRight')}
                             >
                                 <HardwareKeyboardArrowRight />
                             </FloatingActionButton>

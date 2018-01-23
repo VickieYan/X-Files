@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Login from '../Login/Login'
-import Home from '../Home/Home'
+import Home from '../Home/index'
 import styles from './App.scss'
 
 class App extends Component {
