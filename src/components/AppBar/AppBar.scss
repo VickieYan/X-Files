@@ -45,5 +45,13 @@ li {
 }
 
 .center {
+    position: relative;
     float: right !important;
+}
+
+.homeIcon {
+    position: absolute;
+    top: 5px;
+    left: -15px;
+
 }

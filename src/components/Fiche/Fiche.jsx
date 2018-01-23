@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import styles from './Fiche.scss'
 import Checkbox from 'material-ui/Checkbox'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
+import styles from './Fiche.scss'
 
 class Fiche extends Component {
     render() {
@@ -17,7 +17,7 @@ class Fiche extends Component {
         return (
             <div className={styles.main}>
                 <div className={styles.photo}>
-                    <img src={this.props.data.url} />
+                    <img alt="" src={this.props.data.url} />
                 </div>
                 <div className={styles.text}>
                     <p className={styles.signature}>{this.props.data.signature}</p>
@@ -26,9 +26,9 @@ class Fiche extends Component {
                         <span className={styles.department}>{this.props.data.department}</span>
                         <span className={styles.like}>
                             <Checkbox
-                            checkedIcon={<ActionFavorite />}
-                            uncheckedIcon={<ActionFavoriteBorder />}
-                            style={mStyles.checkbox}
+                              checkedIcon={<ActionFavorite />}
+                              uncheckedIcon={<ActionFavoriteBorder />}
+                              style={mStyles.checkbox}
                             />
                         </span>
                     </div>

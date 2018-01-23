@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import HomeIcon from 'material-ui/svg-icons/action/home'
 import Search from '../Search/Search'
 import styles from './AppBar.scss'
 
@@ -7,7 +8,7 @@ class AppBar extends Component {
         return (
             <div className={styles.background}>
                 <div className={styles.logo}>
-                    <img src="../../../static/images/xfiles.png" />
+                    <img alt="" src="../../../static/images/xfiles.png" />
                 </div>
                 <div className={styles.main}>
                     <ul className={styles.nav}>
@@ -15,7 +16,10 @@ class AppBar extends Component {
                         <li>
                             <Search />
                         </li>
-                        <li className={styles.center}>个人中心</li>
+                        <li className={styles.center}>
+                            <span className={styles.homeIcon}><HomeIcon /></span>
+                            <span>个人中心</span>
+                        </li>
                     </ul>
                 </div>
             </div>
