@@ -28,7 +28,11 @@ class Slider extends Component {
 
     constructor() {
         super()
-        this.state = { offset: 0 }
+        this.state = {
+            offset: 0,
+            isLeft: true,
+            isRight: false,
+        }
         this.handleClick = this.handleClick.bind(this)
     }
 
@@ -37,10 +41,6 @@ class Slider extends Component {
         document.addEventListener('resize', () => {
             this.distance = this.list.offsetWidth
         })
-    }
-
-    tick(offset) {
-        this.setState({ offset })
     }
 
     moveTo(next) {
@@ -52,16 +52,23 @@ class Slider extends Component {
         const totalWidth = data.length * (itemWidth + spacing)
         const limit = totalWidth - this.list.offsetWidth
 
-        // handle limit case
+        // 左右按钮状态控制
+        const controller = {
+            isLeft: false,
+            isRight: false,
+        }
+
         if (current > 0) {
             current = 0
+            controller.isLeft = true
         }
 
         if (current < -limit) {
             current = -limit
+            controller.isRight = true
         }
 
-        this.tick(current)
+        this.setState({ offset: current, ...controller })
     }
 
     handleClick(direction) {
@@ -110,6 +117,7 @@ class Slider extends Component {
         const { offset } = this.state
         const { data } = this.props
         const listStyle = { transform: `translateX(${offset}px)` }
+        const hideStyle = { opacity: 0 }
         return (
             <div className={styles.wrap}>
                 <div className={styles['wrap-inner']}>
@@ -119,7 +127,7 @@ class Slider extends Component {
                         }
                     </div>
                     <div className={styles.control}>
-                        <div className={styles['control-left']}>
+                        <div className={styles['control-left']} style={this.state.isLeft ? hideStyle : null}>
                             <FloatingActionButton
                               mini
                               backgroundColor={grey50}
@@ -129,7 +137,7 @@ class Slider extends Component {
                                 <HardwareKeyboardArrowLeft />
                             </FloatingActionButton>
                         </div>
-                        <div className={styles['control-right']}>
+                        <div className={styles['control-right']} style={this.state.isRight ? hideStyle : null}>
                             <FloatingActionButton
                               mini
                               backgroundColor={grey50}

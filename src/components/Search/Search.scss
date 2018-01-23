@@ -1,0 +1,26 @@
+.wrap {
+    position: relative;
+}
+
+.search {
+    box-sizing: border-box;
+    padding: 0 40px 0 20px;
+    width: 150px;
+    height: 38px;
+    font-size: 14px;
+    border: 1px solid #eee;
+    border-radius: 40px;
+    background: #eee;
+    transition: width .5s;
+    outline: none;
+}
+
+.search:focus {
+    width: 240px;
+}
+
+.icon {
+    position: absolute;
+    top: 7px;
+    right: 8px;
+}
