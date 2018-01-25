@@ -2,12 +2,18 @@
 @import '../../styles/variables.scss';
 
 .main {
-    @include center;
-    flex-direction: column; 
+    // @include center;
+    // flex-direction: column; 
+    width: 200px;
+    height: 200px;
+    float: right;
 }
 
 .btn {
     padding: 0 16px;
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
     line-height: 36px;
     color: $white;
     background: $theme-color;

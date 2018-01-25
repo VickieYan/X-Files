@@ -3,7 +3,6 @@ import Chip from 'material-ui/Chip'
 import styles from './Tag.scss'
 // import { grey200, grey700 } from 'material-ui/styles/colors'
 
-
 class Tag extends Component {
     constructor(props) {
         super(props)

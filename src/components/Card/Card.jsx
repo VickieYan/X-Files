@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import FlatButton from 'material-ui/FlatButton'
 import Tag from '../../components/Tag/Tag'
 import styles from './Card.scss'
 
@@ -15,9 +16,27 @@ class Card extends Component {
         return colors[index]
     }
 
-    render() {
+    renderButton() {
         return (
-            <div className={styles.paper}>
+            <div className={styles['button-fields']}>
+                <FlatButton
+                  primary
+                  label="Cancel"
+                  onClick={this.props.onClose}
+                />
+                <FlatButton
+                  primary
+                  label="Submit"
+                  onClick={this.props.onClose}
+                />
+            </div>
+        )
+    }
+
+    render() {
+        const { style, hasButton } = this.props
+        return (
+            <div className={styles.paper} style={style}>
                 <p>{this.props.title}</p>
                 <div className={styles.chipWrapper}>
                     {
@@ -29,6 +48,7 @@ class Card extends Component {
                             />
                         ))
                     }
+                    {hasButton && this.renderButton()}
                 </div>
             </div>
         )

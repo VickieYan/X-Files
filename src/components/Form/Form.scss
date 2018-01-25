@@ -1,0 +1,38 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/placeholder.scss';
+
+.form {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    height: 50px;
+    font-size: 15px;
+    border-bottom: 1px $edit-border-color solid;
+    &:hover {
+        .content {
+            .modify-button {
+                display: inline-block;
+            }
+        }
+    }
+    .label {
+        display: inline-block;
+        width: 30%;
+        font-weight: 600;
+        color: #444;
+    }
+    .content {
+        width: 70%;
+        display: inline-block;
+        .name {
+            color: #1a1a1a;
+        }
+        .modify-button {
+            @extend %button;
+            display: none;
+            margin-left: 20px;
+            color: #3273dc;
+        }
+    }
+}

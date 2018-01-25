@@ -1,4 +1,5 @@
 @import '../../styles/variables.scss';
+@import '../../styles/placeholder.scss';
 @import '../../styles/mixins.scss';
 
 .wrap {
@@ -7,40 +8,34 @@
     background: $edit-bg-color;
 }
 
-.main {
-    width: 1000px;
-    height: 200px;
-    padding: 16px;
-    margin: 20px auto;
-    background: $white;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    box-shadow: 0 4px 16px 1px rgba(0, 0, 0, .05);
-    .head {
-        border-bottom: 1px $edit-border-color solid;
-        .title {
-            font-size: 24px;
-            line-height: 1.5em;
-            font-weight: normal;
-        }
+.fields {
+    width: 70%;
+    display: inline-block;
+}
+
+.avatar {
+    float: right;
+}
+
+.chip-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    .chip {
+        margin: 6px !important;
     }
-    .fields {
-        width: 70%;
-        .field-form {
-            padding: 15px 0;
-            font-size: 15px;
-            border-bottom: 1px $edit-border-color solid;
-            .field-label {
-                display: inline-block;
-                width: 30%;
-                font-weight: 600;
-                color: #444;
-            }
-            .field-name {
-                width: 70%;
-                display: inline-block;
-                color: #1a1a1a;
-            }
-        }
-    }
+}
+
+.dialog-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    @include size(100%, 100%);
+    background: rgba(0, 0, 0, 0.54);
+    transform: translateZ(0px);
+    transition: left 0ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, opacity 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }

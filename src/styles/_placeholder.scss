@@ -1,4 +1,6 @@
 // placeholder
+@import './variables.scss';
+
 %center {
     display: flex;
     align-items: center;
@@ -10,4 +12,16 @@
     border: none;
     cursor: pointer;
     background: transparent;
+}
+
+%edit-card {
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 1000px;
+    padding: 16px;
+    margin: 20px auto;
+    background: $white;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0 4px 16px 1px rgba(0, 0, 0, .05);
 }
