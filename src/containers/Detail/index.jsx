@@ -16,7 +16,7 @@ class MyStepper extends Component {
         super(props)
         this.state = {
             finished: false,
-            stepIndex: 0,
+            stepIndex: 1,
         }
         this.handleNext = this.handleNext.bind(this)
         this.handlePrev = this.handlePrev.bind(this)
@@ -53,31 +53,23 @@ class MyStepper extends Component {
     }
     render() {
         const { finished, stepIndex } = this.state
-        const contentStyle = {
-            margin: '0 16px',
-        }
-
+        const contentStyle = { margin: '0 16px' }
+        const group = ['基本信息', '技能爱好', '工作贡献']
         return (
             <div className={styles.main}>
-                <div style={{ width: '100%', maxWidth: 700, margin: 'auto' }}>
+                <div style={{ width: '70%', maxWidth: '80%', margin: 'auto' }}>
                     <Stepper activeStep={stepIndex}>
-                        <Step>
-                            <StepLabel>基本信息</StepLabel>
-                        </Step>
-                        <Step>
-                            <StepLabel>技能爱好</StepLabel>
-                        </Step>
-                        <Step>
-                            <StepLabel>工作贡献</StepLabel>
-                        </Step>
+                        {group.map((item, index) => (
+                            <Step key={index}>
+                                <StepLabel>{item}</StepLabel>
+                            </Step>
+                        ))}
                     </Stepper>
                     <div style={contentStyle}>
                         {finished ? (
                             <p>
                                 <a
                                   href="#"
-                                //   role="button"
-                                //   tabIndex="0"
                                   onClick={(event) => {
                                         event.preventDefault()
                                         this.setState({ stepIndex: 0, finished: false })

@@ -42,8 +42,8 @@ class Card extends Component {
                     {
                         this.props.words.map((item, index) => (
                             <Tag
-                              content={item}
                               key={index}
+                              content={item}
                               color={this.getRandomColor()}
                             />
                         ))

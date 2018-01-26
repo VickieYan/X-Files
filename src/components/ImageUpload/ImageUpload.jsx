@@ -12,7 +12,6 @@ class ImageUpload extends Component {
     }
 
     imageuploaded(res) {
-        console.log(res)
         if (res.errcode === 0) {
             this.setState({
                 src: res.data.src,
