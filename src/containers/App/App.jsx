@@ -24,7 +24,7 @@ class App extends Component {
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
                 <div className={styles.container}>
-                    <Profile />
+                    <Edit />
                 </div>
             </MuiThemeProvider>
         )
