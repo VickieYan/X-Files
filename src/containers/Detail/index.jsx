@@ -4,6 +4,7 @@ import {
     Stepper,
     StepLabel,
 } from 'material-ui/Stepper'
+import { CSSTransitionGroup } from 'react-transition-group'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import Step1 from './Step1'
@@ -15,8 +16,7 @@ class MyStepper extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            finished: false,
-            stepIndex: 1,
+            stepIndex: 0,
         }
         this.handleNext = this.handleNext.bind(this)
         this.handlePrev = this.handlePrev.bind(this)
@@ -25,13 +25,13 @@ class MyStepper extends Component {
     getStepContent(stepIndex) {
         switch (stepIndex) {
             case 0:
-                return <Step1 />
+                return <Step1 key={0} />
             case 1:
-                return <Step2 />
+                return <Step2 key={1} />
             case 2:
-                return <Step3 />
+                return <Step3 key={2} />
             default:
-                return 'You\'re a long way from home sonny jim!'
+                return <Step1 key={3} />
         }
     }
 
@@ -40,8 +40,10 @@ class MyStepper extends Component {
         const { stepIndex } = this.state
         this.setState({
             stepIndex: stepIndex + 1,
-            finished: stepIndex >= 2,
         })
+        if (stepIndex >= 2) {
+            this.props.history.push('./')
+        }
     }
 
     handlePrev() {
@@ -52,7 +54,7 @@ class MyStepper extends Component {
         }
     }
     render() {
-        const { finished, stepIndex } = this.state
+        const { stepIndex } = this.state
         const contentStyle = { margin: '0 16px' }
         const group = ['基本信息', '技能爱好', '工作贡献']
         return (
@@ -66,36 +68,30 @@ class MyStepper extends Component {
                         ))}
                     </Stepper>
                     <div style={contentStyle}>
-                        {finished ? (
-                            <p>
-                                <a
-                                  href="#"
-                                  onClick={(event) => {
-                                        event.preventDefault()
-                                        this.setState({ stepIndex: 0, finished: false })
-                                    }}
-                                >
-                  Click here
-                                </a> to reset the example.
-                            </p>
-                        ) : (
+                        <div>
                             <div>
-                                <div>{this.getStepContent(stepIndex)}</div>
-                                <div style={{ marginTop: 12 }}>
-                                    <FlatButton
-                                      label="Back"
-                                      disabled={stepIndex === 0}
-                                      onClick={this.handlePrev}
-                                      style={{ marginRight: 12 }}
-                                    />
-                                    <RaisedButton
-                                      label={stepIndex === 2 ? 'Finish' : 'Next'}
-                                      primary
-                                      onClick={this.handleNext}
-                                    />
-                                </div>
+                                <CSSTransitionGroup
+                                  transitionName="fade"
+                                  transitionEnterTimeout={200}
+                                  transitionLeaveTimeout={200}
+                                >
+                                    {this.getStepContent(stepIndex)}
+                                </CSSTransitionGroup>
                             </div>
-                        )}
+                            <div style={{ marginTop: 12 }}>
+                                <FlatButton
+                                  label="Back"
+                                  disabled={stepIndex === 0}
+                                  onClick={this.handlePrev}
+                                  style={{ marginRight: 12 }}
+                                />
+                                <RaisedButton
+                                  label={stepIndex === 2 ? 'Finish' : 'Next'}
+                                  primary
+                                  onClick={this.handleNext}
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

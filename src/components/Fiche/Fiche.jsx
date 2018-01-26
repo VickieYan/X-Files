@@ -15,7 +15,7 @@ class Fiche extends Component {
             },
         }
         return (
-            <div className={styles.main}>
+            <div className={styles.main} onClick={() => { this.props.history.push('./profile') }}>
                 <div className={styles.photo}>
                     <img alt="" src={this.props.data.url} />
                 </div>

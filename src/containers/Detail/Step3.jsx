@@ -10,26 +10,34 @@ class Step3 extends Component {
         this.state = {
             memorabilias: [''],
         }
-        this.handleClick = this.handleClick.bind(this)
+        this.handleAdd = this.handleAdd.bind(this)
+        this.handleDelete = this.handleDelete.bind(this)
     }
 
-    handleClick() {
+    handleAdd() {
         this.setState({
             memorabilias: [...this.state.memorabilias, ''],
         })
+    }
+
+    handleDelete(index) {
+        return () => {
+            console.log('test')
+            const memorabilias = this.state.memorabilias.slice()
+            memorabilias.splice(index, 1)
+            this.setState({ memorabilias })
+        }
     }
 
     render() {
         return (
             <div>
                 <div>
-                    {
-                        this.state.memorabilias.map((item, index) => (<Memorabilia key={index} />))
-                    }
+                    {this.state.memorabilias.map((item, index) => (<Memorabilia key={index} isDeletable onDelete={this.handleDelete(index)} />))}
                 </div>
                 <div className={styles.addBtn}>
                     <FloatingActionButton
-                      onClick={this.handleClick}
+                      onClick={this.handleAdd}
                     >
                         <ContentAdd />
                     </FloatingActionButton>

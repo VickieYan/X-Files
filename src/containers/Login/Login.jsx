@@ -18,6 +18,7 @@ class Login extends Component {
         this.handleFocus = this.handleFocus.bind(this)
         this.handleBlur = this.handleBlur.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleLogin = this.handleLogin.bind(this)
     }
 
     handleClick() {
@@ -70,6 +71,10 @@ class Login extends Component {
         if (isUsernameValid && isPasswordValid && isCheckPwValid) {
             // submit code here
         }
+    }
+
+    handleLogin() {
+        this.props.history.push('./detail')
     }
 
     render() {
@@ -134,7 +139,7 @@ class Login extends Component {
                             /><br />
                         </div>
                     }
-                    <div className={styles['form-btn-container']}>
+                    <div className={styles['form-btn-container']} onClick={this.handleLogin}>
                         <div className={styles['form-btn-wrap']}>
                             <div className={styles['form-btn-bg']} />
                             <button type="submit" className={styles['form-btn']}>{actionText}</button>

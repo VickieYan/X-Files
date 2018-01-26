@@ -129,7 +129,7 @@ class Edit extends Component {
     render() {
         return (
             <div className={styles.wrap}>
-                <AppBar />
+                <AppBar {...this.props}/>
                 {this.renderInfo()}
                 {this.renderHobbies()}
                 {this.renderSkills()}

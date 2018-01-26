@@ -1,4 +1,5 @@
 .paper {
+    position: relative;
     width: 100%;
     margin: 5% 0;
     padding: 4% 6% 4% 6%;
@@ -10,4 +11,10 @@
 .paper:hover {
     box-shadow: 0 26px 40px -24px rgba(0, 36, 100, 0.3);
     transform: translateY(-6px);
+}
+
+.btn-wrap {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
 }

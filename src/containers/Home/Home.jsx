@@ -13,7 +13,7 @@ class Home extends Component {
         }
         return (
             <div>
-                <AppBar />
+                <AppBar {...this.props} />
                 <div className={styles.main}>
                     <Slider
                       data={info2}
@@ -26,6 +26,7 @@ class Home extends Component {
                     >
                         {info.map((item, index) => (
                             <Fiche
+                              {... this.props}
                               key={index}
                               data={item}
                             />

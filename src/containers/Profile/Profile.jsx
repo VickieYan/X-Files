@@ -112,12 +112,12 @@ class Profile extends Component {
         const { currentPage, data, group } = this.state
         return (
             <div>
-                <AppBar />
+                <AppBar {...this.props} />
                 <div className={styles.wrap}>
                     <CSSTransitionGroup
                       transitionName="fade"
-                      transitionEnterTimeout={500}
-                      transitionLeaveTimeout={300}
+                      transitionEnterTimeout={200}
+                      transitionLeaveTimeout={200}
                     >
                         {group.map((item, index) => {
                             const Specifystory = item.component
@@ -128,7 +128,6 @@ class Profile extends Component {
                                   data={data}
                                 />
                         })}
-
                     </CSSTransitionGroup>
                 </div>
             </div>

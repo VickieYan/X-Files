@@ -12,12 +12,17 @@ class AppBar extends Component {
                 </div>
                 <div className={styles.main}>
                     <ul className={styles.nav}>
-                        <li>首页</li>
+                        <li onClick={() => { this.props.history.push('./') }}>首页</li>
                         <li>
                             <Search />
                         </li>
                         <li className={styles.center}>
-                            <span className={styles.homeIcon}><HomeIcon /></span>
+                            <span
+                              className={styles.homeIcon}
+                              onClick={() => { this.props.history.push('./edit') }}
+                            >
+                                <HomeIcon />
+                            </span>
                         </li>
                     </ul>
                 </div>

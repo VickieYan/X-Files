@@ -12,6 +12,8 @@
 
 .main:hover {
     box-shadow: 0 26px 40px -24px rgba(0, 36, 100, 0.3);
+    transform: translateY(-3px);
+    cursor: pointer;
 }
 
 .photo img {

@@ -62,7 +62,9 @@ class Step1 extends Component {
     render() {
         return (
             <div>
-                <ImageUpload />
+                <div className={styles['img-wrapper']}>
+                    <ImageUpload />
+                </div>
                 <div className={styles.form}>
                     <TextField
                       name="cName"
