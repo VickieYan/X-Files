@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
+import { pink50 } from 'material-ui/styles/colors'
 import Chip from 'material-ui/Chip'
 import styles from './Tag.scss'
-// import { grey200, grey700 } from 'material-ui/styles/colors'
 
 
 class Tag extends Component {
+    static defaultProps = {
+        backgroundColor: pink50,
+        clickable: true,
+    }
     constructor(props) {
         super(props)
         this.handleClick = this.handleClick.bind(this)
@@ -12,7 +16,7 @@ class Tag extends Component {
             isActive: false,
         }
     }
-
+    
     handleClick() {
         this.setState({
             isActive: !this.state.isActive,
@@ -20,13 +24,15 @@ class Tag extends Component {
     }
 
     render() {
+        const { clickable } = this.props
+        const { isActive } = this.state
+        const props = {
+            className: styles.chip,
+            backgroundColor: isActive ? this.props.color : this.props.backgroundColor,
+        }
+        if (clickable) props.onClick = this.handleClick
         return (
-            <Chip
-              className={styles.chip}
-              onClick={this.handleClick}
-              backgroundColor={this.state.isActive ? this.props.color : null}
-            //   labelColor={this.state.isActive ? grey200 : grey700}
-            >
+            <Chip {...props}>
                 {this.props.content}
             </Chip>
         )

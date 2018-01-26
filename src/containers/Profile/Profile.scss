@@ -10,9 +10,22 @@ font-family: JosefinSans-Italic;
 src: url('../../../static/fonts/JosefinSans-Italic.ttf'),
 }
 
+.wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 55px;
+    bottom: 0;
+}
+
+
 .main {
-    width: 80%;
-    margin: 10px auto;
+    position: absolute;
+    left: 50%;
+    top: 30px;
+    bottom: 30px;
+    width: 960px;
+    transform: translateX(-50%);
     padding:20px;
     overflow: hidden;
     background: $white;
@@ -20,8 +33,13 @@ src: url('../../../static/fonts/JosefinSans-Italic.ttf'),
 }
 
 .left {
+    display: flex;
+    align-items: center;
     float: left;
-    width: 50%;
+    width: 55%;
+    height: 100%;
+    transition: opacity .3 ease-in-out;
+    overflow: hidden;
     img {
         width: 100%;
         border-radius: 8px;
@@ -30,22 +48,27 @@ src: url('../../../static/fonts/JosefinSans-Italic.ttf'),
 
 .right {
     float: right;
-    width: 50%;
+    width: 45%;
+    height: 100%;
     font-family: 'JosefinSans-Regular';
     text-align: center;
+    transition: opacity .3 ease-in-out;
     .logo {
-        padding-top: 90px;
+        padding-top: 15%;
     }
 
     h4 {
-        margin: 15px 0;
+        margin: 3% 0;
         font-size: 18px;
         line-height: 1.1;
         text-transform: uppercase;
     }
-
+    
     p {
-        padding:15px 120px 15px;
+        overflow: hidden;
+        height: 140px;
+        padding:20px 80px;
+        margin-bottom: 160px;//增加按钮时修改此处
         font-family: '微软雅黑';
         font-style: italic;
         font-weight: 600;
@@ -54,12 +77,23 @@ src: url('../../../static/fonts/JosefinSans-Italic.ttf'),
     }
 
     .btn-group {
-        font-family: 'JosefinSans-Italic';
-        .btn {
-            margin: 30px auto;
-            width: 40%;
-        }
+        display: flex;
+        height: 160px;
+        flex-direction: column;
+        
     }
+    
+    .btn {
+        font-family: 'JosefinSans-Italic';
+        margin:auto;
+        width: 40%;
+        text-transform: capitalize;
+    }
+
+    .btn-back{
+        margin:30px auto;
+    }
+    
 
     .icon-group {
         margin: 10px auto;
@@ -68,5 +102,51 @@ src: url('../../../static/fonts/JosefinSans-Italic.ttf'),
             margin: 15px;
         }
     }
+
+    .info-list {
+        padding: 0px 80px;
+        font-family: '微软雅黑';
+        // font-style: italic;
+        font-weight: 600;
+        line-height: 30px;
+        color: #585757;
+        li {
+            line-height: 50px;
+        }
+    }
+
+    // .tags {
+    //     overflow: hidden;
+    //     padding:20px 40px;
+    // }
+
+    .tags {
+        overflow: hidden;
+        padding:20px 40px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+         
+    }
+
+    .timeline {
+        padding: 20px 40px;
+    }
+
 }
 
+.right-btm {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    .btn-back{
+        margin:10px auto 30px;
+    }
+}
+
+.about {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

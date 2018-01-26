@@ -3,6 +3,12 @@
 @import '../../styles/placeholder';
 
 .wrap {
+    // margin: 50% 0 0 50%;
+    // transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     box-sizing: border-box;
     @include size(390px, 650px);
     padding: 77px 55px 33px 55px;

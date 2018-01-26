@@ -15,19 +15,21 @@ class Home extends Component {
             <div>
                 <AppBar />
                 <div className={styles.main}>
-                    <Slider data={info2} itemWidth={210} spacing={4} />
+                    <Slider
+                      data={info2}
+                      itemWidth={210}
+                      spacing={4}
+                    />
                     <Masonry
                       options={masonryOptions}
                       updateOnEachImageLoad={false}
                     >
-                        {
-                            info.map((item, index) => (
-                                <Fiche
-                                  key={index}
-                                  data={item}
-                                />
-                            ))
-                        }
+                        {info.map((item, index) => (
+                            <Fiche
+                              key={index}
+                              data={item}
+                            />
+                        ))}
                     </Masonry>
                 </div>
             </div>

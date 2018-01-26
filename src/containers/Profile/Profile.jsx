@@ -1,70 +1,135 @@
 import React, { Component } from 'react'
+import { CSSTransitionGroup } from 'react-transition-group'
 import AppBar from '../../components/AppBar/AppBar'
-import Button from '../../components/Button/Button'
-import Icon from '../../components/Icon/Icon'
+import Main from './Main'
+import About from './About'
+import Hobby from './Hobby'
+import Skill from './Skill'
+import Work from './Work'
 import styles from './Profile.scss'
 
 class Profile extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            currentPage: 'main',
+            group: [{
+                name: 'main',
+                component: Main,
+            }, {
+                name: 'about',
+                component: About,
+            }, {
+                name: 'hobby',
+                component: Hobby,
+            }, {
+                name: 'skill',
+                component: Skill,
+            }, {
+                name: 'work',
+                component: Work,
+            }],
+            data: {
+                _id: '5a67fffbf4a61132bcc29f0f',
+                shortName: 'bl4b',
+                Groups: [
+                    '* ORG CN SH NESC MIS US D WWW (305.433\\#2)',
+                    '* GP team mis nesc cnsh neweggecdeveloper www',
+                    '* GP team mis nesc cnsh neweggec developer',
+                    '* GP team mis nesc cnsh neweggec',
+                ],
+                skills: [
+                    'C++',
+                    'JAVA',
+                    'HTML',
+                    'Linux',
+                    'Python',
+                ],
+                tags: [
+                    '爱学习',
+                    '爱工作',
+                    '爱自由',
+                ],
+                hobbies: [
+                    '琴',
+                    '棋',
+                    '书',
+                    '画',
+                    '篮球',
+                ],
+                country: '中国',
+                visit: 0,
+                contributes: [
+                    {
+                        _id: '5a6841acb439a21bc08dcd34',
+                        duty: '啥也没干，就是中了500万',
+                        endTime: '2018-01-30T03:39:39.352Z',
+                        startTime: '2018-01-24T03:39:39.352Z',
+                    },
+                    {
+                        _id: '5a6841acb439a21bc08dcd33',
+                        duty: '真的啥也没干',
+                        endTime: '2018-01-24T03:39:39.352Z',
+                        startTime: '2018-01-14T03:39:39.352Z',
+                    },
+                ],
+                isWork: true,
+                meta: {
+                    updateAt: '2018-01-24T03:39:39.352Z',
+                    createAt: '2018-01-24T03:39:39.352Z',
+                },
+                role: 0,
+                photograph: 'uploads/photograph-1516765200748.jpg',
+                Avatar: 'http://10.16.75.10:9043/common/v1/domain/user/bl4b/avatar',
+                __v: 0,
+                hometown: '内蒙古 呼和浩特',
+                sex: '',
+                hireDate: null,
+                job: 'FONT-END ENGINEER',
+                phoneNumber: '17761237141',
+                cName: '李巴特儿',
+                Title: 'Eng,Software,WWW',
+                TelephoneNumber: '818641099',
+                Department: 'CN SH NESC MIS',
+                Company: 'NESC',
+                EmployeeID: '17860220',
+                Email: 'Bill.B.Li@newegg.com',
+                DisplayName: 'Bill.B.Li (g-mis.cnsh01.Newegg) 41099',
+                FullName: 'Bill.B.Li',
+                deparent: 'www',
+                eName: '',
+                isSingle: true,
+            },
+        }
         this.handleClick = this.handleClick.bind(this)
     }
 
     handleClick(name) {
-        console.log(name)
+        this.setState({ currentPage: name })
     }
 
     render() {
-        const testImgs = [
-            'http://pic1.win4000.com/pic/7/55/4b82595293.jpg',
-            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516701204885&di=1b4a8b8ae4945d54acb010f6019745b9&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201610%2F16%2F20161016171724_HdSa2.jpeg',
-            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516701131383&di=2b084e06aa7a4775323a37c420f2677e&imgtype=0&src=http%3A%2F%2Ftp.codmst.com%2Fpc%2F14-16091ZU124.jpg',
-            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516701142339&di=8583ece29dd2364750c6b6f58dd1d851&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201606%2F29%2F20160629131133_TEcfx.thumb.700_0.jpeg',
-            'http://p0.ifengimg.com/pmop/2018/0107/2B10958C53F933452AAF16AA86C76B850EB0D598_size18_w466_h309.jpeg',
-        ]
-        const data = {
-            name: 'Nana',
-            signature: '我们不肯探索自己本身的价值，我们过分看重他人在自己生命里的参与。于是，孤独不再美好，失去了他人，我们惶惑不安。',
-        }
+        const { currentPage, data, group } = this.state
         return (
             <div>
                 <AppBar />
-                <div className={styles.main}>
-                    <div className={styles.left}>
-                        <img alt="" src={testImgs[1]} />
-                    </div>
-                    <div className={styles.right}>
-                        <div className={styles.logo}>
-                            <img alt="" src="../../../static/images/logo.png" />
-                        </div>
-                        <h4>i am {data.name}</h4>
-                        <p>{data.signature}</p>
-                        <div className={styles['btn-group']}>
-                            <div
-                              className={styles.btn}
-                              onClick={() => { this.handleClick('about') }}
-                            >
-                                <Button text="About" />
-                            </div>
-                            <div className={styles.btn}>
-                                <Button text="Skill" />
-                            </div>
-                            <div className={styles.btn}>
-                                <Button text="Work" />
-                            </div>
-                        </div>
-                        <div className={styles['icon-group']}>
-                            <div className={styles.icon}>
-                                <Icon url="http://www.freepngimg.com/download/github/1-2-github-free-png-image.png" />
-                            </div>
-                            <div className={styles.icon}>
-                                <Icon url="http://simpleicon.com/wp-content/uploads/linkedin.png" />
-                            </div>
-                            <div className={styles.icon}>
-                                <Icon url="https://image.flaticon.com/icons/png/512/23/23931.png" />
-                            </div>
-                        </div>
-                    </div>
+                <div className={styles.wrap}>
+                    <CSSTransitionGroup
+                      transitionName="fade"
+                      transitionEnterTimeout={500}
+                      transitionLeaveTimeout={300}
+                    >
+                        {group.map((item, index) => {
+                            const Specifystory = item.component
+                            return currentPage === item.name &&
+                                <Specifystory
+                                  key={index}
+                                  onClick={this.handleClick}
+                                  data={data}
+                                />
+                        })}
+
+                    </CSSTransitionGroup>
                 </div>
             </div>
         )
