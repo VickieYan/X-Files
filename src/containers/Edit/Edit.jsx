@@ -67,6 +67,9 @@ class Edit extends Component {
             { type: 'text', label: '电话', name: 'tel', text: '17621973154' },
             { type: 'text', label: '邮箱', name: 'email', text: 'Ningersan@gmail.com' },
             { type: 'multiLine', label: '个人签名', name: 'signature', text: 'In me the tiger sniffs the rose' },
+            { type: 'text', label: '微博', name: 'weibo', text: 'https://weibo.com/ningersan' },
+            { type: 'text', label: 'github', name: 'github', text: 'https://github.com/Ningersan' },
+            { type: 'text', label: 'twitter', name: 'twitter', text: 'http://twitter.com' }
         ]
         return (
             <EditCard title="Public profile">
@@ -79,7 +82,6 @@ class Edit extends Component {
             </EditCard>
         )
     }
-
     renderPhotos() {
         const { previewVisible, previewImage, fileList } = this.state
         const uploadButton = (
@@ -107,7 +109,6 @@ class Edit extends Component {
             </EditCard>
         )
     }
-
     renderHobbies() {
         const { hobbies } = this.state
         const buttonStyle = { marginLeft: '10px', width: '40px', height: '40px' }
@@ -155,56 +156,29 @@ class Edit extends Component {
         )
     }
     renderExperience() {
-        // const minDate = new Date()
-        // const maxDate = new Date()
-        // minDate.setFullYear(minDate.getFullYear() - 1)
-        // minDate.setHours(0, 0, 0, 0)
-        // maxDate.setFullYear(maxDate.getFullYear() + 1)
-        // maxDate.setHours(0, 0, 0, 0)
-        // const style = { width: '1000px', margin: '0 auto', padding: '16px', backgroundColor: '#fff' }
-        // return (
-        //     <div className={styles.experience}>
-        //         <Memorabilia style={style} date={minDate} text="这是一段经历" />
-        //         <Memorabilia style={style} date={maxDate} text="这是另一段经历" />
-        //     </div>
-        // )
+        const experience = [
+            { date: '2015-09-01', work: 'Create a services site' },
+            { date: '2015-10-10', work: 'Solve initial network problems' },
+            { date: '2015-10-11', work: 'Technical testing' },
+            { date: '2015-11-22', work: 'twork problems being solved' },
+        ]
         return (
-            <EditCard
-              isEditable
-              title="Experience"
-              onClick={this.handleOpen}
-            >
+            <EditCard title="Experience">
                 <div className={styles['timeline-wrap']}>
                     <Timeline pending="to be continue...">
-                        <Timeline.Item className={styles['timeline-item']} color="pink">
-                            <span>Create a services site 2015-09-01</span>
-                            <div className={styles['edit-btn-wrap']}>
-                                <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={() => { this.handleOpen('experience') }}>
-                                    <EditorModeEdit />
-                                </IconButton>
-                                <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }}>
-                                    <Clear />
-                                </IconButton>
-                            </div>
-                        </Timeline.Item>
-                        {/* <Timeline.Item color="pink">
-                            <span>Solve initial network problems 2015-09-01</span>
-                            <span style={{ display: 'inline-block' }}>
-                                <EditorModeEdit
-                                  iconStyle={test.smallIcon}
-                                  style={test.small}
-                                />
-                            </span>
-                        </Timeline.Item> */}
-                        <Timeline.Item color="pink">
-                            Technical testing 2015-09-01
-                        </Timeline.Item>
-                        <Timeline.Item color="pink">
-                            Network problems being solved 2015-09-01
-                        </Timeline.Item>
-                        <Timeline.Item color="pink">
-                            Create a services site 2015-09-01
-                        </Timeline.Item>
+                        {experience.map((item, index) => (
+                            <Timeline.Item key={index} className={styles['timeline-item']} color="pink">
+                                <span>{item.work} {item.date}</span>
+                                <div className={styles['edit-btn-wrap']}>
+                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={() => { this.handleOpen('experience') }}>
+                                        <EditorModeEdit />
+                                    </IconButton>
+                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }}>
+                                        <Clear />
+                                    </IconButton>
+                                </div>
+                            </Timeline.Item>
+                        ))}
                     </Timeline>
                 </div>
             </EditCard>
