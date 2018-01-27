@@ -1,14 +1,20 @@
 import React, { Component } from 'react'
 import TextField from 'material-ui/TextField'
+import { connect } from 'react-redux'
+import { login } from '../../actions/userAction'
 import validator from '../../scripts/validator'
 import styles from './Login.scss'
 
+@connect(
+    state => state.user,
+    { login },
+)
 class Login extends Component {
     constructor() {
         super()
         this.state = {
             isLogin: true,
-            username: '',
+            shortName: '',
             password: '',
             isUsernameValid: null,
             isPasswordValid: null,
@@ -31,7 +37,7 @@ class Login extends Component {
         // reset current status
         const { target } = e
         const statusType = {
-            username: 'isUsernameValid',
+            shortName: 'isUsernameValid',
             password: 'isPasswordValid',
             checkPw: 'isCheckPwValid',
         }[target.name]
@@ -44,14 +50,17 @@ class Login extends Component {
         const text = target.value.trim()
         const { pattern } = validator[target.name]
         const isValid = pattern.test(text)
-        const value = pattern.test(text) ? text : null
+        // const value = pattern.test(text) ? text : null
+        const value = pattern.test(text) ? text : text
         const statusType = {
-            username: 'isUsernameValid',
+            shortName: 'isUsernameValid',
             password: 'isPasswordValid',
             checkPw: 'isCheckPwValid',
         }[target.name]
-
-        this.setState({ [statusType]: isValid })
+        this.setState({
+            [statusType]: isValid,
+            [target.name]: target.value,
+        })
 
         // check username and password
         if (target.name !== 'checkPw') {
@@ -74,7 +83,11 @@ class Login extends Component {
     }
 
     handleLogin() {
-        this.props.history.push('./detail')
+        const { shortName, password } = this.state
+        // this.props.history.push('./detail')
+        // console.log(`username${username}`)
+        console.log()
+        this.props.login({ shortName, password })
     }
 
     render() {
@@ -96,12 +109,12 @@ class Login extends Component {
                     <TextField
                       fullWidth
                       type="text"
-                      name="username"
+                      name="shortName"
                       className={styles.textfield}
                       onFocus={this.handleFocus}
                       onBlur={this.handleBlur}
-                      errorText={isUsernameValid === false && validator.username.errorMsg}
-                      floatingLabelText="Username"
+                      errorText={isUsernameValid === false && validator.shortName.errorMsg}
+                      floatingLabelText="shortName"
                       floatingLabelStyle={{ top: '30px' }}
                       floatingLabelFocusStyle={{ fontSize: '20px', color: 'rgba(0, 0, 0, 0.3)', transition: 'all .4s' }}
                       underlineStyle={{ borderBottom: '2px solid #adadad' }}

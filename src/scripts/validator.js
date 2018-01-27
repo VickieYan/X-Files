@@ -1,5 +1,5 @@
 export default {
-    username: {
+    shortName: {
         pattern: /^[a-zA-Z0-9_-]{4,16}$/,
         errorMsg: '请输入4-16位的英文短名，支持下划线',
     },

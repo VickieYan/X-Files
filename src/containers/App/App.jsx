@@ -10,6 +10,8 @@ import {
     Switch,
     Redirect,
 } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from '../../store/store'
 import Home from '../Home/Home'
 import Edit from '../Edit/Edit'
 import Login from '../Login/Login'
@@ -30,31 +32,33 @@ class App extends Component {
             },
         })
         return (
-            <MuiThemeProvider muiTheme={muiTheme}>
-                <div className={styles.container}>
-                    <Router>
-                        <Route render={({ location }) => (
-                            <div>
-                                <Redirect to="/login" />
-                                <CSSTransitionGroup
-                                  transitionName="fade"
-                                  transitionEnterTimeout={300}
-                                  transitionLeaveTimeout={300}
-                                >
-                                    <Switch key={location.key} location={location}>
-                                        <Route exact path="/" component={Home} location={location} />
-                                        <Route path="/login" component={Login} location={location} />
-                                        <Route path="/detail" component={Detail} location={location} />
-                                        <Route path="/profile" component={Profile} location={location} />
-                                        <Route path="/edit" component={Edit} location={location} />
-                                    </Switch>
-                                </CSSTransitionGroup>
-                            </div>
-                        )}
-                        />
-                    </Router>
-                </div>
-            </MuiThemeProvider>
+            <Provider store={store}>
+                <MuiThemeProvider muiTheme={muiTheme}>
+                    <div className={styles.container}>
+                        <Router>
+                            <Route render={({ location }) => (
+                                <div>
+                                    {/* <Redirect to="/login" /> */}
+                                    <CSSTransitionGroup
+                                      transitionName="fade"
+                                      transitionEnterTimeout={300}
+                                      transitionLeaveTimeout={300}
+                                    >
+                                        <Switch key={location.key} location={location}>
+                                            <Route exact path="/" component={Home} location={location} />
+                                            <Route path="/login" component={Login} location={location} />
+                                            <Route path="/detail" component={Detail} location={location} />
+                                            <Route path="/profile" component={Profile} location={location} />
+                                            <Route path="/edit" component={Edit} location={location} />
+                                        </Switch>
+                                    </CSSTransitionGroup>
+                                </div>
+                            )}
+                            />
+                        </Router>
+                    </div>
+                </MuiThemeProvider>
+            </Provider>
         )
     }
 }

@@ -115,6 +115,13 @@ module.exports = {
         inline: true,
         // 静态资源路径（.html）
         // contentBase: './',
+        proxy: {
+            '/user/': {
+                target: 'http://wsmis053:6141/',
+                changeOrigin: true,
+                secure: false,
+            },
+        },
         publicPath: '/',
         historyApiFallback: true,
     },

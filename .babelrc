@@ -5,5 +5,5 @@
         "stage-1",
         "react"
     ],
-    "plugins": ["react-hot-loader/babel", "transform-class-properties",["import", { "libraryName": "antd", "style": "css" }]]
+    "plugins": ["react-hot-loader/babel", "transform-class-properties",["import", { "libraryName": "antd", "style": "css" }],"transform-decorators-legacy"]
 }
