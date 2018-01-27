@@ -36,12 +36,14 @@ class Form extends Component {
             text: {
                 name,
                 autoFocus: true,
+                spellCheck: false,
                 onChange: this.handleChange,
                 onBlur: this.handleBlur,
                 defaultValue: value,
             },
             multiLine: {
                 multiLine: true,
+                spellCheck: false,
                 row: 1,
                 rowsMax: 3,
                 autoFocus: true,
