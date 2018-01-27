@@ -16,8 +16,31 @@ class Memorabilia extends Component {
             </div>
         )
     }
+    renderButton() {
+        return (
+            <div className={styles['button-fields']}>
+                <FlatButton
+                  primary
+                  label="Cancel"
+                  onClick={this.props.onClose}
+                />
+                <FlatButton
+                  primary
+                  label="Submit"
+                  onClick={this.props.onClose}
+                />
+            </div>
+        )
+    }
+
     render() {
-        const { style, date, text, isDeletable } = this.props
+        const {
+            style,
+            date,
+            text,
+            hasButton,
+            isDeletable,
+        } = this.props
         return (
             <div className={styles.paper} style={style}>
                 <DatePicker hintText="请选择时间" defaultDate={date} />
@@ -28,6 +51,7 @@ class Memorabilia extends Component {
                   value={text}
                 />
                 {isDeletable && this.renderDelButton()}
+                {hasButton && this.renderButton()}
             </div>
         )
     }

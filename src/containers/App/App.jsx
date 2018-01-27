@@ -32,33 +32,10 @@ class App extends Component {
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
                 <div className={styles.container}>
-                    {/* <Router>
-                        <div>
-                            <Redirect to="/login" />
-                            <CSSTransitionGroup
-                              transitionName="fade"
-                              transitionEnterTimeout={500}
-                              transitionLeaveTimeout={300}
-                            >
-                                <Route exact path="/" component={Home} />
-                                <Route path="/login" component={Login} />
-                                <Route path="/detail" component={Detail} />
-                                <Route path="/profile" component={Profile} />
-                                <Route path="/edit" component={Edit} />
-                            </CSSTransitionGroup>
-                        </div>
-                    </Router> */}
                     <Router>
                         <Route render={({ location }) => (
                             <div>
-                                {/* <Route
-                                  exact
-                                  path="/"
-                                  render={() => (
-                                      <Redirect to="/login" />
-                                  )}
-                                /> */}
-                                {/* <Redirect to="/login" /> */}
+                                <Redirect to="/login" />
                                 <CSSTransitionGroup
                                   transitionName="fade"
                                   transitionEnterTimeout={300}
@@ -69,7 +46,7 @@ class App extends Component {
                                         <Route path="/login" component={Login} location={location} />
                                         <Route path="/detail" component={Detail} location={location} />
                                         <Route path="/profile" component={Profile} location={location} />
-                                        <Route path="/edit" component={Edit} />
+                                        <Route path="/edit" component={Edit} location={location} />
                                     </Switch>
                                 </CSSTransitionGroup>
                             </div>
