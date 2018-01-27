@@ -5,6 +5,17 @@ import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 import styles from './Fiche.scss'
 
 class Fiche extends Component {
+    constructor() {
+        super()
+        this.handleClick = this.handleClick.bind(this)
+        this.handleLike = this.handleLike.bind(this)
+    }
+    handleClick() {
+        this.props.history.push('./profile')
+    }
+    handleLike(e) {
+        e.stopPropagation()
+    }
     render() {
         const mStyles = {
             block: {
@@ -15,7 +26,7 @@ class Fiche extends Component {
             },
         }
         return (
-            <div className={styles.main} onClick={() => { this.props.history.push('./profile') }}>
+            <div className={styles.main} onClick={this.handleClick}>
                 <div className={styles.photo}>
                     <img alt="" src={this.props.data.url} />
                 </div>
@@ -29,6 +40,7 @@ class Fiche extends Component {
                               checkedIcon={<ActionFavorite />}
                               uncheckedIcon={<ActionFavoriteBorder />}
                               style={mStyles.checkbox}
+                              onClick={this.handleLike}
                             />
                         </span>
                     </div>

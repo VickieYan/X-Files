@@ -10,7 +10,7 @@ import FlatButton from 'material-ui/FlatButton'
 import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
-import styles from './index.scss'
+import styles from './Detail.scss'
 
 class MyStepper extends Component {
     constructor(props) {
@@ -53,13 +53,13 @@ class MyStepper extends Component {
             this.setState({ stepIndex: stepIndex - 1 })
         }
     }
+
     render() {
         const { stepIndex } = this.state
-        const contentStyle = { margin: '0 16px' }
         const group = ['基本信息', '技能爱好', '工作贡献']
         return (
             <div className={styles.main}>
-                <div style={{ width: '70%', maxWidth: '80%', margin: 'auto' }}>
+                <div className={styles.wrap}>
                     <Stepper activeStep={stepIndex}>
                         {group.map((item, index) => (
                             <Step key={index}>
@@ -67,31 +67,27 @@ class MyStepper extends Component {
                             </Step>
                         ))}
                     </Stepper>
-                    <div style={contentStyle}>
-                        <div>
-                            <div>
-                                <CSSTransitionGroup
-                                  transitionName="fade"
-                                  transitionEnterTimeout={200}
-                                  transitionLeaveTimeout={200}
-                                >
-                                    {this.getStepContent(stepIndex)}
-                                </CSSTransitionGroup>
-                            </div>
-                            <div style={{ marginTop: 12 }}>
-                                <FlatButton
-                                  label="Back"
-                                  disabled={stepIndex === 0}
-                                  onClick={this.handlePrev}
-                                  style={{ marginRight: 12 }}
-                                />
-                                <RaisedButton
-                                  label={stepIndex === 2 ? 'Finish' : 'Next'}
-                                  primary
-                                  onClick={this.handleNext}
-                                />
-                            </div>
-                        </div>
+                    <div className={styles['base-info-wrap']}>
+                        <CSSTransitionGroup
+                          transitionName="fade"
+                          transitionEnterTimeout={200}
+                          transitionLeaveTimeout={200}
+                        >
+                            {this.getStepContent(stepIndex)}
+                        </CSSTransitionGroup>
+                    </div>
+                    <div className={styles['btn-more']}>
+                        <FlatButton
+                          label="Back"
+                          disabled={stepIndex === 0}
+                          onClick={this.handlePrev}
+                          style={{ marginRight: 12 }}
+                        />
+                        <RaisedButton
+                          label={stepIndex === 2 ? 'Finish' : 'Next'}
+                          primary
+                          onClick={this.handleNext}
+                        />
                     </div>
                 </div>
             </div>

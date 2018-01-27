@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import Button from '../../components/Button/Button'
-import Tag from '../../components/Tag/Tag'
+import { Button, Tag } from '../../components/'
 import styles from './Profile.scss'
 
 class Hobbit extends Component {

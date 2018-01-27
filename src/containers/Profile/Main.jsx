@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import Button from '../../components/Button/Button'
-import Icon from '../../components/Icon/Icon'
+import { Button, Icon } from '../../components/'
 import logos from '../../../static/data/logo'
 import styles from './Profile.scss'
 

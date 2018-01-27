@@ -47,8 +47,8 @@ class Memorabilia extends Component {
                 <TextField
                   hintText="description"
                   multiLine
-                  rows={2}
-                  value={text}
+                  rows={1}
+                  defaultValue={text}
                 />
                 {isDeletable && this.renderDelButton()}
                 {hasButton && this.renderButton()}

@@ -92,6 +92,7 @@ class Slider extends Component {
             marginRight: `${spacing}px`,
             borderRadius: '2px',
             backgroundColor: background,
+            cursor: 'pointer',
         }
         return (
             <Card key={index} style={cardStyle}>

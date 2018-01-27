@@ -6,15 +6,18 @@ import { CSSTransitionGroup } from 'react-transition-group'
 import {
     BrowserRouter as Router,
     Route,
-    // Link
     Switch,
     Redirect,
 } from 'react-router-dom'
-import Home from '../Home/Home'
-import Edit from '../Edit/Edit'
-import Login from '../Login/Login'
-import Detail from '../Detail/index'
-import Profile from '../Profile/Profile'
+
+import {
+    Home,
+    Edit,
+    Login,
+    Detail,
+    Profile,
+} from '../index'
+
 import styles from './App.scss'
 
 class App extends Component {

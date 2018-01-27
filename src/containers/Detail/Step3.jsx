@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import Memorabilia from '../../components/Memorabilia/Memorabilia'
-import styles from './index.scss'
+import { Memorabilia } from '../../components/'
+import styles from './Detail.scss'
 
 class Step3 extends Component {
     constructor(props) {
@@ -22,7 +22,6 @@ class Step3 extends Component {
 
     handleDelete(index) {
         return () => {
-            console.log('test')
             const memorabilias = this.state.memorabilias.slice()
             memorabilias.splice(index, 1)
             this.setState({ memorabilias })

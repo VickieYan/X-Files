@@ -8,13 +8,9 @@ import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit'
 import Clear from 'material-ui/svg-icons/content/clear'
 import { hobbies } from '../../../static/data/words'
 import styles from './Edit.scss'
-import AppBar from '../../components/AppBar/AppBar'
-import Form from '../../components/Form/Form'
-import Card from '../../components/Card/Card'
+import { AppBar, Form, Card, Memorabilia, ImageUpload } from '../../components/'
 import EditCard from './EditCard'
 import { colorsA, colorsB } from '../../../static/data/color'
-import Memorabilia from '../../components/Memorabilia/Memorabilia'
-import ImageUpload from '../../components/ImageUpload/ImageUpload'
 
 class Edit extends Component {
     constructor() {
@@ -100,7 +96,7 @@ class Edit extends Component {
                       onPreview={this.handlePreview}
                       onChange={this.handleChange}
                     >
-                        {fileList.length >= 3 ? null : uploadButton}
+                        {fileList.length >= 4 ? null : uploadButton}
                     </Upload>
                     <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
                         <img alt="example" style={{ width: '100%' }} src={previewImage} />
@@ -218,7 +214,7 @@ class Edit extends Component {
     render() {
         return (
             <div className={styles.wrap}>
-                <AppBar {...this.props}/>
+                <AppBar {...this.props} />
                 {this.renderInfo()}
                 {this.renderHobbies()}
                 {this.renderSkills()}

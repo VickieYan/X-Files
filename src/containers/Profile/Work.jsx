@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Timeline } from 'antd'
 // import 'antd/dist/antd.css'
-import Button from '../../components/Button/Button'
+import { Button } from '../../components/'
 import styles from './Profile.scss'
 
 class Work extends Component {

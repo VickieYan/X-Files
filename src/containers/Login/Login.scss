@@ -2,20 +2,23 @@
 @import '../../styles/mixins.scss';
 @import '../../styles/placeholder';
 
-.wrap {
-    // margin: 50% 0 0 50%;
-    // transform: translate(-50%, -50%);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    box-sizing: border-box;
-    @include size(390px, 650px);
-    padding: 77px 55px 33px 55px;
-    overflow: hidden;
-    background: $white;
-    border-radius: $radius-login-wrap;
-    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+.container {
+    @include center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $login-bg-color;
+    .wrap {
+        box-sizing: border-box;
+        @include size(390px, 650px);
+        padding: 77px 55px 33px 55px;
+        overflow: hidden;
+        background: $white;
+        border-radius: $radius-login-wrap;
+        box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    }
 }
 
 .form {
@@ -100,10 +103,6 @@
         font-size: 13px;
         .sign {
             color: $gray;
-        }
-        .signup-btn {
-            @extend %button;
-            color: $black-light;
         }
     }
 }

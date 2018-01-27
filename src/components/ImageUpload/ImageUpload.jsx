@@ -29,20 +29,15 @@ class ImageUpload extends Component {
                       className={styles['avatar-img']}
                     />
                 </div>
-                <div>
-                    <ReactCoreImageUpload
-                      text="上传头像"
-                      className={styles.btn}
-                      inputOfFile="avatar" // 上传服务器对应表单name
-                      url="http://wsmis053:6141/user/testUpdate" // 服务器上传位置
-                      imageUploaded={this.imageuploaded}
-                      crop
-                      cropBtn={{
-                        ok: '确认',
-                        cancel: '取消',
-                      }}
-                    />
-                </div>
+                <ReactCoreImageUpload
+                  crop
+                  text="上传头像"
+                  className={styles['upload-btn']}
+                  inputOfFile="avatar" // 上传服务器对应表单name
+                  url="http://wsmis053:6141/user/testUpdate" // 服务器上传位置
+                  imageUploaded={this.imageuploaded}
+                  cropBtn={{ ok: '确认', cancel: '取消' }}
+                />
             </div>
       )
     }

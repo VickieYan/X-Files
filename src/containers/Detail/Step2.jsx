@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Card from '../../components/Card/Card'
+import { Card } from '../../components/'
 import { hobbies, skills } from '../../../static/data/words'
 import { colorsA, colorsB } from '../../../static/data/color'
 
