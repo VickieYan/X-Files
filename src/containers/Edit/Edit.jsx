@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
+import ReactCoreImageUpload from 'react-core-image-upload'
 import Chip from 'material-ui/Chip'
-import { Timeline, Upload, Icon, Modal } from 'antd'
 import IconButton from 'material-ui/IconButton'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
-import ContentAdd from 'material-ui/svg-icons/content/add'
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit'
 import Clear from 'material-ui/svg-icons/content/clear'
-import { hobbies } from '../../../static/data/words'
-import styles from './Edit.scss'
+import ContentAdd from 'material-ui/svg-icons/content/add'
+import { Timeline } from 'antd'
 import { AppBar, Form, Card, Memorabilia, ImageUpload } from '../../components/'
 import EditCard from './EditCard'
+import Upload from './Upload'
+import { hobbies } from '../../../static/data/words'
 import { colorsA, colorsB } from '../../../static/data/color'
+import styles from './Edit.scss'
 
 class Edit extends Component {
     constructor() {
@@ -20,14 +22,7 @@ class Edit extends Component {
             dialogType: null,
             hobbies: ['美食', '互联网', '篮球', '美食'],
             skills: ['HTML', 'CSS', 'Javascript', 'Php', 'Java', 'Golang', 'Python'],
-            previewVisible: false,
-            previewImage: '',
-            fileList: [{
-              uid: -1,
-              name: 'xxx.png',
-              status: 'done',
-              url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-            }],
+            photos: [],
         }
         this.handleOpen = this.handleOpen.bind(this)
         this.handleClose = this.handleClose.bind(this)
@@ -45,17 +40,6 @@ class Edit extends Component {
     handleRequestDelete() {
         // hanlde here
     }
-    // upload
-    handleCancel = () => this.setState({ previewVisible: false })
-
-    handlePreview = (file) => {
-        this.setState({
-          previewImage: file.url || file.thumbUrl,
-          previewVisible: true,
-        })
-    }
-
-    handleChange = ({ fileList }) => this.setState({ fileList })
 
     renderInfo() {
         const data = [
@@ -65,7 +49,7 @@ class Edit extends Component {
             { type: 'multiLine', label: '个人签名', name: 'signature', text: 'In me the tiger sniffs the rose' },
             { type: 'text', label: '微博', name: 'weibo', text: 'https://weibo.com/ningersan' },
             { type: 'text', label: 'github', name: 'github', text: 'https://github.com/Ningersan' },
-            { type: 'text', label: 'twitter', name: 'twitter', text: 'http://twitter.com' }
+            { type: 'text', label: 'twitter', name: 'twitter', text: 'http://twitter.com' },
         ]
         return (
             <EditCard title="Public profile">
@@ -79,28 +63,23 @@ class Edit extends Component {
         )
     }
     renderPhotos() {
-        const { previewVisible, previewImage, fileList } = this.state
-        const uploadButton = (
-            <div>
-                <Icon type="plus" />
-                <div className="ant-upload-text">Upload</div>
-            </div>
-          )
+        const { photos } = this.state
+        const { length } = photos
         return (
-            <EditCard title="Photography">
+            <EditCard title="Photo">
                 <div className={styles['photo-wrap']}>
-                    <Upload
-                      action="//jsonplaceholder.typicode.com/posts/"
-                      listType="picture-card"
-                      fileList={fileList}
-                      onPreview={this.handlePreview}
-                      onChange={this.handleChange}
-                    >
-                        {fileList.length >= 4 ? null : uploadButton}
-                    </Upload>
-                    <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-                        <img alt="example" style={{ width: '100%' }} src={previewImage} />
-                    </Modal>
+                    {photos.map((photo, index) => <Upload key={index} />)}
+                    {length < 3 &&
+                        <ReactCoreImageUpload
+                          crop
+                          resize="local"
+                          text="+"
+                          className={styles['upload-photo-btn']}
+                          inputOfFile="avatar" // 上传服务器对应表单name
+                          url="http://wsmis053:6141/user/testUpdate" // 服务器上传位置
+                          imageUploaded={this.imageuploaded}
+                        />
+                    }
                 </div>
             </EditCard>
         )
@@ -153,10 +132,10 @@ class Edit extends Component {
     }
     renderExperience() {
         const experience = [
-            { date: '2015-09-01', work: 'Create a services site' },
-            { date: '2015-10-10', work: 'Solve initial network problems' },
-            { date: '2015-10-11', work: 'Technical testing' },
-            { date: '2015-11-22', work: 'twork problems being solved' },
+            { startTime: '2015-09-01', endTime: '2015-09-02', work: 'Create a services site' },
+            { startTime: '2015-10-10', endTime: '2015-09-05', work: 'Solve initial network problems' },
+            { startTime: '2015-10-11', endTime: '2015-09-02', work: 'Technical testing' },
+            { startTime: '2015-11-22', endTime: '2015-09-06', work: 'twork problems being solved' },
         ]
         return (
             <EditCard title="Experience">
@@ -164,7 +143,7 @@ class Edit extends Component {
                     <Timeline pending="to be continue...">
                         {experience.map((item, index) => (
                             <Timeline.Item key={index} className={styles['timeline-item']} color="pink">
-                                <span>{item.work} {item.date}</span>
+                                <span>{item.work} {item.startTime}~{item.endTime}</span>
                                 <div className={styles['edit-btn-wrap']}>
                                     <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={() => { this.handleOpen('experience') }}>
                                         <EditorModeEdit />

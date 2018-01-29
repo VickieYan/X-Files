@@ -31,6 +31,7 @@ class ImageUpload extends Component {
                 </div>
                 <ReactCoreImageUpload
                   crop
+                  resize="local"
                   text="上传头像"
                   className={styles['upload-btn']}
                   inputOfFile="avatar" // 上传服务器对应表单name
@@ -39,7 +40,7 @@ class ImageUpload extends Component {
                   cropBtn={{ ok: '确认', cancel: '取消' }}
                 />
             </div>
-      )
+        )
     }
 }
 

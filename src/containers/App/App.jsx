@@ -38,7 +38,7 @@ class App extends Component {
                     <Router>
                         <Route render={({ location }) => (
                             <div>
-                                <Redirect to="/login" />
+                                <Redirect to="/edit" />
                                 <CSSTransitionGroup
                                   transitionName="fade"
                                   transitionEnterTimeout={300}

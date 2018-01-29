@@ -43,7 +43,8 @@ class Memorabilia extends Component {
         } = this.props
         return (
             <div className={styles.paper} style={style}>
-                <DatePicker hintText="请选择时间" defaultDate={date} />
+                <DatePicker hintText="开始时间" defaultDate={date} />
+                <DatePicker hintText="结束时间" defaultDate={date} />
                 <TextField
                   hintText="description"
                   multiLine

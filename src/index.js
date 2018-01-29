@@ -17,6 +17,6 @@ const render = (Component) => {
 render(App)
 
 // Webpack Hot Module Replacement API
-if (module.hot) {
+if (process.env.NODE_ENV === 'development' && module.hot) {
     module.hot.accept()
 }
