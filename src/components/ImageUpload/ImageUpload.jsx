@@ -3,6 +3,12 @@ import ReactCoreImageUpload from 'react-core-image-upload'
 import styles from './ImageUpload.scss'
 
 class ImageUpload extends Component {
+    static defaultProps = {
+        className: styles.wrap,
+        previewClassName: styles.preview,
+        imgClassName: styles['preview-img'],
+        btnClassName: styles['upload-btn'],
+    }
     constructor(props) {
         super(props)
         this.state = {
@@ -20,20 +26,26 @@ class ImageUpload extends Component {
     }
 
     render() {
+        const {
+            className,
+            previewClassName,
+            imgClassName,
+            btnClassName,
+        } = this.props
         return (
-            <div className={styles.main}>
-                <div className={styles.avatar}>
+            <div className={className}>
+                <div className={previewClassName}>
                     <img
-                      alt="avatar"
+                      alt="preview"
                       src={this.state.src}
-                      className={styles['avatar-img']}
+                      className={imgClassName}
                     />
                 </div>
                 <ReactCoreImageUpload
                   crop
                   resize="local"
                   text="上传头像"
-                  className={styles['upload-btn']}
+                  className={btnClassName}
                   inputOfFile="avatar" // 上传服务器对应表单name
                   url="http://wsmis053:6141/user/testUpdate" // 服务器上传位置
                   imageUploaded={this.imageuploaded}

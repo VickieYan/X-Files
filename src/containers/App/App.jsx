@@ -38,12 +38,12 @@ class App extends Component {
                     <Router>
                         <Route render={({ location }) => (
                             <div>
-                                <Redirect to="/edit" />
                                 <CSSTransitionGroup
                                   transitionName="fade"
                                   transitionEnterTimeout={300}
                                   transitionLeaveTimeout={300}
                                 >
+                                    <Redirect to="/login" />
                                     <Switch key={location.key} location={location}>
                                         <Route exact path="/" component={Home} location={location} />
                                         <Route path="/login" component={Login} location={location} />

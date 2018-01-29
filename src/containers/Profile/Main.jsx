@@ -3,7 +3,6 @@ import { Button, Icon } from '../../components/'
 import logos from '../../../static/data/logo'
 import styles from './Profile.scss'
 
-
 class Main extends Component {
     render() {
         const data = {

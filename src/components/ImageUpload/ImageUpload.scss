@@ -1,15 +1,15 @@
 @import '../../styles/mixins.scss';
 @import '../../styles/variables.scss';
 
-.main {
+.wrap {
     overflow: hidden;
     width: 200px;
-    .avatar {
+    .preview {
         margin:20px;
         overflow: hidden;
         border-radius: $radius-base;
         box-shadow: 0 0 10px $gray-light;
-        .avatar-img {
+        .preview-img {
             float: left;
             width: 150px;
             height: 150px;

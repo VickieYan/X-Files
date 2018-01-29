@@ -9,7 +9,6 @@ import ContentAdd from 'material-ui/svg-icons/content/add'
 import { Timeline } from 'antd'
 import { AppBar, Form, Card, Memorabilia, ImageUpload } from '../../components/'
 import EditCard from './EditCard'
-import Upload from './Upload'
 import { hobbies } from '../../../static/data/words'
 import { colorsA, colorsB } from '../../../static/data/color'
 import styles from './Edit.scss'
@@ -22,7 +21,7 @@ class Edit extends Component {
             dialogType: null,
             hobbies: ['美食', '互联网', '篮球', '美食'],
             skills: ['HTML', 'CSS', 'Javascript', 'Php', 'Java', 'Golang', 'Python'],
-            photos: [],
+            photos: ['1'],
         }
         this.handleOpen = this.handleOpen.bind(this)
         this.handleClose = this.handleClose.bind(this)
@@ -68,7 +67,15 @@ class Edit extends Component {
         return (
             <EditCard title="Photo">
                 <div className={styles['photo-wrap']}>
-                    {photos.map((photo, index) => <Upload key={index} />)}
+                    {photos.map((photo, index) => (
+                        <ImageUpload
+                          key={index}
+                          className={styles['photo-upload-wrap']}
+                          previewClassName={styles['photo-preview']}
+                          imgClassName={styles['preview-img']}
+                          btnClassName={styles['photo-upload-btn']}
+                        />
+                    ))}
                     {length < 3 &&
                         <ReactCoreImageUpload
                           crop

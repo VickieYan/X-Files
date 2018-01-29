@@ -67,7 +67,6 @@ class Login extends Component {
 
     render() {
         const { isUsernameValid, isPasswordValid } = this.state
-
         const action = 'Login'
         const sign = 'Please Use Your Shortname'
 
