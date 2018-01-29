@@ -17,6 +17,7 @@ import Edit from '../Edit/Edit'
 import Login from '../Login/Login'
 import Detail from '../Detail/index'
 import Profile from '../Profile/Profile'
+import AuthRoute from '../../components/AuthRoute/authroute'
 import styles from './App.scss'
 
 class App extends Component {
@@ -44,6 +45,7 @@ class App extends Component {
                                       transitionEnterTimeout={300}
                                       transitionLeaveTimeout={300}
                                     >
+                                        {/* <AuthRoute /> */}
                                         <Switch key={location.key} location={location}>
                                             <Route exact path="/" component={Home} location={location} />
                                             <Route path="/login" component={Login} location={location} />

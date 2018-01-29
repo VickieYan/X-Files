@@ -8,11 +8,13 @@ class Step2 extends Component {
         return (
             <div>
                 <Card
+                  name="hobbies"
                   title="请选择感兴趣的话题"
                   colors={colorsA}
                   words={hobbies}
                 />
                 <Card
+                  name="skills"
                   title="请选择你掌握的技能"
                   colors={colorsB}
                   words={skills}

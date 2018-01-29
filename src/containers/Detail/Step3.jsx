@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
+import { connect } from 'react-redux'
+import { uploadData } from '../../actions/userAction'
 import Memorabilia from '../../components/Memorabilia/Memorabilia'
 import styles from './index.scss'
 
+@connect(
+    state => state.user,
+    { uploadData },
+)
 class Step3 extends Component {
     constructor(props) {
         super(props)
@@ -15,17 +21,22 @@ class Step3 extends Component {
     }
 
     handleAdd() {
-        this.setState({
-            memorabilias: [...this.state.memorabilias, ''],
+        this.props.uploadData({
+            contributes: [...this.props.contributes, 
+                {
+                    startTime:'',
+                    endTime:'',
+                    duty:'',
+                } 
+            ],
         })
     }
 
     handleDelete(index) {
         return () => {
-            console.log('test')
-            const memorabilias = this.state.memorabilias.slice()
-            memorabilias.splice(index, 1)
-            this.setState({ memorabilias })
+            const contributes = this.props.contributes.slice()
+            contributes.splice(index, 1)
+            this.props.uploadData({ contributes })
         }
     }
 
@@ -33,7 +44,7 @@ class Step3 extends Component {
         return (
             <div>
                 <div>
-                    {this.state.memorabilias.map((item, index) => (<Memorabilia key={index} isDeletable onDelete={this.handleDelete(index)} />))}
+                    {this.props.contributes.map((item, index) => (<Memorabilia key={index} isDeletable onDelete={this.handleDelete(index)} index={index}/>))}
                 </div>
                 <div className={styles.addBtn}>
                     <FloatingActionButton

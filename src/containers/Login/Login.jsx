@@ -24,9 +24,8 @@ class Login extends Component {
         this.handleFocus = this.handleFocus.bind(this)
         this.handleBlur = this.handleBlur.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleLogin = this.handleLogin.bind(this)
     }
-
+ 
     handleClick() {
         this.setState(prevState => ({
             isLogin: !prevState.isLogin,
@@ -76,19 +75,18 @@ class Login extends Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        const { isUsernameValid, isPasswordValid, isCheckPwValid } = this.state
-        if (isUsernameValid && isPasswordValid && isCheckPwValid) {
+        const { isUsernameValid, isPasswordValid, shortName, password } = this.state
+        if (isUsernameValid && isPasswordValid) {
             // submit code here
+            this.props.login({ shortName, password })
+            // this.props.history.push(this.props.redirectTo)
+            setTimeout(()=>{
+                this.props.history.push(this.props.redirectTo)
+            },1000)
         }
     }
 
-    handleLogin() {
-        const { shortName, password } = this.state
-        // this.props.history.push('./detail')
-        // console.log(`username${username}`)
-        console.log()
-        this.props.login({ shortName, password })
-    }
+   
 
     render() {
         const {
@@ -152,7 +150,7 @@ class Login extends Component {
                             /><br />
                         </div>
                     }
-                    <div className={styles['form-btn-container']} onClick={this.handleLogin}>
+                    <div className={styles['form-btn-container']}>
                         <div className={styles['form-btn-wrap']}>
                             <div className={styles['form-btn-bg']} />
                             <button type="submit" className={styles['form-btn']}>{actionText}</button>

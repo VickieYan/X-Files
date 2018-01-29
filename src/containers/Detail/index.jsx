@@ -17,6 +17,18 @@ class MyStepper extends Component {
         super(props)
         this.state = {
             stepIndex: 0,
+            avatar: '',
+            sex: '男',
+            isSingle: 'yes',
+            phoneNumber: '',
+            hometown: '',
+            signature: '',
+            github: '',
+            linkedin: '',
+            twitter: '',
+            hobbies: [],
+            skills: []
+            
         }
         this.handleNext = this.handleNext.bind(this)
         this.handlePrev = this.handlePrev.bind(this)
@@ -42,6 +54,8 @@ class MyStepper extends Component {
             stepIndex: stepIndex + 1,
         })
         if (stepIndex >= 2) {
+            // handleFinish
+
             this.props.history.push('./')
         }
     }
@@ -53,6 +67,7 @@ class MyStepper extends Component {
             this.setState({ stepIndex: stepIndex - 1 })
         }
     }
+    
     render() {
         const { stepIndex } = this.state
         const contentStyle = { margin: '0 16px' }

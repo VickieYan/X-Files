@@ -193,6 +193,7 @@ class Edit extends Component {
                     <div className={styles['dialog-wrap']}>
                         <Card
                           hasButton
+                          name='hobbies'
                           style={{ backgroundColor: '#fff', width: '1000px', margin: 'auto auto' }}
                           title="感兴趣的话题"
                           colors={colorsA}
