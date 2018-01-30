@@ -17,17 +17,9 @@ class Memorabilia extends Component {
     }
 
     handleChange(type, value) {
-        let time
         const { uploadData, contributes, index } = this.props
-        if(type === 'startTime' || type === 'endTime') {
-            let date = new Date(value)
-            let year = date.getFullYear()
-            let month = date.getMonth() + 1
-            let day = date.getDate()
-            time = `${year}-${month}-${day}`
-        }
         const newContributes = contributes.slice()
-        newContributes[index][type] = time ? time : value
+        newContributes[index][type] = value
         uploadData({ contributes: newContributes })
     }
 
@@ -63,7 +55,8 @@ class Memorabilia extends Component {
     render() {
         const {
             style,
-            date,
+            startTime,
+            endTime,
             text,
             hasButton,
             isDeletable,
@@ -72,20 +65,20 @@ class Memorabilia extends Component {
             <div className={styles.paper} style={style}>
                 <DatePicker
                   hintText="请选择开始时间"
-                  defaultDate={date}
-                  onChange={(ev, date) => {this.handleChange('startTime', date)}}
+                  defaultDate={startTime}
+                  onChange={(ev, date) => { this.handleChange('startTime', date) }}
                 />
                 <DatePicker
                   hintText="请选择结束时间"
-                  defaultDate={date}
-                  onChange={(ev, date) => {this.handleChange('endTime', date)}}
+                  defaultDate={endTime}
+                  onChange={(ev, date) => { this.handleChange('endTime', date) }}
                 />
                 <TextField
                   hintText="description"
                   multiLine
                   rows={2}
                   value={text}
-                  onChange={(ev, value) => {this.handleChange('duty', value)}}
+                  onChange={(ev, value) => { this.handleChange('duty', value) }}
                 />
                 {isDeletable && this.renderDelButton()}
                 {hasButton && this.renderButton()}

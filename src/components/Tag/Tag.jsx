@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { pink50 } from 'material-ui/styles/colors'
 import Chip from 'material-ui/Chip'
 import { connect } from 'react-redux'
+import { colorsB } from '../../../static/data/color'
 import { uploadData } from '../../actions/userAction'
 import styles from './Tag.scss'
 
@@ -14,13 +15,14 @@ class Tag extends Component {
     static defaultProps = {
         backgroundColor: pink50,
         clickable: true,
+        colors: colorsB,
     }
 
     constructor(props) {
         super(props)
         this.state = {
             isActive: false,
-            color: ''
+            color: '',
         }
         this.handleClick = this.handleClick.bind(this)
         this.getRandomColor = this.getRandomColor.bind(this)
@@ -31,7 +33,13 @@ class Tag extends Component {
         if (!(this.props[name].indexOf(content) === -1)) {
             this.setState({ isActive: true })
         }
-        this.state.color === '' ? this.setState({color: this.getRandomColor()}) : null
+        this.state.color === '' ? this.setState({ color: this.getRandomColor() }) : null
+    }
+
+    getRandomColor() {
+        const { colors } = this.props
+        const index = Math.floor(colors.length * Math.random())
+        return colors[index]
     }
 
     handleClick() {
@@ -41,27 +49,22 @@ class Tag extends Component {
         } else {
             const index = this.props[name].indexOf(content)
             const newArr = this.props[name].slice()
-            newArr.splice(index,1)
+            newArr.splice(index, 1)
             uploadData({ [name]: newArr })
         }
-        
+
         this.setState({
             isActive: !this.state.isActive,
         })
     }
 
-    getRandomColor() {
-        const { colors } = this.props
-        const index = Math.floor(colors.length * Math.random())
-        return colors[index]
-    }
 
     render() {
         const { clickable } = this.props
         const { isActive, color } = this.state
         const props = {
             className: styles.chip,
-            backgroundColor: isActive ?  color : this.props.backgroundColor,
+            backgroundColor: isActive ? color : this.props.backgroundColor,
         }
         if (clickable) {
             props.onClick = this.handleClick

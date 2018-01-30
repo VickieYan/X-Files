@@ -35,6 +35,7 @@ class About extends Component {
                     <div className={styles.tags}>
                         {data.hobbies.map((item, index) => (
                             <Tag
+                              name="hobbies"
                               key={index}
                               content={item}
                               clickable={false}
@@ -42,6 +43,7 @@ class About extends Component {
                             ))}
                         {data.skills.map((item, index) => (
                             <Tag
+                              name="skills"
                               key={index}
                               content={item}
                               backgroundColor={lightBlue50}

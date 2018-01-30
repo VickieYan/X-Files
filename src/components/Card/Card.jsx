@@ -3,21 +3,8 @@ import FlatButton from 'material-ui/FlatButton'
 import Tag from '../../components/Tag/Tag'
 import styles from './Card.scss'
 
-
-
-//name:string title:string colors:array words:array
+// name:string title:string colors:array words:array
 class Card extends Component {
-    constructor(props) {
-        super(props)
-        // this.getRandomColor = this.getRandomColor.bind(this)
-    }
-
-    // getRandomColor() {
-    //     const { colors } = this.props
-    //     const index = Math.floor(colors.length * Math.random())
-    //     return colors[index]
-    // }
-
     renderButton() {
         return (
             <div className={styles['button-fields']}>
@@ -36,7 +23,12 @@ class Card extends Component {
     }
 
     render() {
-        const { style, hasButton, name, colors } = this.props
+        const {
+            style,
+            hasButton,
+            name,
+            colors,
+        } = this.props
         return (
             <div className={styles.paper} style={style}>
                 <p>{this.props.title}</p>

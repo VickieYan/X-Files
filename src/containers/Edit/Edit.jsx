@@ -6,7 +6,9 @@ import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit'
 import Clear from 'material-ui/svg-icons/content/clear'
-import { hobbies } from '../../../static/data/words'
+import { connect } from 'react-redux'
+import { uploadData } from '../../actions/userAction'
+import { hobbies, skills } from '../../../static/data/words'
 import styles from './Edit.scss'
 import AppBar from '../../components/AppBar/AppBar'
 import Form from '../../components/Form/Form'
@@ -16,14 +18,17 @@ import { colorsA, colorsB } from '../../../static/data/color'
 import Memorabilia from '../../components/Memorabilia/Memorabilia'
 import ImageUpload from '../../components/ImageUpload/ImageUpload'
 
+@connect(
+    state => state.user,
+    { uploadData },
+)
 class Edit extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             isOpen: false,
             dialogType: null,
-            hobbies: ['美食', '互联网', '篮球', '美食'],
-            skills: ['HTML', 'CSS', 'Javascript', 'Php', 'Java', 'Golang', 'Python'],
+            index: null,
             previewVisible: false,
             previewImage: '',
             fileList: [{
@@ -36,12 +41,14 @@ class Edit extends Component {
         this.handleOpen = this.handleOpen.bind(this)
         this.handleClose = this.handleClose.bind(this)
         this.handleRequestDelete = this.handleRequestDelete.bind(this)
+        this.formatDate = this.formatDate.bind(this)
     }
-    handleOpen(type) {
+    handleOpen(type, index) {
         this.setState({
             isOpen: true,
             dialogType: type,
-         })
+            index: index || 0,
+        })
     }
     handleClose() {
         this.setState({ isOpen: false })
@@ -61,15 +68,33 @@ class Edit extends Component {
 
     handleChange = ({ fileList }) => this.setState({ fileList })
 
+    formatDate(value) {
+        const date = new Date(value)
+        const year = date.getFullYear()
+        const month = date.getMonth() + 1
+        const day = date.getDate()
+        const time = `${year}-${month}-${day}`
+        return time
+    }
+
     renderInfo() {
+        const {
+            sex,
+            phoneNumber,
+            emial,
+            signature,
+            linkedin,
+            github,
+            twitter,
+        } = this.props
         const data = [
-            { type: 'radio', label: '性别', name: 'sex', text: '男' },
-            { type: 'text', label: '电话', name: 'tel', text: '17621973154' },
-            { type: 'text', label: '邮箱', name: 'email', text: 'Ningersan@gmail.com' },
-            { type: 'multiLine', label: '个人签名', name: 'signature', text: 'In me the tiger sniffs the rose' },
-            { type: 'text', label: '微博', name: 'weibo', text: 'https://weibo.com/ningersan' },
-            { type: 'text', label: 'github', name: 'github', text: 'https://github.com/Ningersan' },
-            { type: 'text', label: 'twitter', name: 'twitter', text: 'http://twitter.com' }
+            { type: 'radio', label: '性别', name: 'sex', text: sex },
+            { type: 'text', label: '电话', name: 'tel', text: phoneNumber },
+            { type: 'text', label: '邮箱', name: 'email', text: emial },
+            { type: 'multiLine', label: '个人签名', name: 'signature', text: signature },
+            { type: 'text', label: 'linkedin', name: 'linkedin', text: linkedin },
+            { type: 'text', label: 'github', name: 'github', text: github },
+            { type: 'text', label: 'twitter', name: 'twitter', text: twitter }
         ]
         return (
             <EditCard title="Public profile">
@@ -110,7 +135,7 @@ class Edit extends Component {
         )
     }
     renderHobbies() {
-        const { hobbies } = this.state
+        const { hobbies } = this.props
         const buttonStyle = { marginLeft: '10px', width: '40px', height: '40px' }
         return (
             <EditCard title="Hobby">
@@ -125,7 +150,7 @@ class Edit extends Component {
                             {item}
                         </Chip>
                     ))}
-                    <FloatingActionButton mini secondary style={buttonStyle} onClick={() => { this.handleOpen('hobbit') }}>
+                    <FloatingActionButton mini secondary style={buttonStyle} onClick={() => { this.handleOpen('hobbies') }}>
                         <ContentAdd />
                     </FloatingActionButton>
                 </div>
@@ -133,7 +158,7 @@ class Edit extends Component {
         )
     }
     renderSkills() {
-        const { skills } = this.state
+        const { skills } = this.props
         const buttonStyle = { marginLeft: '10px', width: '40px', height: '40px' }
         return (
             <EditCard title="Skill">
@@ -148,7 +173,7 @@ class Edit extends Component {
                             {item}
                         </Chip>
                     ))}
-                    <FloatingActionButton mini secondary style={buttonStyle} onClick={() => { this.handleOpen('skill') }}>
+                    <FloatingActionButton mini secondary style={buttonStyle} onClick={() => { this.handleOpen('skills') }}>
                         <ContentAdd />
                     </FloatingActionButton>
                 </div>
@@ -156,21 +181,17 @@ class Edit extends Component {
         )
     }
     renderExperience() {
-        const experience = [
-            { date: '2015-09-01', work: 'Create a services site' },
-            { date: '2015-10-10', work: 'Solve initial network problems' },
-            { date: '2015-10-11', work: 'Technical testing' },
-            { date: '2015-11-22', work: 'twork problems being solved' },
-        ]
+        const { contributes } = this.props
         return (
             <EditCard title="Experience">
                 <div className={styles['timeline-wrap']}>
                     <Timeline pending="to be continue...">
-                        {experience.map((item, index) => (
+                        {contributes.map((item, index) => (
                             <Timeline.Item key={index} className={styles['timeline-item']} color="pink">
-                                <span>{item.work} {item.date}</span>
+                                <h3>From {this.formatDate(item.startTime)} to {this.formatDate(item.endTime)}</h3>
+                                <p>{item.duty}</p>
                                 <div className={styles['edit-btn-wrap']}>
-                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={() => { this.handleOpen('experience') }}>
+                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={() => { this.handleOpen('experience', index) }}>
                                         <EditorModeEdit />
                                     </IconButton>
                                     <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }}>
@@ -185,19 +206,33 @@ class Edit extends Component {
         )
     }
     renderDialog() {
-        const { dialogType } = this.state
+        const { dialogType, index } = this.state
+        const { contributes } = this.props
         switch (dialogType) {
-            case 'hobbit':
-            case 'skill':
+            case 'hobbies':
                 return (
                     <div className={styles['dialog-wrap']}>
                         <Card
                           hasButton
-                          name='hobbies'
+                          name={dialogType}
                           style={{ backgroundColor: '#fff', width: '1000px', margin: 'auto auto' }}
                           title="感兴趣的话题"
                           colors={colorsA}
                           words={hobbies}
+                          onClose={this.handleClose}
+                        />
+                    </div>
+                )
+            case 'skills':
+                return (
+                    <div className={styles['dialog-wrap']}>
+                        <Card
+                          hasButton
+                          name={dialogType}
+                          style={{ backgroundColor: '#fff', width: '1000px', margin: 'auto auto' }}
+                          title="感兴趣的话题"
+                          colors={colorsA}
+                          words={skills}
                           onClose={this.handleClose}
                         />
                     </div>
@@ -207,6 +242,9 @@ class Edit extends Component {
                     <div className={styles['dialog-wrap']}>
                         <Memorabilia
                           hasButton
+                          startTime={contributes[index].startTime}
+                          endTime={contributes[index].endTime}
+                          text={contributes[index].duty}
                           style={{ backgroundColor: '#fff', width: '1000px', margin: 'auto auto' }}
                           onClose={this.handleClose}
                         />
@@ -219,7 +257,7 @@ class Edit extends Component {
     render() {
         return (
             <div className={styles.wrap}>
-                <AppBar {...this.props}/>
+                <AppBar {...this.props} />
                 {this.renderInfo()}
                 {this.renderHobbies()}
                 {this.renderSkills()}

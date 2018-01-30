@@ -11,7 +11,7 @@ function errorMsg(msg) {
 function loginSuccess(data) {
     return {
         type: LOGIN_SUCCESS,
-        payload: data
+        payload: data,
     }
 }
 
@@ -23,13 +23,13 @@ export function login({ shortName, password }) {
     // return ((dispatch) => {
     //     axios.post('/user/signin', { shortName, password })
     //     .then((res) => {
-    //         console.log(res)
+    //         dispatch(loginSuccess(res.data))
     //     })
     // })
 
     // vk-simdata
-    let res = {
-        msg:  '登录成功',
+    const res = {
+        msg: '登录成功',
         code: 200,
         info: {
             shortName: 'vy67',
@@ -41,7 +41,7 @@ export function login({ shortName, password }) {
             company: 'Newegg',
             telephoneNumber: '17761237141',
             title: 'software',
-            groups:'WWW',
+            groups: 'WWW',
         },
     }
     if (res.code === 200) { // 登录成功
@@ -52,6 +52,6 @@ export function login({ shortName, password }) {
 export function uploadData(obj) {
     return {
         type: UPLOAD_DATA,
-        payload: obj
+        payload: obj,
     }
 }

@@ -24,10 +24,10 @@ class Step3 extends Component {
         this.props.uploadData({
             contributes: [...this.props.contributes, 
                 {
-                    startTime:'',
-                    endTime:'',
-                    duty:'',
-                } 
+                    startTime: '',
+                    endTime: '',
+                    duty: '',
+                },
             ],
         })
     }
@@ -41,10 +41,18 @@ class Step3 extends Component {
     }
 
     render() {
+        const { contributes } = this.props
         return (
             <div>
                 <div>
-                    {this.props.contributes.map((item, index) => (<Memorabilia key={index} isDeletable onDelete={this.handleDelete(index)} index={index}/>))}
+                    {contributes.map((item, index) => (
+                        <Memorabilia
+                          key={index}
+                          isDeletable
+                          index={index}
+                          onDelete={this.handleDelete(index)}
+                        />
+                    ))}
                 </div>
                 <div className={styles.addBtn}>
                     <FloatingActionButton

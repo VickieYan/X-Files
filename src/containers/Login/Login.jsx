@@ -80,13 +80,11 @@ class Login extends Component {
             // submit code here
             this.props.login({ shortName, password })
             // this.props.history.push(this.props.redirectTo)
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.props.history.push(this.props.redirectTo)
-            },1000)
+            }, 1000)
         }
     }
-
-   
 
     render() {
         const {
