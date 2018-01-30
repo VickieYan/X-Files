@@ -29,7 +29,7 @@ class Form extends Component {
 
     renderContent() {
         const { value } = this.state
-        const { type, name, text } = this.props
+        const { type, name, text, options } = this.props
         const groupStyle = { width: '150px', display: 'flex', flexDirection: 'row' }
 
         const props = {
@@ -45,7 +45,7 @@ class Form extends Component {
                 multiLine: true,
                 spellCheck: false,
                 row: 1,
-                rowsMax: 3,
+                rowsMax: 2,
                 autoFocus: true,
                 name,
                 onChange: this.handleChange,
@@ -62,8 +62,11 @@ class Form extends Component {
                   style={groupStyle}
                   onBlur={this.handleBlur}
                 >
-                    <RadioButton value="男" label="男" />
-                    <RadioButton value="女" label="女" />
+                    {options.map((option, index) => (
+                        <RadioButton key={index} value={option} label={option} />
+                    ))}
+                    {/* <RadioButton value="男" label="男" />
+                    <RadioButton value="女" label="女" /> */}
                 </RadioButtonGroup>
             )
         }
@@ -76,7 +79,7 @@ class Form extends Component {
         const { isEditing, value } = this.state
         const { label } = this.props
         return (
-            <form className={styles.form}>
+            <div className={styles.form}>
                 <h3 className={styles.label}>{label}</h3>
                 <div className={styles.content}>
                     {!isEditing
@@ -99,7 +102,7 @@ class Form extends Component {
                         )
                     }
                 </div>
-            </form>
+            </div>
         )
     }
 }

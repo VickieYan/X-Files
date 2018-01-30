@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { lightBlue50 } from 'material-ui/styles/colors'
-import Button from '../../components/Button/Button'
-import Tag from '../../components/Tag/Tag'
+import { Button, Tag } from '../../components/'
 import styles from './Profile.scss'
 
 class About extends Component {

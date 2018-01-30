@@ -1,13 +1,15 @@
-@import '../../styles/mixins.scss';
 @import '../../styles/variables.scss';
+@import '../../styles/placeholder.scss';
+@import '../../styles/mixins.scss';
 
 .wrap {
-    overflow: hidden;
-    width: 200px;
+    height: 150px;
+    margin-right: 10px;
     .preview {
-        margin:20px;
+        display: inline-block;
+        @include size(150px, 150px);
         overflow: hidden;
-        border-radius: $radius-base;
+        border-radius: 2px;
         box-shadow: 0 0 10px $gray-light;
         .preview-img {
             float: left;
@@ -15,12 +17,15 @@
             height: 150px;
         }
     }
-    .upload-btn {
-        padding: 0 16px;
-        margin: 0 auto;
-        width: 50%;
+    
+    .upload-photo-btn {
+        // position: absolute;
+        // top: 20px;
+        @include size(150px, 150px);
+        transform: translateY(-100%);
         text-align: center;
         line-height: 36px;
+        opacity: 0;
         color: $white;
         cursor: pointer;
         background: $theme-color;

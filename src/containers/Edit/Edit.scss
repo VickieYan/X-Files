@@ -10,7 +10,7 @@
         width: 70%;
         display: inline-block;
     }
-    
+
     .avatar {
         float: right;
         width: 230px;
@@ -27,7 +27,59 @@
     }
 
     .photo-wrap {
+        display: flex;
+        align-items: center;
+        position: relative;
         padding: 20px;
+        .photo-upload-wrap {
+            // height: 0px;
+            margin-right: 10px;
+            .photo-preview {
+                display: inline-block;
+                @include size(150px, 150px);
+                overflow: hidden;
+                border-radius: 2px;
+                box-shadow: 0 0 10px $gray-light;
+                .preview-img {
+                    float: left;
+                    width: 150px;
+                    height: 150px;
+                }
+            }
+            .photo-upload-btn {
+                width: 150px;
+                text-align: center;
+                line-height: 36px;
+                // opacity: 0;
+                color: $white;
+                cursor: pointer;
+                background: $theme-color;
+                box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px,
+                rgba(0, 0, 0, 0.12) 0px 1px 4px;
+                border-radius: 2px;
+                transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+                &:hover {
+                    background: $theme-color-light;
+                }
+            }
+        }
+        .upload-photo-btn {
+            margin: 0 10px;
+            @include size(40px, 40px);
+            text-align: center;
+            line-height: 40px;
+            font-size: 30px;
+            color: $white;
+            cursor: pointer;
+            background: rgb(255, 64, 129);
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 10px,
+                        rgba(0, 0, 0, 0.23) 0px 3px 10px;
+            border-radius: $radius-base;
+            transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+            &:hover {
+                background-color: rgb(255, 141, 180);
+            }
+        }
     }
 
     .timeline-wrap {

@@ -1,22 +1,19 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import ReactCoreImageUpload from 'react-core-image-upload'
+import { Timeline } from 'antd'
 import Chip from 'material-ui/Chip'
-import { Timeline, Upload, Icon, Modal } from 'antd'
 import IconButton from 'material-ui/IconButton'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
-import ContentAdd from 'material-ui/svg-icons/content/add'
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit'
 import Clear from 'material-ui/svg-icons/content/clear'
-import { connect } from 'react-redux'
+import ContentAdd from 'material-ui/svg-icons/content/add'
 import { uploadData } from '../../actions/userAction'
-import { hobbies, skills } from '../../../static/data/words'
-import styles from './Edit.scss'
-import AppBar from '../../components/AppBar/AppBar'
-import Form from '../../components/Form/Form'
-import Card from '../../components/Card/Card'
+import { AppBar, Form, Card, Memorabilia, ImageUpload } from '../../components/'
 import EditCard from './EditCard'
+import { hobbies, skills } from '../../../static/data/words'
 import { colorsA, colorsB } from '../../../static/data/color'
-import Memorabilia from '../../components/Memorabilia/Memorabilia'
-import ImageUpload from '../../components/ImageUpload/ImageUpload'
+import styles from './Edit.scss'
 
 @connect(
     state => state.user,
@@ -28,15 +25,7 @@ class Edit extends Component {
         this.state = {
             isOpen: false,
             dialogType: null,
-            index: null,
-            previewVisible: false,
-            previewImage: '',
-            fileList: [{
-              uid: -1,
-              name: 'xxx.png',
-              status: 'done',
-              url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-            }],
+            photos: ['1'],
         }
         this.handleOpen = this.handleOpen.bind(this)
         this.handleClose = this.handleClose.bind(this)
@@ -56,17 +45,6 @@ class Edit extends Component {
     handleRequestDelete() {
         // hanlde here
     }
-    // upload
-    handleCancel = () => this.setState({ previewVisible: false })
-
-    handlePreview = (file) => {
-        this.setState({
-          previewImage: file.url || file.thumbUrl,
-          previewVisible: true,
-        })
-    }
-
-    handleChange = ({ fileList }) => this.setState({ fileList })
 
     formatDate(value) {
         const date = new Date(value)
@@ -88,13 +66,14 @@ class Edit extends Component {
             twitter,
         } = this.props
         const data = [
-            { type: 'radio', label: '性别', name: 'sex', text: sex },
-            { type: 'text', label: '电话', name: 'tel', text: phoneNumber },
+            { type: 'radio', label: '性别', name: 'sex', text: sex, options: ['男', '女'] },
+            { type: 'radio', label: '是否单身', name: 'isSingle', text: phoneNumber, options: ['是', '否'] },
+            { type: 'text', label: '电话', name: 'tel', text: '17621973154' },
             { type: 'text', label: '邮箱', name: 'email', text: emial },
             { type: 'multiLine', label: '个人签名', name: 'signature', text: signature },
-            { type: 'text', label: 'linkedin', name: 'linkedin', text: linkedin },
+            { type: 'text', label: '微博', name: 'linkedin', text: linkedin },
             { type: 'text', label: 'github', name: 'github', text: github },
-            { type: 'text', label: 'twitter', name: 'twitter', text: twitter }
+            { type: 'text', label: 'twitter', name: 'twitter', text: twitter },
         ]
         return (
             <EditCard title="Public profile">
@@ -108,28 +87,34 @@ class Edit extends Component {
         )
     }
     renderPhotos() {
-        const { previewVisible, previewImage, fileList } = this.state
-        const uploadButton = (
-            <div>
-                <Icon type="plus" />
-                <div className="ant-upload-text">Upload</div>
-            </div>
-          )
+        const { photos } = this.state
+        const { length } = photos
         return (
-            <EditCard title="Photography">
+            <EditCard title="Photo">
                 <div className={styles['photo-wrap']}>
-                    <Upload
-                      action="//jsonplaceholder.typicode.com/posts/"
-                      listType="picture-card"
-                      fileList={fileList}
-                      onPreview={this.handlePreview}
-                      onChange={this.handleChange}
-                    >
-                        {fileList.length >= 3 ? null : uploadButton}
-                    </Upload>
-                    <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-                        <img alt="example" style={{ width: '100%' }} src={previewImage} />
-                    </Modal>
+                    {photos.map((photo, index) => (
+                        <ImageUpload
+                          key={index}
+                          text="更换图片"
+                          cropRatio="5:7"
+                          className={styles['photo-upload-wrap']}
+                          previewClassName={styles['photo-preview']}
+                          imgClassName={styles['preview-img']}
+                          btnClassName={styles['photo-upload-btn']}
+                        />
+                    ))}
+                    {length < 3 &&
+                        <ReactCoreImageUpload
+                          crop
+                        //   resize="local"
+                          text="+"
+                          cropRatio="5:7"
+                          className={styles['upload-photo-btn']}
+                          inputOfFile="avatar" // 上传服务器对应表单name
+                          url="http://wsmis053:6141/user/testUpdate" // 服务器上传位置
+                          imageUploaded={this.imageuploaded}
+                        />
+                    }
                 </div>
             </EditCard>
         )

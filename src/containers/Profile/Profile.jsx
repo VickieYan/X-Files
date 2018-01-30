@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { CSSTransitionGroup } from 'react-transition-group'
-import AppBar from '../../components/AppBar/AppBar'
+import { AppBar } from '../../components/'
 import Main from './Main'
 import About from './About'
 import Hobby from './Hobby'

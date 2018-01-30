@@ -1,0 +1,38 @@
+@import '../../styles/_mixins.scss';
+@import '../../styles/_variables.scss';
+
+.main {
+    padding: 30px 0;
+}
+
+.wrap {
+    max-width: $width-base;
+    margin: 0 auto;
+    .base-info-wrap {
+        padding: 0 16px;
+        .img-wrapper {
+            @include center();
+        }
+    }
+    .form {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .btn-more {
+        margin-top: 12px;
+    }
+}
+
+//step2
+.chipWrapper {
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+
+//step3 
+.addBtn {
+    margin-bottom: 40px;
+}

@@ -3,8 +3,8 @@ import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import { connect } from 'react-redux'
 import { uploadData } from '../../actions/userAction'
-import Memorabilia from '../../components/Memorabilia/Memorabilia'
-import styles from './index.scss'
+import { Memorabilia } from '../../components/'
+import styles from './Detail.scss'
 
 @connect(
     state => state.user,
@@ -13,16 +13,13 @@ import styles from './index.scss'
 class Step3 extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            memorabilias: [''],
-        }
         this.handleAdd = this.handleAdd.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
     }
 
     handleAdd() {
         this.props.uploadData({
-            contributes: [...this.props.contributes, 
+            contributes: [...this.props.contributes,
                 {
                     startTime: '',
                     endTime: '',

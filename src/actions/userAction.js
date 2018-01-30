@@ -45,7 +45,7 @@ export function login({ shortName, password }) {
         },
     }
     if (res.code === 200) { // 登录成功
-       return loginSuccess(res.info)
+        return loginSuccess(res.info)
     }
 }
 

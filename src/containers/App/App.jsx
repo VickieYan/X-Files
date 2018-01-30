@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import { blueGrey700, white } from 'material-ui/styles/colors'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { CSSTransitionGroup } from 'react-transition-group'
 import {
     BrowserRouter as Router,
     Route,
-    // Link
     Switch,
-    Redirect,
 } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { CSSTransitionGroup } from 'react-transition-group'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import { blueGrey700, white } from 'material-ui/styles/colors'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import store from '../../store/store'
-import Home from '../Home/Home'
-import Edit from '../Edit/Edit'
-import Login from '../Login/Login'
-import Detail from '../Detail/index'
-import Profile from '../Profile/Profile'
 import AuthRoute from '../../components/AuthRoute/authroute'
+import {
+    Home,
+    Edit,
+    Login,
+    Detail,
+    Profile,
+} from '../index'
 import styles from './App.scss'
 
 class App extends Component {
@@ -45,7 +45,7 @@ class App extends Component {
                                       transitionEnterTimeout={300}
                                       transitionLeaveTimeout={300}
                                     >
-                                        <AuthRoute /> 
+                                        <AuthRoute />
                                         <Switch key={location.key} location={location}>
                                             <Route exact path="/" component={Home} location={location} />
                                             <Route path="/login" component={Login} location={location} />

@@ -4,9 +4,9 @@ import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import { connect } from 'react-redux'
 import { uploadData } from '../../actions/userAction'
-import ImageUpload from '../../components/ImageUpload/ImageUpload'
-import Form from '../../components/Form/Form'
-import styles from './index.scss'
+import { ImageUpload } from '../../components/'
+// import validator from '../../scripts/validator'
+import styles from './Detail.scss'
 
 @connect(
     state => state.user,
@@ -103,6 +103,24 @@ class Step1 extends Component {
             </div>
         )
     }
+
+    // handleChangePhone(event) {
+    //   const { pattern, errorMsg } = validator.tel
+    //   const phone = event.target.value.trim()
+    //   const isValid = pattern.test(phone)
+    //   const phoneErrorText = !isValid ? errorMsg : null
+
+    //   this.setState({ phoneErrorText })
+    // }
+
+    // handleChangeEmail(event) {
+    //   const { pattern, errorMsg } = validator.email
+    //   const email = event.target.value.trim()
+    //   const isValid = pattern.test(email)
+    //   const emailErrorText = !isValid ? errorMsg : null
+
+    //   this.setState({ emailErrorText })
+    // }
 
     render() {
         return (
