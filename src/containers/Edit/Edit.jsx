@@ -173,8 +173,8 @@ class Edit extends Component {
                     <Timeline pending="to be continue...">
                         {contributes.map((item, index) => (
                             <Timeline.Item key={index} className={styles['timeline-item']} color="pink">
-                                <h3>From {this.formatDate(item.startTime)} to {this.formatDate(item.endTime)}</h3>
-                                <p>{item.duty}</p>
+                                <h3>{item.duty}</h3>
+                                <span>From {this.formatDate(item.startTime)} to {this.formatDate(item.endTime)}</span>
                                 <div className={styles['edit-btn-wrap']}>
                                     <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={() => { this.handleOpen('experience', index) }}>
                                         <EditorModeEdit />
@@ -227,6 +227,8 @@ class Edit extends Component {
                     <div className={styles['dialog-wrap']}>
                         <Memorabilia
                           hasButton
+                          contributes={this.props.contributes}
+                          onUploadData={this.props.uploadData}
                           startTime={contributes[index].startTime}
                           endTime={contributes[index].endTime}
                           text={contributes[index].duty}

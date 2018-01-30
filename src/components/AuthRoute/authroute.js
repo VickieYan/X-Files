@@ -12,7 +12,7 @@ class AuthRoute extends Component {
     componentDidMount() {
         this.props.history.push(this.props.redirectTo)
     }
-    
+
     render() {
         return null
     }

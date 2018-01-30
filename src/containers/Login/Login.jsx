@@ -46,7 +46,6 @@ class Login extends Component {
         const text = target.value.trim()
         const { pattern } = validator[target.name]
         const isValid = pattern.test(text)
-        // const value = pattern.test(text) ? text : null
         const value = pattern.test(text) ? text : text
         const statusType = {
             shortName: 'isUsernameValid',
@@ -61,7 +60,12 @@ class Login extends Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        const { isUsernameValid, isPasswordValid, shortName, password } = this.state
+        const {
+            shortName,
+            password,
+            isUsernameValid,
+            isPasswordValid,
+        } = this.state
         if (isUsernameValid && isPasswordValid) {
             // submit code here
             this.props.login({ ShortName: shortName, Password: password })

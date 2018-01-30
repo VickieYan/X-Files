@@ -2,16 +2,10 @@ import React, { Component } from 'react'
 import TextField from 'material-ui/TextField'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
-import { connect } from 'react-redux'
-import { uploadData } from '../../actions/userAction'
 import { ImageUpload } from '../../components/'
 // import validator from '../../scripts/validator'
 import styles from './Detail.scss'
 
-@connect(
-    state => state.user,
-    { uploadData },
-)
 class Step1 extends Component {
     constructor(props) {
         super(props)
@@ -41,14 +35,14 @@ class Step1 extends Component {
         const item = userinfo[index]
         switch (type) {
             case 'text':
-                this.props.uploadData({ [item.name]: value })
+                this.props.onUploadData({ [item.name]: value })
                 break
             case 'select':
                 newUserinfo[index].num = value
                 this.setState({
                     userinfo: newUserinfo,
                 })
-                this.props.uploadData({ [item.name]: item.options[value] })
+                this.props.onUploadData({ [item.name]: item.options[value] })
                 break
             default:
                 break

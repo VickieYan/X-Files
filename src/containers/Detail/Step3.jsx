@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import { connect } from 'react-redux'
-import { uploadData } from '../../actions/userAction'
 import { Memorabilia } from '../../components/'
 import styles from './Detail.scss'
 
-@connect(
-    state => state.user,
-    { uploadData },
-)
 class Step3 extends Component {
     constructor(props) {
         super(props)
@@ -18,7 +12,7 @@ class Step3 extends Component {
     }
 
     handleAdd() {
-        this.props.uploadData({
+        this.props.onUploadData({
             contributes: [...this.props.contributes,
                 {
                     startTime: '',
@@ -33,12 +27,12 @@ class Step3 extends Component {
         return () => {
             const contributes = this.props.contributes.slice()
             contributes.splice(index, 1)
-            this.props.uploadData({ contributes })
+            this.props.onUploadData({ contributes })
         }
     }
 
     render() {
-        const { contributes } = this.props
+        const { contributes, onUploadData } = this.props
         return (
             <div>
                 <div>
@@ -47,6 +41,8 @@ class Step3 extends Component {
                           key={index}
                           isDeletable
                           index={index}
+                          contributes={contributes}
+                          onUploadData={onUploadData}
                           onDelete={this.handleDelete(index)}
                         />
                     ))}

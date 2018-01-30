@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
-import {
-    Step,
-    Stepper,
-    StepLabel,
-} from 'material-ui/Stepper'
+import { connect } from 'react-redux'
+import { Step, Stepper, StepLabel } from 'material-ui/Stepper'
 import { CSSTransitionGroup } from 'react-transition-group'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
+import { uploadData } from '../../actions/userAction'
 import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
 import styles from './Detail.scss'
 
+@connect(
+    state => state.user,
+    { uploadData },
+)
 class MyStepper extends Component {
     constructor(props) {
         super(props)
@@ -23,13 +25,14 @@ class MyStepper extends Component {
     }
 
     getStepContent(stepIndex) {
+        const { uploadData, contributes } = this.props
         switch (stepIndex) {
             case 0:
-                return <Step1 key={0} />
+                return <Step1 onUploadData={uploadData} key={0} />
             case 1:
                 return <Step2 key={1} />
             case 2:
-                return <Step3 key={2} />
+                return <Step3 onUploadData={uploadData} contributes={contributes} key={2} />
             default:
                 return <Step1 key={3} />
         }
