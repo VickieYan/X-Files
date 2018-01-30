@@ -42,13 +42,14 @@ class Edit extends Component {
 
     renderInfo() {
         const data = [
-            { type: 'radio', label: '性别', name: 'sex', text: '男' },
-            { type: 'text', label: '电话', name: 'tel', text: '17621973154' },
-            { type: 'text', label: '邮箱', name: 'email', text: 'Ningersan@gmail.com' },
+            { type: 'radio', label: '性别', name: 'Sex', text: '男', options: ['男', '女'] },
+            { type: 'radio', label: '是否单身', name: 'IsSingle', text: '是', options: ['是', '否'] },
+            { type: 'text', label: '电话', name: 'Tel', text: '17621973154' },
+            { type: 'text', label: '邮箱', name: 'Email', text: 'Ningersan@gmail.com' },
             { type: 'multiLine', label: '个人签名', name: 'signature', text: 'In me the tiger sniffs the rose' },
-            { type: 'text', label: '微博', name: 'weibo', text: 'https://weibo.com/ningersan' },
-            { type: 'text', label: 'github', name: 'github', text: 'https://github.com/Ningersan' },
-            { type: 'text', label: 'twitter', name: 'twitter', text: 'http://twitter.com' },
+            { type: 'text', label: '微博', name: 'Weibo', text: 'https://weibo.com/ningersan' },
+            { type: 'text', label: 'github', name: 'Github', text: 'https://github.com/Ningersan' },
+            { type: 'text', label: 'twitter', name: 'Twitter', text: 'http://twitter.com' },
         ]
         return (
             <EditCard title="Public profile">
@@ -70,6 +71,8 @@ class Edit extends Component {
                     {photos.map((photo, index) => (
                         <ImageUpload
                           key={index}
+                          text="更换图片"
+                          cropRatio="5:7"
                           className={styles['photo-upload-wrap']}
                           previewClassName={styles['photo-preview']}
                           imgClassName={styles['preview-img']}
@@ -79,8 +82,9 @@ class Edit extends Component {
                     {length < 3 &&
                         <ReactCoreImageUpload
                           crop
-                          resize="local"
+                        //   resize="local"
                           text="+"
+                          cropRatio="5:7"
                           className={styles['upload-photo-btn']}
                           inputOfFile="avatar" // 上传服务器对应表单name
                           url="http://wsmis053:6141/user/testUpdate" // 服务器上传位置

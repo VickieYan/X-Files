@@ -32,7 +32,7 @@
         position: relative;
         padding: 20px;
         .photo-upload-wrap {
-            height: 150px;
+            // height: 0px;
             margin-right: 10px;
             .photo-preview {
                 display: inline-block;
@@ -47,11 +47,10 @@
                 }
             }
             .photo-upload-btn {
-                @include size(150px, 150px);
-                transform: translateY(-100%);
+                width: 150px;
                 text-align: center;
                 line-height: 36px;
-                opacity: 0;
+                // opacity: 0;
                 color: $white;
                 cursor: pointer;
                 background: $theme-color;
