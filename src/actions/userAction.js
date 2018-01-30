@@ -16,37 +16,38 @@ function loginSuccess(data) {
 }
 
 // actionCreator
-export function login({ shortName, password }) {
-    if (!shortName || !password) {
+export function login({ ShortName, Password }) {
+    if (!ShortName || !Password) {
         return errorMsg('用户名和密码必须输入')
     }
-    // return ((dispatch) => {
-    //     axios.post('/user/signin', { shortName, password })
-    //     .then((res) => {
-    //         dispatch(loginSuccess(res.data))
-    //     })
-    // })
+    return ((dispatch) => {
+        axios.post('/user/signin', { ShortName, Password })
+        .then((res) => {
+            // dispatch(loginSuccess(res.data))
+            console.log(res)
+        })
+    })
 
     // vk-simdata
-    const res = {
-        msg: '登录成功',
-        code: 200,
-        info: {
-            shortName: 'vy67',
-            fullName: 'Vickie.W.Yan',
-            displayName: 'Vickie',
-            emial: 'Vickie.W.Yan@newegg.com',
-            employeeID: '418570912',
-            department: 'MIS',
-            company: 'Newegg',
-            telephoneNumber: '17761237141',
-            title: 'software',
-            groups: 'WWW',
-        },
-    }
-    if (res.code === 200) { // 登录成功
-        return loginSuccess(res.info)
-    }
+    // const res = {
+    //     msg: '登录成功',
+    //     code: 200,
+    //     info: {
+    //         shortName: 'vy67',
+    //         fullName: 'Vickie.W.Yan',
+    //         displayName: 'Vickie',
+    //         emial: 'Vickie.W.Yan@newegg.com',
+    //         employeeID: '418570912',
+    //         department: 'MIS',
+    //         company: 'Newegg',
+    //         telephoneNumber: '17761237141',
+    //         title: 'software',
+    //         groups: 'WWW',
+    //     },
+    // }
+    // if (res.code === 200) { // 登录成功
+    //     return loginSuccess(res.info)
+    // }
 }
 
 export function uploadData(obj) {

@@ -65,6 +65,7 @@ class Step1 extends Component {
 
     renderInfo() {
         const { userinfo } = this.state
+        const textFieldStyle = { width: '400px' }
         return (
             <div className={styles.form}>
                 {
@@ -75,6 +76,7 @@ class Step1 extends Component {
                                     <SelectField
                                       key={index}
                                       value={item.num}
+                                      style={textFieldStyle}
                                       onChange={(ev, num) => { this.handleChange('select', index, num) }}
                                     >
                                         {item.options.map((item, index) => (
@@ -91,6 +93,7 @@ class Step1 extends Component {
                                     <TextField
                                       key={index}
                                       name={item.name}
+                                      style={textFieldStyle}
                                       floatingLabelText={item.label}
                                       onChange={(ev, value) => { this.handleChange('text', index, value) }}
                                     />

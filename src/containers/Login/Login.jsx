@@ -64,7 +64,7 @@ class Login extends Component {
         const { isUsernameValid, isPasswordValid, shortName, password } = this.state
         if (isUsernameValid && isPasswordValid) {
             // submit code here
-            this.props.login({ shortName, password })
+            this.props.login({ ShortName: shortName, Password: password })
             // this.props.history.push(this.props.redirectTo)
             setTimeout(() => {
                 this.props.history.push(this.props.redirectTo)
