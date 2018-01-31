@@ -25,15 +25,26 @@
 }
 
 .control {
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    top: 0;
-    @include size(100%, 100%);
-    z-index: 999;
+    // display: flex;
+    // justify-content: space-between;
+    // position: absolute;
+    // top: 0;
+    // @include size(100%, 100%);
+    // z-index: 999;
+    .control-left {
+        position: absolute;
+        top: 5px;
+        left: 0;
+    }
+    .control-right {
+        position: absolute;
+        top: 5px;
+        right: 0;
+    }
     .control-left,
     .control-right {
         width: 60px;
+        height: 216px;
         display: flex;
         align-items: center;
         opacity: 1;

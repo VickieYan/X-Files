@@ -173,6 +173,17 @@ class Edit extends Component {
                                 </div>
                             </Timeline.Item>
                         ))}
+                        <Timeline.Item className={styles['timeline-item']} color="pink">
+                            <IconButton
+                              tooltip="add experience"
+                              className={styles['add-experience-btn']}
+                              style={{ width: 20, height: 20 }}
+                              iconStyle={{ marginTop: '-12px' }}
+                              onClick={() => { this.handleOpen('experience') }}
+                            >
+                                <ContentAdd color="pink" />
+                            </IconButton>
+                        </Timeline.Item>
                     </Timeline>
                 </div>
             </EditCard>

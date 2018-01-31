@@ -7,13 +7,15 @@ class Login extends Component {
     constructor() {
         super()
         this.state = {
-            username: '',
+            shortName: '',
             password: '',
-            isUsernameValid: null,
+            isShortNameValid: null,
             isPasswordValid: null,
+            passwordErrorMsg: validator.password.errorMsg,
         }
         this.handleClick = this.handleClick.bind(this)
         this.handleFocus = this.handleFocus.bind(this)
+        this.handleChange = this.handleChange.bind(this)
         this.handleBlur = this.handleBlur.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
@@ -29,34 +31,36 @@ class Login extends Component {
         // reset current status
         const { target } = e
         const statusType = {
-            username: 'isUsernameValid',
+            shortName: 'isShortNameValid',
             password: 'isPasswordValid',
         }[target.name]
 
         this.setState({ [statusType]: null })
     }
 
+    handleChange(e) {
+        this.setState({ [e.target.name]: e.target.value })
+    }
+
     handleBlur(e) {
         const { target } = e
-        const text = target.value.trim()
+        const value = this.state[target.name]
         const { pattern } = validator[target.name]
-        const isValid = pattern.test(text)
-        const value = pattern.test(text) ? text : null
+        const isValid = pattern.test(value)
+
         const statusType = {
-            username: 'isUsernameValid',
+            shortName: 'isShortNameValid',
             password: 'isPasswordValid',
         }[target.name]
 
-        this.setState({
-            [statusType]: isValid,
-            [e.target.name]: value,
-        })
+        this.setState({ [statusType]: isValid })
     }
 
     handleSubmit(e) {
         e.preventDefault()
-        const { isUsernameValid, isPasswordValid } = this.state
-        if (isUsernameValid && isPasswordValid) {
+        const { isShortNameValid, isPasswordValid } = this.state
+        if (isShortNameValid && isPasswordValid) {
+            console.log(this.state.shortName, this.state.password)
             // submit code here
         }
     }
@@ -66,7 +70,7 @@ class Login extends Component {
     }
 
     render() {
-        const { isUsernameValid, isPasswordValid } = this.state
+        const { isShortNameValid, isPasswordValid, passwordErrorMsg } = this.state
         const action = 'Login'
         const sign = 'Please Use Your Shortname'
 
@@ -79,12 +83,13 @@ class Login extends Component {
                         <TextField
                           fullWidth
                           type="text"
-                          name="username"
+                          name="shortName"
                           className={styles.textfield}
                           onFocus={this.handleFocus}
+                          onChange={this.handleChange}
                           onBlur={this.handleBlur}
-                          errorText={isUsernameValid === false && validator.username.errorMsg}
-                          floatingLabelText="Username"
+                          errorText={isShortNameValid === false && validator.shortName.errorMsg}
+                          floatingLabelText="shortName"
                           floatingLabelStyle={{ top: '30px' }}
                           floatingLabelFocusStyle={{ fontSize: '20px', color: 'rgba(0, 0, 0, 0.3)', transition: 'all .4s' }}
                           underlineStyle={{ borderBottom: '2px solid #adadad' }}
@@ -96,8 +101,9 @@ class Login extends Component {
                           name="password"
                           className={styles.textfield}
                           onFocus={this.handleFocus}
+                          onChange={this.handleChange}
                           onBlur={this.handleBlur}
-                          errorText={isPasswordValid === false && validator.password.errorMsg}
+                          errorText={isPasswordValid === false && passwordErrorMsg}
                           floatingLabelText="Password"
                           floatingLabelStyle={{ top: '30px' }}
                           floatingLabelFocusStyle={{ fontSize: '20px', color: 'rgba(0, 0, 0, 0.3)', transition: 'all .4s' }}

@@ -1,11 +1,12 @@
 export default {
-    username: {
-        pattern: /^[a-zA-Z0-9_-]{4,16}$/,
-        errorMsg: '请输入4-16位的英文短名，支持下划线',
+    shortName: {
+        pattern: /^(([a-z]+[0-9]+)|([0-9]+[a-z]+))[a-z0-9]*$/i,
+        errorMsg: '请检查英文短名',
     },
     password: {
-        pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-        errorMsg: '密码至少八个字符，至少一个字母和一个数字',
+        // pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+        pattern: /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[~!@#$%^&*])[\da-zA-Z~!@#$%^&*]{8,}$/,
+        errorMsg: '密码至少含有一个字母和一个数字还有一个特殊符号',
     },
     checkPw: {
         pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,

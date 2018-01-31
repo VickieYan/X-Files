@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import RaisedButton from 'material-ui/RaisedButton'
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton'
 import TextField from 'material-ui/TextField'
 import styles from './Form.scss'
@@ -29,7 +30,12 @@ class Form extends Component {
 
     renderContent() {
         const { value } = this.state
-        const { type, name, text, options } = this.props
+        const {
+            type,
+            name,
+            text,
+            options,
+        } = this.props
         const groupStyle = { width: '150px', display: 'flex', flexDirection: 'row' }
 
         const props = {
@@ -56,18 +62,30 @@ class Form extends Component {
 
         if (type === 'radio') {
             return (
-                <RadioButtonGroup
-                  name="sex"
-                  defaultSelected={text}
-                  style={groupStyle}
-                  onBlur={this.handleBlur}
-                >
-                    {options.map((option, index) => (
-                        <RadioButton key={index} value={option} label={option} />
-                    ))}
-                    {/* <RadioButton value="男" label="男" />
-                    <RadioButton value="女" label="女" /> */}
-                </RadioButtonGroup>
+                <div className={styles['radio-btn-groups']}>
+                    <RadioButtonGroup
+                      name="sex"
+                      defaultSelected={text}
+                      style={groupStyle}
+                      onBlur={this.handleBlur}
+                    >
+                        {options.map((option, index) => (
+                            <RadioButton
+                              key={index}
+                              value={option}
+                              label={option}
+                              style={{ width: 80 }}
+                            />
+                        ))}
+                    </RadioButtonGroup>
+                    <RaisedButton
+                      label="确认"
+                      backgroundColor="#455964"
+                      labelColor="#fff"
+                      style={{ width: 30, height: 25, color: '#fff' }}
+                      onClick={this.handleBlur}
+                    />
+                </div>
             )
         }
         return (
