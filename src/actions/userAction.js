@@ -3,8 +3,8 @@ import { ERROR_MSG, LOGIN_SUCCESS, UPLOAD_DATA } from '../constants/actionType'
 
 function errorMsg(msg) {
     return {
-        msg,
         type: ERROR_MSG,
+        msg,
     }
 }
 
@@ -45,7 +45,9 @@ export function login({ ShortName, Password }) {
             groups: 'WWW',
         },
     }
-    if (res.code === 200) { // 登录成功
+
+    // 登录成功
+    if (res.code === 200) {
         return loginSuccess(res.info)
     }
 }

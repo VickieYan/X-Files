@@ -2,14 +2,8 @@ import React, { Component } from 'react'
 import DatePicker from 'material-ui/DatePicker'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
-import { connect } from 'react-redux'
-import { uploadData } from '../../actions/userAction'
 import styles from './Memorabilia.scss'
 
-@connect(
-    state => state.user,
-    { uploadData },
-)
 class Memorabilia extends Component {
     constructor(props) {
         super(props)
@@ -17,10 +11,10 @@ class Memorabilia extends Component {
     }
 
     handleChange(type, value) {
-        const { uploadData, contributes, index } = this.props
+        const { onUploadData, contributes, index } = this.props
         const newContributes = contributes.slice()
         newContributes[index][type] = value
-        uploadData({ contributes: newContributes })
+        onUploadData({ contributes: newContributes })
     }
 
     renderDelButton() {

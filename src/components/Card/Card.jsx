@@ -8,11 +8,11 @@ class Card extends Component {
     renderButton() {
         return (
             <div className={styles['button-fields']}>
-                <FlatButton
+                {/* <FlatButton
                   primary
                   label="Cancel"
                   onClick={this.props.onClose}
-                />
+                /> */}
                 <FlatButton
                   primary
                   label="Submit"
@@ -21,7 +21,6 @@ class Card extends Component {
             </div>
         )
     }
-
     render() {
         const {
             style,

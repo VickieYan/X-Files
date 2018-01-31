@@ -6,7 +6,6 @@ import { colorsB } from '../../../static/data/color'
 import { uploadData } from '../../actions/userAction'
 import styles from './Tag.scss'
 
-
 @connect(
     state => state.user,
     { uploadData },
@@ -57,7 +56,6 @@ class Tag extends Component {
             isActive: !this.state.isActive,
         })
     }
-
 
     render() {
         const { clickable } = this.props
