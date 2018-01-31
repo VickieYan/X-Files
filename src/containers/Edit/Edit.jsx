@@ -64,6 +64,7 @@ class Edit extends Component {
             linkedin,
             github,
             twitter,
+            avatar,
         } = this.props
         const data = [
             { type: 'radio', label: '性别', name: 'sex', text: sex, options: ['男', '女'] },
@@ -81,13 +82,14 @@ class Edit extends Component {
                     {data.map((props, index) => <Form key={index} {...props} />)}
                 </div>
                 <div className={styles.avatar}>
-                    <ImageUpload />
+                    <ImageUpload avatar={avatar} />
                 </div>
             </EditCard>
         )
     }
     renderPhotos() {
         const { photos } = this.state
+        const { avatar } = this.props
         const { length } = photos
         return (
             <EditCard title="Photo">
@@ -97,6 +99,7 @@ class Edit extends Component {
                           key={index}
                           text="更换图片"
                           cropRatio="5:7"
+                          avatar={avatar}
                           className={styles['photo-upload-wrap']}
                           previewClassName={styles['photo-preview']}
                           imgClassName={styles['preview-img']}

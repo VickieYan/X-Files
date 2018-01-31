@@ -15,7 +15,6 @@ import styles from './Detail.scss'
 class Step1 extends Component {
     constructor(props) {
         super(props)
-        // const { sex, isSingle, phoneNumber, hometown, signature, github, linkedin, twitter } = this.props
         this.state = {
             userinfo: [
                 {
@@ -56,9 +55,10 @@ class Step1 extends Component {
     }
 
     renderAvatar() {
+        const { avatar } = this.props
         return (
             <div className={styles['img-wrapper']}>
-                <ImageUpload />
+                <ImageUpload avatar={avatar} uploadData={uploadData} />
             </div>
         )
     }

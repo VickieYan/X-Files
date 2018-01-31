@@ -121,6 +121,11 @@ module.exports = {
                 changeOrigin: true,
                 secure: false,
             },
+            '/info/': {
+                target: 'http://wsmis053:6141/',
+                changeOrigin: true,
+                secure: false,
+            },
         },
         publicPath: '/',
         historyApiFallback: true,

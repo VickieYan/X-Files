@@ -14,16 +14,15 @@ class ImageUpload extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            src: 'http://www.gx8899.com/uploads/allimg/160804/3-160P4111639.jpg',
+            src: this.props.avatar,
         }
         this.imageuploaded = this.imageuploaded.bind(this)
     }
 
     imageuploaded(res) {
+        const { uploadData } = this.props
         if (res.errcode === 0) {
-            this.setState({
-                src: res.data.src,
-            })
+            uploadData({ avatar: res.data.src })
         }
     }
 

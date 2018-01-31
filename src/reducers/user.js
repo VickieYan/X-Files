@@ -15,6 +15,7 @@ const initState = {
     title: '',
     groups: '',
     // 用户填写
+    avatar: 'http://www.gx8899.com/uploads/allimg/160804/3-160P4111639.jpg',
     sex: '男',
     isSingle: '是',
     phoneNumber: '',

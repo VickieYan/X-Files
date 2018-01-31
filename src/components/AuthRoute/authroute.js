@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom"
 import { login } from '../../actions/userAction'
 
 @connect(
@@ -12,7 +12,7 @@ class AuthRoute extends Component {
     componentDidMount() {
         this.props.history.push(this.props.redirectTo)
     }
-    
+
     render() {
         return null
     }
