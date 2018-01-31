@@ -21,7 +21,7 @@ class Edit extends Component {
             dialogType: null,
             hobbies: ['美食', '互联网', '篮球', '美食'],
             skills: ['HTML', 'CSS', 'Javascript', 'Php', 'Java', 'Golang', 'Python'],
-            photos: ['1'],
+            photos: [],
         }
         this.handleOpen = this.handleOpen.bind(this)
         this.handleClose = this.handleClose.bind(this)
@@ -68,6 +68,14 @@ class Edit extends Component {
         return (
             <EditCard title="Photo">
                 <div className={styles['photo-wrap']}>
+                    <ImageUpload
+                      text="更换封面"
+                      cropRatio="5:7"
+                      className={styles['photo-upload-wrap']}
+                      previewClassName={styles['photo-preview']}
+                      imgClassName={styles['preview-img']}
+                      btnClassName={styles['photo-upload-btn']}
+                    />
                     {photos.map((photo, index) => (
                         <ImageUpload
                           key={index}
@@ -79,7 +87,7 @@ class Edit extends Component {
                           btnClassName={styles['photo-upload-btn']}
                         />
                     ))}
-                    {length < 3 &&
+                    {length < 2 &&
                         <ReactCoreImageUpload
                           crop
                         //   resize="local"
