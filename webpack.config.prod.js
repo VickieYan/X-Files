@@ -75,6 +75,18 @@ module.exports = {
                     },
                 ],
             },
+
+            {
+                test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 10000,
+                        },
+                    },
+                ],
+            },
         ],
     },
 
@@ -83,7 +95,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'X-Files',
             template: path.resolve(__dirname, 'index.tmpl.html'),
-            favicon: path.resolve(__dirname, 'static/images/Newegg.ico'),
+            favicon: path.resolve(__dirname, 'static/images/favicon_1.ico'),
         }),
         new webpack.DefinePlugin({
             'process.env': {
