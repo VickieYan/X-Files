@@ -5,7 +5,6 @@ import styles from './ImageUpload.scss'
 class ImageUpload extends Component {
     static defaultProps = {
         text: '上传头像',
-        cropRatio: '1:1',
         className: styles.wrap,
         previewClassName: styles.preview,
         imgClassName: styles['preview-img'],
@@ -30,7 +29,6 @@ class ImageUpload extends Component {
     render() {
         const {
             text,
-            cropRatio,
             className,
             previewClassName,
             imgClassName,
@@ -47,10 +45,8 @@ class ImageUpload extends Component {
                 </div>
                 <ReactCoreImageUpload
                   crop
-                  resize="local"
                   text={text}
                   className={btnClassName}
-                  cropRatio={cropRatio}
                   inputOfFile="avatar" // 上传服务器对应表单name
                   url="http://wsmis053:6141/user/testUpdate" // 服务器上传位置
                   imageUploaded={this.imageuploaded}

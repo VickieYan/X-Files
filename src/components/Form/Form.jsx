@@ -30,14 +30,7 @@ class Form extends Component {
 
     renderContent() {
         const { value } = this.state
-        const {
-            type,
-            name,
-            text,
-            options,
-        } = this.props
-        const groupStyle = { width: '150px', display: 'flex', flexDirection: 'row' }
-
+        const { type, name } = this.props
         const props = {
             text: {
                 name,
@@ -60,39 +53,39 @@ class Form extends Component {
             },
         }
 
-        if (type === 'radio') {
-            return (
-                <div className={styles['radio-btn-groups']}>
-                    <RadioButtonGroup
-                      name="sex"
-                      defaultSelected={text}
-                      style={groupStyle}
-                      onBlur={this.handleBlur}
-                    >
-                        {options.map((option, index) => (
-                            <RadioButton
-                              key={index}
-                              value={option}
-                              label={option}
-                              style={{ width: 80 }}
-                            />
-                        ))}
-                    </RadioButtonGroup>
-                    <RaisedButton
-                      label="确认"
-                      backgroundColor="#455964"
-                      labelColor="#fff"
-                      style={{ width: 30, height: 25, color: '#fff' }}
-                      onClick={this.handleBlur}
-                    />
-                </div>
-            )
-        }
-        return (
-            <TextField {...props[type]} />
-        )
+        return type === 'radio' ? this.renderRadio() : <TextField {...props[type]} />
     }
 
+    renderRadio() {
+        const { name, text, options } = this.props
+        const groupStyle = { width: '150px', display: 'flex', flexDirection: 'row' }
+        return (
+            <div className={styles['radio-btn-groups']}>
+                <RadioButtonGroup
+                  name={name}
+                  defaultSelected={text}
+                  style={groupStyle}
+                  onBlur={this.handleBlur}
+                >
+                    {options.map((option, index) => (
+                        <RadioButton
+                          key={index}
+                          value={option}
+                          label={option}
+                          style={{ width: 80 }}
+                        />
+                    ))}
+                </RadioButtonGroup>
+                <RaisedButton
+                  label="确认"
+                  backgroundColor="#455964"
+                  labelColor="#fff"
+                  style={{ width: 30, height: 25, color: '#fff' }}
+                  onClick={this.handleBlur}
+                />
+            </div>
+        )
+    }
     render() {
         const { isEditing, value } = this.state
         const { label } = this.props

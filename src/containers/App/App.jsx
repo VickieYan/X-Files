@@ -37,22 +37,20 @@ class App extends Component {
                 <div className={styles.container}>
                     <Router>
                         <Route render={({ location }) => (
-                            <div>
-                                <CSSTransitionGroup
-                                  transitionName="fade"
-                                  transitionEnterTimeout={300}
-                                  transitionLeaveTimeout={300}
-                                >
-                                    <Redirect to="/edit" />
-                                    <Switch key={location.key} location={location}>
-                                        <Route exact path="/" component={Home} location={location} />
-                                        <Route path="/login" component={Login} location={location} />
-                                        <Route path="/detail" component={Detail} location={location} />
-                                        <Route path="/profile" component={Profile} location={location} />
-                                        <Route path="/edit" component={Edit} location={location} />
-                                    </Switch>
-                                </CSSTransitionGroup>
-                            </div>
+                            <CSSTransitionGroup
+                              transitionName="fade"
+                              transitionEnterTimeout={300}
+                              transitionLeaveTimeout={300}
+                            >
+                                <Redirect to="/login" />
+                                <Switch key={location.key} location={location}>
+                                    <Route exact path="/" component={Home} location={location} />
+                                    <Route path="/login" component={Login} location={location} />
+                                    <Route path="/detail" component={Detail} location={location} />
+                                    <Route path="/profile" component={Profile} location={location} />
+                                    <Route path="/edit" component={Edit} location={location} />
+                                </Switch>
+                            </CSSTransitionGroup>
                         )}
                         />
                     </Router>

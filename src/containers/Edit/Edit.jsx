@@ -80,7 +80,6 @@ class Edit extends Component {
                         <ImageUpload
                           key={index}
                           text="更换图片"
-                          cropRatio="5:7"
                           className={styles['photo-upload-wrap']}
                           previewClassName={styles['photo-preview']}
                           imgClassName={styles['preview-img']}
@@ -90,9 +89,7 @@ class Edit extends Component {
                     {length < 2 &&
                         <ReactCoreImageUpload
                           crop
-                        //   resize="local"
                           text="+"
-                          cropRatio="5:7"
                           className={styles['upload-photo-btn']}
                           inputOfFile="avatar" // 上传服务器对应表单name
                           url="http://wsmis053:6141/user/testUpdate" // 服务器上传位置
