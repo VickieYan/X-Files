@@ -24,6 +24,7 @@ class Login extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
+
     handleClick() {
         this.setState(prevState => ({
             isLogin: !prevState.isLogin,
@@ -68,11 +69,11 @@ class Login extends Component {
         } = this.state
         if (isUsernameValid && isPasswordValid) {
             // submit code here
-            this.props.login({ ShortName: shortName, Password: password })
+            this.props.login(
+                { ShortName: shortName, Password: password },
+                () => { this.props.history.push(this.props.redirectTo) }
+            )
             // this.props.history.push(this.props.redirectTo)
-            setTimeout(() => {
-                this.props.history.push(this.props.redirectTo)
-            }, 1000)
         }
     }
 

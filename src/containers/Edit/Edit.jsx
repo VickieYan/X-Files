@@ -8,16 +8,17 @@ import FloatingActionButton from 'material-ui/FloatingActionButton'
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit'
 import Clear from 'material-ui/svg-icons/content/clear'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import { uploadData } from '../../actions/userAction'
+import { uploadData, submitData, getSelfInfo, test } from '../../actions/userAction'
 import { AppBar, Form, Card, Memorabilia, ImageUpload } from '../../components/'
 import EditCard from './EditCard'
 import { hobbies, skills } from '../../../static/data/words'
 import { colorsA, colorsB } from '../../../static/data/color'
+import { formatDate } from '../../scripts/utils'
 import styles from './Edit.scss'
 
 @connect(
     state => state.user,
-    { uploadData },
+    { uploadData, submitData, getSelfInfo, test },
 )
 class Edit extends Component {
     constructor(props) {
@@ -30,7 +31,7 @@ class Edit extends Component {
         this.handleOpen = this.handleOpen.bind(this)
         this.handleClose = this.handleClose.bind(this)
         this.handleRequestDelete = this.handleRequestDelete.bind(this)
-        this.formatDate = this.formatDate.bind(this)
+        this.handleRemove = this.handleRemove.bind(this)
     }
     handleOpen(type, index) {
         this.setState({
@@ -41,45 +42,109 @@ class Edit extends Component {
     }
     handleClose() {
         this.setState({ isOpen: false })
+        const {
+            submitData,
+            sex,
+            isSingle,
+            phoneNumber,
+            hometown,
+            signature,
+            github,
+            linkedin,
+            twitter,
+            hobbies,
+            skills,
+            contributes,
+            department,
+        } = this.props
+        submitData({
+            Sex: sex,
+            IsSingle: isSingle,
+            Department: department,
+            PhoneNumber: phoneNumber,
+            Hometown: hometown,
+            Signature: signature,
+            GitHub: github,
+            LinkedIn: linkedin,
+            Twitter: twitter,
+            Hobbies: hobbies,
+            Skills: skills,
+            Contributes: contributes,
+        })
     }
-    handleRequestDelete() {
+    handleRequestDelete(index, type) {
         // hanlde here
+        const {
+            submitData,
+            sex,
+            isSingle,
+            phoneNumber,
+            hometown,
+            signature,
+            github,
+            linkedin,
+            twitter,
+            hobbies,
+            skills,
+            contributes,
+            department,
+        } = this.props
+        let temp = null
+        if (type === 'hobbies') {
+            temp = hobbies.slice()
+        } else {
+            temp = skills.slice()
+        }
+        temp.splice(index, 1)
+        this.props.uploadData({ [type]: temp })
+        this.props.test()
     }
-
-    formatDate(value) {
-        const date = new Date(value)
-        const year = date.getFullYear()
-        const month = date.getMonth() + 1
-        const day = date.getDate()
-        const time = `${year}-${month}-${day}`
-        return time
+    handleRemove() {
+        const { contributes, uploadData } = this.props
+        const { index } = this.state
+        const temp = contributes.slice()
+        temp.splice(index, 1)
+        uploadData({ contributes: temp })
     }
+    // formatDate(value) {
+    //     if (value) {
+    //         const date = new Date(value)
+    //         const year = date.getFullYear()
+    //         const month = date.getMonth() + 1
+    //         const day = date.getDate()
+    //         const time = `${year}-${month}-${day}`
+    //         return time
+    //     }
+    //     return '近未来'
+    // }
 
     renderInfo() {
         const {
             sex,
+            isSingle,
             phoneNumber,
-            emial,
+            email,
             signature,
             linkedin,
             github,
             twitter,
             avatar,
+            uploadData,
         } = this.props
         const data = [
             { type: 'radio', label: '性别', name: 'sex', text: sex, options: ['男', '女'] },
-            { type: 'radio', label: '是否单身', name: 'isSingle', text: phoneNumber, options: ['是', '否'] },
-            { type: 'text', label: '电话', name: 'tel', text: '17621973154' },
-            { type: 'text', label: '邮箱', name: 'email', text: emial },
+            { type: 'radio', label: '是否单身', name: 'isSingle', text: isSingle, options: ['是', '否'] },
+            { type: 'text', label: '电话', name: 'phoneNumber', text: phoneNumber },
+            { type: 'text', label: '邮箱', name: 'email', text: email },
             { type: 'multiLine', label: '个人签名', name: 'signature', text: signature },
-            { type: 'text', label: '微博', name: 'linkedin', text: linkedin },
+            { type: 'text', label: 'linkedin', name: 'linkedin', text: linkedin },
             { type: 'text', label: 'github', name: 'github', text: github },
             { type: 'text', label: 'twitter', name: 'twitter', text: twitter },
         ]
         return (
             <EditCard title="Public profile">
                 <div className={styles.fields}>
-                    {data.map((props, index) => <Form key={index} {...props} />)}
+                    {data.map((item, index) => <Form key={index} {...item} data={{ ...this.props }} uploadData={uploadData} submitDate={submitData} />)}
                 </div>
                 <div className={styles.avatar}>
                     <ImageUpload avatar={avatar} />
@@ -133,7 +198,7 @@ class Edit extends Component {
                           key={index}
                           className={styles.chip}
                           backgroundColor={colorsB[index]}
-                          onRequestDelete={this.handleRequestDelete}
+                          onRequestDelete={() => { this.handleRequestDelete(index, 'hobbies') }}
                         >
                             {item}
                         </Chip>
@@ -156,7 +221,7 @@ class Edit extends Component {
                           key={index}
                           className={styles.chip}
                           backgroundColor={colorsA[index]}
-                          onRequestDelete={this.handleRequestDelete}
+                          onRequestDelete={() => { this.handleRequestDelete(index, 'skills') }}
                         >
                             {item}
                         </Chip>
@@ -177,12 +242,12 @@ class Edit extends Component {
                         {contributes.map((item, index) => (
                             <Timeline.Item key={index} className={styles['timeline-item']} color="pink">
                                 <h3>{item.duty}</h3>
-                                <span>From {this.formatDate(item.startTime)} to {this.formatDate(item.endTime)}</span>
+                                <span>From {formatDate(item.startTime)} to {formatDate(item.endTime)}</span>
                                 <div className={styles['edit-btn-wrap']}>
                                     <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={() => { this.handleOpen('experience', index) }}>
                                         <EditorModeEdit />
                                     </IconButton>
-                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }}>
+                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={this.handleRemove}>
                                         <Clear />
                                     </IconButton>
                                 </div>
@@ -229,6 +294,7 @@ class Edit extends Component {
                 return (
                     <div className={styles['dialog-wrap']}>
                         <Memorabilia
+                          index={index}
                           hasButton
                           contributes={this.props.contributes}
                           onUploadData={this.props.uploadData}

@@ -22,17 +22,17 @@ class About extends Component {
                           onClick={() => { onClick('main') }}
                         />
                         <ul className={styles['info-list']}>
-                            <li>{`${data.FullName} ${data.cName}`}</li>
+                            <li>{`${data.FullName}`}</li>
                             <li>{`${data.Department}`}</li>
                             <li>{`${data.Title}`}</li>
-                            <li>{`${data.hometown}`}</li>
-                            <li>{`${data.phoneNumber}`}</li>
+                            <li>{`${data.Hometown}`}</li>
+                            <li>{`${data.PhoneNumber}`}</li>
                             <li>{`${data.Email}`}</li>
-                            <li>{`${data.isSingle ? '万年单身狗　丑拒' : '已有女票 比你漂亮'}`}</li>
+                            <li>{`${data.IsSingle ? '万年单身狗　丑拒' : '已有女票 比你漂亮'}`}</li>
                         </ul>
                     </div>
                     <div className={styles.tags}>
-                        {data.hobbies.map((item, index) => (
+                        {data.Hobbies.map((item, index) => (
                             <Tag
                               name="hobbies"
                               key={index}
@@ -40,7 +40,7 @@ class About extends Component {
                               clickable={false}
                             />
                             ))}
-                        {data.skills.map((item, index) => (
+                        {data.Skills.map((item, index) => (
                             <Tag
                               name="skills"
                               key={index}

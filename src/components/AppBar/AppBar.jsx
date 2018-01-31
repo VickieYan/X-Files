@@ -2,14 +2,24 @@ import React, { Component } from 'react'
 import HomeIcon from 'material-ui/svg-icons/action/account-circle'
 import { connect } from 'react-redux'
 import { search } from '../../actions/infoAction'
+import { getSelfInfo } from '../../actions/userAction'
 import Search from '../Search/Search'
 import styles from './AppBar.scss'
 
 @connect(
     state => state.info,
-    { search },
+    { search, getSelfInfo },
 )
 class AppBar extends Component {
+    constructor() {
+        super()
+        this.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick() {
+        this.props.getSelfInfo(() => { this.props.history.push('./edit') })
+    }
+
     render() {
         const { search } = this.props
         return (
@@ -26,7 +36,7 @@ class AppBar extends Component {
                         <li className={styles.center}>
                             <span
                               className={styles.homeIcon}
-                              onClick={() => { this.props.history.push('./edit') }}
+                              onClick={this.handleClick}
                             >
                                 <HomeIcon />
                             </span>

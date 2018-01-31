@@ -17,6 +17,9 @@ class Step1 extends Component {
                 {
                     type: 'select', label: '单身', name: 'isSingle', options: ['是', '否'], num: 0,
                 },
+                {
+                    type: 'select', label: '部门', name: 'department', options: ['WWW Dev', 'SSL Dev', 'Bigdata Dev', 'WWW Test', 'SSL Test'], num: 0,
+                },
                 { type: 'text', label: '手机号码', name: 'phoneNumber' },
                 { type: 'text', label: '家乡', name: 'hometown' },
                 { type: 'text', label: '个性签名', name: 'signature' },
@@ -49,10 +52,10 @@ class Step1 extends Component {
     }
 
     renderAvatar() {
-        const { avatar, uploadData } = this.props
+        const { avatar, onUploadData } = this.props
         return (
             <div className={styles['img-wrapper']}>
-                <ImageUpload avatar={avatar} uploadData={uploadData} />
+                <ImageUpload avatar={avatar} uploadData={onUploadData} url="/user/updateAvatar" />
             </div>
         )
     }

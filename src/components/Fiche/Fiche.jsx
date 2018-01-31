@@ -7,15 +7,13 @@ import styles from './Fiche.scss'
 class Fiche extends Component {
     constructor() {
         super()
-        this.handleClick = this.handleClick.bind(this)
         this.handleLike = this.handleLike.bind(this)
     }
-    handleClick() {
-        this.props.history.push('./profile')
-    }
+
     handleLike(e) {
         e.stopPropagation()
     }
+
     render() {
         // const mStyles = {
         //     block: {
@@ -26,16 +24,16 @@ class Fiche extends Component {
         //     },
         // }
         const { onClick } = this.props
-        const { Cover, Signature, Department, CName } = this.props.data
+        const { FullName, Signature, Department, IndexShowPhotograph } = this.props.data
         return (
             <div className={styles.main} onClick={onClick}>
                 <div className={styles.photo}>
-                    <img alt="" src={Cover} />
+                    <img alt="" src={IndexShowPhotograph} />
                 </div>
                 <div className={styles.text}>
                     <p className={styles.signature}>{Signature}</p>
                     <div className={styles.info}>
-                        <span>{CName}</span>
+                        <span>{FullName}</span>
                         <span className={styles.department}>{Department}</span>
                         {/* <span className={styles.like}>
                             <Checkbox

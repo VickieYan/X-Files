@@ -32,11 +32,11 @@ class Memorabilia extends Component {
     renderButton() {
         return (
             <div className={styles['button-fields']}>
-                <FlatButton
+                {/* <FlatButton
                   primary
                   label="Cancel"
                   onClick={this.props.onClose}
-                />
+                /> */}
                 <FlatButton
                   primary
                   label="Submit"
@@ -59,12 +59,12 @@ class Memorabilia extends Component {
             <div className={styles.paper} style={style}>
                 <DatePicker
                   hintText="请选择开始时间"
-                  defaultDate={startTime}
+                  defaultDate={startTime || new Date()}
                   onChange={(ev, date) => { this.handleChange('startTime', date) }}
                 />
                 <DatePicker
                   hintText="请选择结束时间"
-                  defaultDate={endTime}
+                  defaultDate={endTime || new Date()}
                   onChange={(ev, date) => { this.handleChange('endTime', date) }}
                 />
                 <TextField
