@@ -60,7 +60,7 @@ class MyStepper extends Component {
             hobbies,
             skills,
             contributes,
-            department,
+            domain,
         } = this.props
         this.setState({
             stepIndex: stepIndex + 1,
@@ -69,7 +69,7 @@ class MyStepper extends Component {
             submitData({
                 Sex: sex,
                 IsSingle: isSingle,
-                Department: department,
+                Domain: domain,
                 PhoneNumber: phoneNumber,
                 Hometown: hometown,
                 Signature: signature,

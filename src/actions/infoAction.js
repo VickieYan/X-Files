@@ -39,7 +39,7 @@ export function search(keyword) {
     return ((dispacth) => {
         axios.post('/info/search', { query: keyword })
             .then((res) => {
-                dispacth(searchSuccess(res.data))
+                dispacth(searchSuccess(res.data.data))
             })
         })
     }

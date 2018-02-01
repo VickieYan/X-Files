@@ -24,7 +24,7 @@ class Fiche extends Component {
         //     },
         // }
         const { onClick } = this.props
-        const { FullName, Signature, Department, IndexShowPhotograph } = this.props.data
+        const { FullName, Signature, Domain, IndexShowPhotograph } = this.props.data
         return (
             <div className={styles.main} onClick={onClick}>
                 <div className={styles.photo}>
@@ -34,7 +34,7 @@ class Fiche extends Component {
                     <p className={styles.signature}>{Signature}</p>
                     <div className={styles.info}>
                         <span>{FullName}</span>
-                        <span className={styles.department}>{Department}</span>
+                        <span className={styles.department}>{Domain}</span>
                         {/* <span className={styles.like}>
                             <Checkbox
                               checkedIcon={<ActionFavorite />}

@@ -36,14 +36,17 @@ class Main extends Component {
                     </div>
                     <div className={styles['icon-group']}>
                         {
-                            logos.map((item, index) => (
-                                <div
-                                  className={styles.icon}
-                                  key={index}
-                                >
-                                    <Icon url={item} data={data}/>
-                                </div>
-                            ))
+                            logos.map((item, index) => {
+                                const icon = ['GitHub', 'LinkedIn', 'Twitter'][index]
+                                return (
+                                    <div
+                                      className={styles.icon}
+                                      key={index}
+                                    >
+                                        <Icon src={item} href={data[icon]} />
+                                    </div>
+                                )
+                            })
                         }
                     </div>
                 </div>

@@ -18,7 +18,7 @@ class Step1 extends Component {
                     type: 'select', label: '单身', name: 'isSingle', options: ['是', '否'], num: 0,
                 },
                 {
-                    type: 'select', label: '部门', name: 'department', options: ['WWW Dev', 'SSL Dev', 'Bigdata Dev', 'WWW Test', 'SSL Test'], num: 0,
+                    type: 'select', label: '部门', name: 'domain', options: ['WWW Dev', 'SSL Dev', 'Bigdata Dev', 'WWW Test', 'SSL Test'], num: 0,
                 },
                 { type: 'text', label: '手机号码', name: 'phoneNumber' },
                 { type: 'text', label: '家乡', name: 'hometown' },

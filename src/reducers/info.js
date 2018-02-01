@@ -11,7 +11,7 @@ const initState = {
             ShortName: '',
             EName: '',
             Signature: '',
-            Deparent: '',
+            Domain: '',
             Job: '',
             PhoneNumber: '',
             Photograph: '',
@@ -23,9 +23,9 @@ const initState = {
 export default function info(state = initState, action) {
     switch (action.type) {
         case SEARCH_SUCCESS:
-            return { ...state, ...action.payload }
+            return { ...state, members: action.payload }
         case SORT_SUCCESS:
-            return { ...state, current: action.payload }
+            return { ...state, members: action.payload }
         case INIT_SUCCESS:
             return { ...state, members: action.payload }
         case GET_SUCCESS:
