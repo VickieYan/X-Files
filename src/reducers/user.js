@@ -7,7 +7,7 @@ const initState = {
     shortName: '',
     fullName: '',
     displayName: '',
-    emial: '',
+    email: '',
     employeeID: '',
     department: '',
     company: '',

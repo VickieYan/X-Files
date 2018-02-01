@@ -31,7 +31,6 @@ class Form extends Component {
     handleBlur() {
         this.setState({ isEditing: false })
         const {
-            submitData,
             sex,
             isSingle,
             phoneNumber,
@@ -44,8 +43,9 @@ class Form extends Component {
             skills,
             contributes,
             department,
+            email,
         } = this.props.data
-        submitData({
+        this.props.submitData({
             Sex: sex,
             IsSingle: isSingle,
             Department: department,
@@ -58,6 +58,7 @@ class Form extends Component {
             Hobbies: hobbies,
             Skills: skills,
             Contributes: contributes,
+            Email: email,
         })
     }
 
