@@ -48,7 +48,7 @@ class App extends Component {
                                         <Route exact path="/" component={Home} location={location} />
                                         <Route path="/login" component={Login} location={location} />
                                         <Route path="/detail" component={Detail} location={location} />
-                                        <Route path="/profile" component={Profile} location={location} />
+                                        <Route path="/profile/:shortName" component={Profile} location={location} />
                                         <Route path="/edit" component={Edit} location={location} />
                                     </Switch>
                                 </CSSTransitionGroup>

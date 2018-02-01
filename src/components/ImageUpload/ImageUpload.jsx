@@ -19,9 +19,26 @@ class ImageUpload extends Component {
     }
 
     imageuploaded(res) {
-        const { uploadData } = this.props
+        const { uploadData, inputOfFile } = this.props
         // uploadData({ avatar: `http://wsmis053:6141/${res.data}` })
-        uploadData({ avatar: res.data })
+        let name = 'avatar'
+        switch (inputOfFile) {
+            case 'IndexShowPhotograph':
+                name = 'indexShowPhotograph'
+                break
+            case 'Photograph1':
+                name = 'photograph1'
+                break
+            case 'Photograph2':
+                name = 'photograph2'
+                break
+            case 'Photograph3':
+                name = 'photograph3'
+                break
+            default:
+                break
+        }
+        uploadData({ [name]: res.data })
     }
 
     render() {
@@ -32,13 +49,14 @@ class ImageUpload extends Component {
             imgClassName,
             btnClassName,
             url,
+            inputOfFile,
         } = this.props
         return (
             <div className={className}>
                 <div className={previewClassName}>
                     <img
                       alt="preview"
-                      src={`${this.props.avatar}`}
+                      src={this.props.avatar}
                       className={imgClassName}
                     />
                 </div>
@@ -46,7 +64,7 @@ class ImageUpload extends Component {
                   crop
                   text={text}
                   className={btnClassName}
-                  inputOfFile="Avatar" // 上传服务器对应表单name
+                  inputOfFile={inputOfFile} // 上传服务器对应表单name
                   url={url} // 服务器上传位置
                   imageUploaded={this.imageuploaded}
                   cropBtn={{ ok: '确认', cancel: '取消' }}
