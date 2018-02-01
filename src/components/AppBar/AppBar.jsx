@@ -34,7 +34,7 @@ class AppBar extends Component {
         const { search } = this.props
         return (
             <div className={styles.background}>
-                <div className={styles.logo}>
+                <div className={styles.logo} onClick={() => { this.props.history.push('./') }}>
                     <img alt="" src="../../../static/images/xfiles.png" />
                 </div>
                 <div className={styles.main}>

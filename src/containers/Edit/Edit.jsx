@@ -321,7 +321,7 @@ class Edit extends Component {
                                 </div>
                             </Timeline.Item>
                         ))}
-                        <Timeline.Item className={styles['timeline-item']} color="pink">
+                        {/* <Timeline.Item className={styles['timeline-item']} color="pink">
                             <IconButton
                               tooltip="add experience"
                               className={styles['add-experience-btn']}
@@ -331,7 +331,7 @@ class Edit extends Component {
                             >
                                 <ContentAdd color="pink" />
                             </IconButton>
-                        </Timeline.Item>
+                        </Timeline.Item> */}
                     </Timeline>
                 </div>
             </EditCard>

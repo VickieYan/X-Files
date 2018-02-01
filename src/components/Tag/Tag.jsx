@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { pink50 } from 'material-ui/styles/colors'
+import { grey50 } from 'material-ui/styles/colors'
 import Chip from 'material-ui/Chip'
 import { connect } from 'react-redux'
-import { colorsB } from '../../../static/data/color'
+import { colorsA, colorsB, colorsC } from '../../../static/data/color'
 import { uploadData } from '../../actions/userAction'
 import styles from './Tag.scss'
 
@@ -12,7 +12,6 @@ import styles from './Tag.scss'
 )
 class Tag extends Component {
     static defaultProps = {
-        backgroundColor: pink50,
         clickable: true,
         colors: colorsB,
     }

@@ -62,7 +62,7 @@ class ImageUpload extends Component {
                     />
                 </div>
                 <ReactCoreImageUpload
-                  crop
+                //   crop
                   text={text}
                   className={btnClassName}
                   inputOfFile={inputOfFile} // 上传服务器对应表单name
