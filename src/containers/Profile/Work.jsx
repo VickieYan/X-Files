@@ -11,7 +11,7 @@ class Work extends Component {
         return (
             <div className={styles.main}>
                 <div className={styles.left}>
-                    <img alt="" src="../../../static/images/profile.jpg" />
+                    <img alt="" src={data.Photograph3} />
                 </div>
                 <div className={styles.right}>
                     <Button

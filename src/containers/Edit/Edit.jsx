@@ -174,19 +174,22 @@ class Edit extends Component {
                     {data.map((item, index) => <Form key={index} {...item} data={{ ...this.props }} uploadData={uploadData} submitData={submitData} />)}
                 </div>
                 <div className={styles.avatar}>
-                    <ImageUpload avatar={avatar} url="/user/updateAvatar" uploadData={uploadData} />
+                    <ImageUpload avatar={this.props.avatar} url="/user/updateAvatar" uploadData={uploadData} inputOfFile="Avatar" />
                 </div>
             </EditCard>
         )
     }
     renderPhotos() {
         const { photos } = this.state
-        const { avatar, photograph1, photograph2, photograph3, indexShowPhotograph } = this.props
+        const { avatar, photograph1, photograph2, photograph3, indexShowPhotograph, uploadData } = this.props
         const { length } = photos
         return (
             <EditCard title="Photo">
                 <div className={styles['photo-wrap']}>
                     <ImageUpload
+                      inputOfFile="IndexShowPhotograph"
+                      url="/user/IndexShowPhotograph"
+                      uploadData={uploadData}
                       avatar={indexShowPhotograph}
                       text="更换封面"
                       cropRatio="5:7"
@@ -196,24 +199,33 @@ class Edit extends Component {
                       btnClassName={styles['photo-upload-btn']}
                     />
                     <ImageUpload
+                      inputOfFile="Photograph1"
+                      url="/user/Photograph1"
+                      uploadData={uploadData}
                       avatar={photograph1}
-                      text="更换图片"
+                      text="更换图片1"
                       className={styles['photo-upload-wrap']}
                       previewClassName={styles['photo-preview']}
                       imgClassName={styles['preview-img']}
                       btnClassName={styles['photo-upload-btn']}
                     />
                     <ImageUpload
+                     inputOfFile="Photograph2"
+                      url="/user/Photograph2"
+                      uploadData={uploadData}
                       avatar={photograph2}
-                      text="更换图片"
+                      text="更换图片2"
                       className={styles['photo-upload-wrap']}
                       previewClassName={styles['photo-preview']}
                       imgClassName={styles['preview-img']}
                       btnClassName={styles['photo-upload-btn']}
                     />
                     <ImageUpload
+                      inputOfFile="Photograph3"
+                      url="/user/Photograph3"
+                      uploadData={uploadData}
                       avatar={photograph3}
-                      text="更换图片"
+                      text="更换图片3"
                       className={styles['photo-upload-wrap']}
                       previewClassName={styles['photo-preview']}
                       imgClassName={styles['preview-img']}

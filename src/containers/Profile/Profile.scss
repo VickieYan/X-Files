@@ -18,16 +18,16 @@ src: url('../../../static/fonts/JosefinSans-Italic.ttf'),
     bottom: 0;
 }
 
-
 .main {
     position: absolute;
     left: 50%;
     top: 30px;
     bottom: 30px;
     width: 960px;
+    height:  747px;
     transform: translateX(-50%);
-    padding:20px;
-    overflow: hidden;
+    padding: 20px;
+    overflow-y: hidden;
     background: $white;
     box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
 }
@@ -41,18 +41,24 @@ src: url('../../../static/fonts/JosefinSans-Italic.ttf'),
     transition: opacity .3 ease-in-out;
     overflow: hidden;
     img {
+        // position: fixed;
+        // top: 50%;
+        // transform: translateY(-50%);
         width: 100%;
         border-radius: 8px;
     }
 }
 
 .right {
+    height: 707px;
+    overflow-y: auto;
     float: right;
     width: 45%;
-    height: 100%;
+    // height: 100%;
     font-family: 'JosefinSans-Regular';
     text-align: center;
     transition: opacity .3 ease-in-out;
+    &::-webkit-scrollbar {display:none}
     .logo {
         padding-top: 15%;
     }
@@ -116,7 +122,6 @@ src: url('../../../static/fonts/JosefinSans-Italic.ttf'),
     }
 
     .tags {
-        overflow: hidden;
         padding:20px 40px;
         display: flex;
         flex-wrap: wrap;

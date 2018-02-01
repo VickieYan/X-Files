@@ -14,7 +14,7 @@ class Main extends Component {
         return (
             <div className={styles.main}>
                 <div className={styles.left}>
-                    <img alt="" src="../../../static/images/profile.jpg" />
+                    <img alt="" src={data.Photograph1} />
                 </div>
                 <div className={styles.right}>
                     <div className={styles.logo}>

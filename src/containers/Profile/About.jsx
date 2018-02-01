@@ -11,7 +11,7 @@ class About extends Component {
                 <div className={styles.left}>
                     <img
                       alt=""
-                      src="../../../static/images/profile.jpg"
+                      src={data.Photograph2}
                     />
                 </div>
                 <div className={`${styles.right} ${styles.about}`}>

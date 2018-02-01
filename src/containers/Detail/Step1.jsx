@@ -55,7 +55,7 @@ class Step1 extends Component {
         const { avatar, onUploadData } = this.props
         return (
             <div className={styles['img-wrapper']}>
-                <ImageUpload avatar={avatar} uploadData={onUploadData} url="/user/updateAvatar" />
+                <ImageUpload avatar={avatar} uploadData={onUploadData} url="/user/updateAvatar" inputOfFile="Avatar" />
             </div>
         )
     }
