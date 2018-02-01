@@ -7,6 +7,7 @@ import { login, check } from '../../actions/userAction'
     state => state.user,
     { login, check },
 )
+
 // 检测路由
 class AuthRoute extends Component {
     componentDidMount() {

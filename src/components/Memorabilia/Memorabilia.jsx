@@ -7,12 +7,35 @@ import styles from './Memorabilia.scss'
 class Memorabilia extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            startTime: new Date(),
+            endTime: new Date(),
+            duty: '',
+        }
+        this.handleAdd = this.handleAdd.bind(this)
         this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleAdd() {
+        const { onUploadData } = this.props
+        const contributes = this.props.contributes.slice()
+        const { startTime, endTime, duty } = this.state
+        const editing = {
+            startTime,
+            endTime,
+            duty,
+        }
+        contributes.push(editing)
+        onUploadData({ contributes })
     }
 
     handleChange(type, value) {
         const { onUploadData, contributes, index } = this.props
         const newContributes = contributes.slice()
+
+        // controled components
+        this.setState({ [type]: value })
+
         newContributes[index][type] = value
         onUploadData({ contributes: newContributes })
     }
@@ -30,6 +53,7 @@ class Memorabilia extends Component {
     }
 
     renderButton() {
+        const { index, onClose } = this.props
         return (
             <div className={styles['button-fields']}>
                 {/* <FlatButton
@@ -40,7 +64,7 @@ class Memorabilia extends Component {
                 <FlatButton
                   primary
                   label="Submit"
-                  onClick={this.props.onClose}
+                  onClick={index ? onClose : this.handleAdd}
                 />
             </div>
         )

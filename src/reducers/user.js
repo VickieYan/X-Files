@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, UPLOAD_DATA, LOGOUT_SUCCESS, GET_SELF_SUCCESS } from '../constants/actionType'
+import { LOGIN_SUCCESS, UPLOAD_DATA, LOGOUT_SUCCESS, GET_SELF_SUCCESS, REDIRECT_SUCCESS } from '../constants/actionType'
 
 const initState = {
     redirectTo: './login',
@@ -48,6 +48,8 @@ export default function user(state = initState, action) {
         case UPLOAD_DATA:
             return { ...state, ...action.payload }
         case GET_SELF_SUCCESS:
+            return { ...state, ...action.payload }
+        case REDIRECT_SUCCESS:
             return { ...state, ...action.payload }
         default:
             return state

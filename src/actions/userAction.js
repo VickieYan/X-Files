@@ -6,6 +6,7 @@ import {
     LOGOUT_SUCCESS,
     SUBMIT_SUCCESS,
     GET_SELF_SUCCESS,
+    REDIRECT_SUCCESS,
 } from '../constants/actionType'
 
 function errorMsg(msg) {
@@ -68,6 +69,15 @@ function getSelfSuccess(obj) {
             hobbies: obj.Hobbies,
             skills: obj.Skills,
             contributes: obj.Contributes,
+        },
+    }
+}
+
+export function redirectSuccess(redirectTo) {
+    return {
+        type: REDIRECT_SUCCESS,
+        payload: {
+            redirectTo,
         },
     }
 }

@@ -8,7 +8,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton'
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit'
 import Clear from 'material-ui/svg-icons/content/clear'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import { uploadData, submitData, getSelfInfo, test } from '../../actions/userAction'
+import { uploadData, submitData, getSelfInfo, test, redirectSuccess } from '../../actions/userAction'
 import { AppBar, Form, Card, Memorabilia, ImageUpload } from '../../components/'
 import EditCard from './EditCard'
 import { hobbies, skills } from '../../../static/data/words'
@@ -18,7 +18,7 @@ import styles from './Edit.scss'
 
 @connect(
     state => state.user,
-    { uploadData, getSelfInfo, test },
+    { uploadData, getSelfInfo, test, redirectSuccess },
 )
 class Edit extends Component {
     constructor(props) {
@@ -33,6 +33,9 @@ class Edit extends Component {
         this.handleRequestDelete = this.handleRequestDelete.bind(this)
         this.handleRemove = this.handleRemove.bind(this)
         // this.renderAddExperience = this.renderAddExperience.bind(this)
+    }
+    componentDidMount() {
+        redirectSuccess('./edit')
     }
     handleOpen(type, index) {
         this.setState({
@@ -338,8 +341,6 @@ class Edit extends Component {
         )
     }
     renderDialog() {
-
-        console.log(this.state.isOpen)
         const { dialogType, index } = this.state
         const { contributes } = this.props
         switch (dialogType) {
