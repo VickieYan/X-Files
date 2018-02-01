@@ -3,11 +3,28 @@ import IconMenu from 'material-ui/IconMenu'
 import IconButton from 'material-ui/IconButton'
 import MenuItem from 'material-ui/MenuItem'
 import HomeIcon from 'material-ui/svg-icons/action/account-circle'
+import { connect } from 'react-redux'
+import { search } from '../../actions/infoAction'
+import { getSelfInfo } from '../../actions/userAction'
 import Search from '../Search/Search'
 import styles from './AppBar.scss'
 
+@connect(
+    state => state.info,
+    { search, getSelfInfo },
+)
 class AppBar extends Component {
+    constructor() {
+        super()
+        this.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick() {
+        this.props.getSelfInfo(() => { this.props.history.push('./edit') })
+    }
+
     render() {
+        const { search } = this.props
         return (
             <div className={styles.background}>
                 <div className={styles.logo}>
@@ -17,7 +34,7 @@ class AppBar extends Component {
                     <ul className={styles.nav}>
                         <li onClick={() => { this.props.history.push('./') }}>首页</li>
                         <li>
-                            <Search />
+                            <Search onSearch={search} />
                         </li>
                         <li className={styles.center}>
                             <IconMenu
@@ -25,12 +42,12 @@ class AppBar extends Component {
                               anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
                               targetOrigin={{ horizontal: 'right', vertical: 'top' }}
                             >
-                                <MenuItem primaryText="personal center" onClick={() => { this.props.history.push('./edit') }} />
+                                <MenuItem primaryText="personal center" onClick={this.handleClick} />
                                 <MenuItem primaryText="Sign out" />
                             </IconMenu>
                             {/* <span
                               className={styles.homeIcon}
-                              onClick={() => { this.props.history.push('./edit') }}
+                              onClick={this.handleClick}
                             >
                                 <HomeIcon />
                             </span> */}

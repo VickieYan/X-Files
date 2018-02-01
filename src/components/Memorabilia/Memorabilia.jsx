@@ -5,6 +5,18 @@ import FlatButton from 'material-ui/FlatButton'
 import styles from './Memorabilia.scss'
 
 class Memorabilia extends Component {
+    constructor(props) {
+        super(props)
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange(type, value) {
+        const { onUploadData, contributes, index } = this.props
+        const newContributes = contributes.slice()
+        newContributes[index][type] = value
+        onUploadData({ contributes: newContributes })
+    }
+
     renderDelButton() {
         return (
             <div className={styles['btn-wrap']}>
@@ -16,14 +28,15 @@ class Memorabilia extends Component {
             </div>
         )
     }
+
     renderButton() {
         return (
             <div className={styles['button-fields']}>
-                <FlatButton
+                {/* <FlatButton
                   primary
                   label="Cancel"
                   onClick={this.props.onClose}
-                />
+                /> */}
                 <FlatButton
                   primary
                   label="Submit"
@@ -36,20 +49,30 @@ class Memorabilia extends Component {
     render() {
         const {
             style,
-            date,
+            startTime,
+            endTime,
             text,
             hasButton,
             isDeletable,
         } = this.props
         return (
             <div className={styles.paper} style={style}>
-                <DatePicker hintText="开始时间" defaultDate={date} />
-                <DatePicker hintText="结束时间" defaultDate={date} />
+                <DatePicker
+                  hintText="请选择开始时间"
+                  defaultDate={startTime || new Date()}
+                  onChange={(ev, date) => { this.handleChange('startTime', date) }}
+                />
+                <DatePicker
+                  hintText="请选择结束时间"
+                  defaultDate={endTime || new Date()}
+                  onChange={(ev, date) => { this.handleChange('endTime', date) }}
+                />
                 <TextField
                   hintText="description"
                   multiLine
-                  rows={1}
-                  defaultValue={text}
+                  rows={2}
+                  value={text}
+                  onChange={(ev, value) => { this.handleChange('duty', value) }}
                 />
                 {isDeletable && this.renderDelButton()}
                 {hasButton && this.renderButton()}

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { CSSTransitionGroup } from 'react-transition-group'
+import { getUserInfo, current } from '../../actions/infoAction'
 import { AppBar } from '../../components/'
 import Main from './Main'
 import About from './About'
@@ -8,6 +10,10 @@ import Skill from './Skill'
 import Work from './Work'
 import styles from './Profile.scss'
 
+@connect(
+    state => state.info,
+    { getUserInfo, current },
+)
 class Profile extends Component {
     constructor(props) {
         super(props)
@@ -101,7 +107,16 @@ class Profile extends Component {
                 isSingle: true,
             },
         }
+        
         this.handleClick = this.handleClick.bind(this)
+    }
+
+    componentDidMount() {
+        // 根据短名向服务端请求用户信息
+        const path = this.props.location.pathname
+        const index = path.lastIndexOf('/') + 1
+        const shortName = path.slice(index)
+        this.props.getUserInfo(shortName)
     }
 
     handleClick(name) {
@@ -109,7 +124,8 @@ class Profile extends Component {
     }
 
     render() {
-        const { currentPage, data, group } = this.state
+        const { currentPage, group } = this.state
+        const { current } = this.props
         return (
             <div>
                 <AppBar {...this.props} />
@@ -125,7 +141,7 @@ class Profile extends Component {
                                 <Specifystory
                                   key={index}
                                   onClick={this.handleClick}
-                                  data={data}
+                                  data={current}
                                 />
                         })}
                     </CSSTransitionGroup>

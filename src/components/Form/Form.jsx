@@ -21,11 +21,44 @@ class Form extends Component {
     }
 
     handleChange(e) {
-        this.setState({ value: e.target.value })
+        const { uploadData, name } = this.props
+        const newValue = e.target.value
+        console.log(newValue)
+        this.setState({ value: newValue })
+        uploadData({ [name]: newValue })
     }
 
     handleBlur() {
         this.setState({ isEditing: false })
+        const {
+            submitData,
+            sex,
+            isSingle,
+            phoneNumber,
+            hometown,
+            signature,
+            github,
+            linkedin,
+            twitter,
+            hobbies,
+            skills,
+            contributes,
+            department,
+        } = this.props.data
+        submitData({
+            Sex: sex,
+            IsSingle: isSingle,
+            Department: department,
+            PhoneNumber: phoneNumber,
+            Hometown: hometown,
+            Signature: signature,
+            GitHub: github,
+            LinkedIn: linkedin,
+            Twitter: twitter,
+            Hobbies: hobbies,
+            Skills: skills,
+            Contributes: contributes,
+        })
     }
 
     renderContent() {
@@ -65,6 +98,7 @@ class Form extends Component {
                   name={name}
                   defaultSelected={text}
                   style={groupStyle}
+                  onChange={this.handleChange}
                   onBlur={this.handleBlur}
                 >
                     {options.map((option, index) => (

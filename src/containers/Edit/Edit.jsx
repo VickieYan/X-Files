@@ -1,69 +1,160 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import ReactCoreImageUpload from 'react-core-image-upload'
+import { Timeline } from 'antd'
 import Chip from 'material-ui/Chip'
 import IconButton from 'material-ui/IconButton'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit'
 import Clear from 'material-ui/svg-icons/content/clear'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import { Timeline } from 'antd'
+import { uploadData, submitData, getSelfInfo, test } from '../../actions/userAction'
 import { AppBar, Form, Card, Memorabilia, ImageUpload } from '../../components/'
 import EditCard from './EditCard'
-import { hobbies } from '../../../static/data/words'
+import { hobbies, skills } from '../../../static/data/words'
 import { colorsA, colorsB } from '../../../static/data/color'
+import { formatDate } from '../../scripts/utils'
 import styles from './Edit.scss'
 
+@connect(
+    state => state.user,
+    { uploadData, submitData, getSelfInfo, test },
+)
 class Edit extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             isOpen: false,
             dialogType: null,
-            hobbies: ['美食', '互联网', '篮球', '美食'],
-            skills: ['HTML', 'CSS', 'Javascript', 'Php', 'Java', 'Golang', 'Python'],
-            photos: [],
+            photos: ['1'],
         }
         this.handleOpen = this.handleOpen.bind(this)
         this.handleClose = this.handleClose.bind(this)
         this.handleRequestDelete = this.handleRequestDelete.bind(this)
+        this.handleRemove = this.handleRemove.bind(this)
     }
-    handleOpen(type) {
+    handleOpen(type, index) {
         this.setState({
             isOpen: true,
             dialogType: type,
-         })
+            index: index || 0,
+        })
     }
     handleClose() {
         this.setState({ isOpen: false })
+        const {
+            submitData,
+            sex,
+            isSingle,
+            phoneNumber,
+            hometown,
+            signature,
+            github,
+            linkedin,
+            twitter,
+            hobbies,
+            skills,
+            contributes,
+            department,
+        } = this.props
+        submitData({
+            Sex: sex,
+            IsSingle: isSingle,
+            Department: department,
+            PhoneNumber: phoneNumber,
+            Hometown: hometown,
+            Signature: signature,
+            GitHub: github,
+            LinkedIn: linkedin,
+            Twitter: twitter,
+            Hobbies: hobbies,
+            Skills: skills,
+            Contributes: contributes,
+        })
     }
-    handleRequestDelete() {
+    handleRequestDelete(index, type) {
         // hanlde here
+        const {
+            submitData,
+            sex,
+            isSingle,
+            phoneNumber,
+            hometown,
+            signature,
+            github,
+            linkedin,
+            twitter,
+            hobbies,
+            skills,
+            contributes,
+            department,
+        } = this.props
+        let temp = null
+        if (type === 'hobbies') {
+            temp = hobbies.slice()
+        } else {
+            temp = skills.slice()
+        }
+        temp.splice(index, 1)
+        this.props.uploadData({ [type]: temp })
+        this.props.test()
     }
+    handleRemove() {
+        const { contributes, uploadData } = this.props
+        const { index } = this.state
+        const temp = contributes.slice()
+        temp.splice(index, 1)
+        uploadData({ contributes: temp })
+    }
+    // formatDate(value) {
+    //     if (value) {
+    //         const date = new Date(value)
+    //         const year = date.getFullYear()
+    //         const month = date.getMonth() + 1
+    //         const day = date.getDate()
+    //         const time = `${year}-${month}-${day}`
+    //         return time
+    //     }
+    //     return '近未来'
+    // }
 
     renderInfo() {
+        const {
+            sex,
+            isSingle,
+            phoneNumber,
+            email,
+            signature,
+            linkedin,
+            github,
+            twitter,
+            avatar,
+            uploadData,
+        } = this.props
         const data = [
-            { type: 'radio', label: '性别', name: 'Sex', text: '男', options: ['男', '女'] },
-            { type: 'radio', label: '是否单身', name: 'IsSingle', text: '是', options: ['是', '否'] },
-            { type: 'text', label: '电话', name: 'Tel', text: '17621973154' },
-            { type: 'text', label: '邮箱', name: 'Email', text: 'Ningersan@gmail.com' },
-            { type: 'multiLine', label: '个人签名', name: 'signature', text: 'In me the tiger sniffs the rose' },
-            { type: 'text', label: '微博', name: 'Weibo', text: 'https://weibo.com/ningersan' },
-            { type: 'text', label: 'github', name: 'Github', text: 'https://github.com/Ningersan' },
-            { type: 'text', label: 'twitter', name: 'Twitter', text: 'http://twitter.com' },
+            { type: 'radio', label: '性别', name: 'sex', text: sex, options: ['男', '女'] },
+            { type: 'radio', label: '是否单身', name: 'isSingle', text: isSingle, options: ['是', '否'] },
+            { type: 'text', label: '电话', name: 'phoneNumber', text: phoneNumber },
+            { type: 'text', label: '邮箱', name: 'email', text: email },
+            { type: 'multiLine', label: '个人签名', name: 'signature', text: signature },
+            { type: 'text', label: 'linkedin', name: 'linkedin', text: linkedin },
+            { type: 'text', label: 'github', name: 'github', text: github },
+            { type: 'text', label: 'twitter', name: 'twitter', text: twitter },
         ]
         return (
             <EditCard title="Public profile">
                 <div className={styles.fields}>
-                    {data.map((props, index) => <Form key={index} {...props} />)}
+                    {data.map((item, index) => <Form key={index} {...item} data={{ ...this.props }} uploadData={uploadData} submitDate={submitData} />)}
                 </div>
                 <div className={styles.avatar}>
-                    <ImageUpload />
+                    <ImageUpload avatar={avatar} />
                 </div>
             </EditCard>
         )
     }
     renderPhotos() {
         const { photos } = this.state
+        const { avatar } = this.props
         const { length } = photos
         return (
             <EditCard title="Photo">
@@ -101,7 +192,7 @@ class Edit extends Component {
         )
     }
     renderHobbies() {
-        const { hobbies } = this.state
+        const { hobbies } = this.props
         const buttonStyle = { marginLeft: '10px', width: '40px', height: '40px' }
         return (
             <EditCard title="Hobby">
@@ -111,12 +202,12 @@ class Edit extends Component {
                           key={index}
                           className={styles.chip}
                           backgroundColor={colorsB[index]}
-                          onRequestDelete={this.handleRequestDelete}
+                          onRequestDelete={() => { this.handleRequestDelete(index, 'hobbies') }}
                         >
                             {item}
                         </Chip>
                     ))}
-                    <FloatingActionButton mini secondary style={buttonStyle} onClick={() => { this.handleOpen('hobbit') }}>
+                    <FloatingActionButton mini secondary style={buttonStyle} onClick={() => { this.handleOpen('hobbies') }}>
                         <ContentAdd />
                     </FloatingActionButton>
                 </div>
@@ -124,7 +215,7 @@ class Edit extends Component {
         )
     }
     renderSkills() {
-        const { skills } = this.state
+        const { skills } = this.props
         const buttonStyle = { marginLeft: '10px', width: '40px', height: '40px' }
         return (
             <EditCard title="Skill">
@@ -134,12 +225,12 @@ class Edit extends Component {
                           key={index}
                           className={styles.chip}
                           backgroundColor={colorsA[index]}
-                          onRequestDelete={this.handleRequestDelete}
+                          onRequestDelete={() => { this.handleRequestDelete(index, 'skills') }}
                         >
                             {item}
                         </Chip>
                     ))}
-                    <FloatingActionButton mini secondary style={buttonStyle} onClick={() => { this.handleOpen('skill') }}>
+                    <FloatingActionButton mini secondary style={buttonStyle} onClick={() => { this.handleOpen('skills') }}>
                         <ContentAdd />
                     </FloatingActionButton>
                 </div>
@@ -147,24 +238,20 @@ class Edit extends Component {
         )
     }
     renderExperience() {
-        const experience = [
-            { startTime: '2015-09-01', endTime: '2015-09-02', work: 'Create a services site' },
-            { startTime: '2015-10-10', endTime: '2015-09-05', work: 'Solve initial network problems' },
-            { startTime: '2015-10-11', endTime: '2015-09-02', work: 'Technical testing' },
-            { startTime: '2015-11-22', endTime: '2015-09-06', work: 'twork problems being solved' },
-        ]
+        const { contributes } = this.props
         return (
             <EditCard title="Experience">
                 <div className={styles['timeline-wrap']}>
                     <Timeline pending="to be continue...">
-                        {experience.map((item, index) => (
+                        {contributes.map((item, index) => (
                             <Timeline.Item key={index} className={styles['timeline-item']} color="pink">
-                                <span>{item.work} {item.startTime}~{item.endTime}</span>
+                                <h3>{item.duty}</h3>
+                                <span>From {formatDate(item.startTime)} to {formatDate(item.endTime)}</span>
                                 <div className={styles['edit-btn-wrap']}>
-                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={() => { this.handleOpen('experience') }}>
+                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={() => { this.handleOpen('experience', index) }}>
                                         <EditorModeEdit />
                                     </IconButton>
-                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }}>
+                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={this.handleRemove}>
                                         <Clear />
                                     </IconButton>
                                 </div>
@@ -187,14 +274,15 @@ class Edit extends Component {
         )
     }
     renderDialog() {
-        const { dialogType } = this.state
+        const { dialogType, index } = this.state
+        const { contributes } = this.props
         switch (dialogType) {
-            case 'hobbit':
-            case 'skill':
+            case 'hobbies':
                 return (
                     <div className={styles['dialog-wrap']}>
                         <Card
                           hasButton
+                          name={dialogType}
                           style={{ backgroundColor: '#fff', width: '1000px', margin: 'auto auto' }}
                           title="感兴趣的话题"
                           colors={colorsA}
@@ -203,11 +291,31 @@ class Edit extends Component {
                         />
                     </div>
                 )
+            case 'skills':
+                return (
+                    <div className={styles['dialog-wrap']}>
+                        <Card
+                          hasButton
+                          name={dialogType}
+                          style={{ backgroundColor: '#fff', width: '1000px', margin: 'auto auto' }}
+                          title="感兴趣的话题"
+                          colors={colorsA}
+                          words={skills}
+                          onClose={this.handleClose}
+                        />
+                    </div>
+                )
             case 'experience':
                 return (
                     <div className={styles['dialog-wrap']}>
                         <Memorabilia
+                          index={index}
                           hasButton
+                          contributes={this.props.contributes}
+                          onUploadData={this.props.uploadData}
+                          startTime={contributes[index].startTime}
+                          endTime={contributes[index].endTime}
+                          text={contributes[index].duty}
                           style={{ backgroundColor: '#fff', width: '1000px', margin: 'auto auto' }}
                           onClose={this.handleClose}
                         />

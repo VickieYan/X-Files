@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import TextField from 'material-ui/TextField'
+import { connect } from 'react-redux'
+import { login } from '../../actions/userAction'
 import validator from '../../scripts/validator'
 import styles from './Login.scss'
 
+@connect(
+    state => state.user,
+    { login },
+)
 class Login extends Component {
     constructor() {
         super()
@@ -18,8 +24,8 @@ class Login extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleBlur = this.handleBlur.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleLogin = this.handleLogin.bind(this)
     }
+
 
     handleClick() {
         this.setState(prevState => ({
@@ -58,15 +64,15 @@ class Login extends Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        const { isShortNameValid, isPasswordValid } = this.state
+        const { isShortNameValid, isPasswordValid, shortName, password } = this.state
         if (isShortNameValid && isPasswordValid) {
-            console.log(this.state.shortName, this.state.password)
             // submit code here
+            this.props.login(
+                { ShortName: shortName, Password: password },
+                () => { this.props.history.push(this.props.redirectTo) }
+            )
+            // this.props.history.push(this.props.redirectTo)
         }
-    }
-
-    handleLogin() {
-        this.props.history.push('./detail')
     }
 
     render() {

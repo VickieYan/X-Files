@@ -7,32 +7,45 @@ import styles from './Detail.scss'
 class Step3 extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            memorabilias: [''],
-        }
         this.handleAdd = this.handleAdd.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
     }
 
     handleAdd() {
-        this.setState({
-            memorabilias: [...this.state.memorabilias, ''],
+        this.props.onUploadData({
+            contributes: [...this.props.contributes,
+                {
+                    startTime: '',
+                    endTime: '',
+                    duty: '',
+                },
+            ],
         })
     }
 
     handleDelete(index) {
         return () => {
-            const memorabilias = this.state.memorabilias.slice()
-            memorabilias.splice(index, 1)
-            this.setState({ memorabilias })
+            const contributes = this.props.contributes.slice()
+            contributes.splice(index, 1)
+            this.props.onUploadData({ contributes })
         }
     }
 
     render() {
+        const { contributes, onUploadData } = this.props
         return (
             <div>
                 <div>
-                    {this.state.memorabilias.map((item, index) => (<Memorabilia key={index} isDeletable onDelete={this.handleDelete(index)} />))}
+                    {contributes.map((item, index) => (
+                        <Memorabilia
+                          key={index}
+                          isDeletable
+                          index={index}
+                          contributes={contributes}
+                          onUploadData={onUploadData}
+                          onDelete={this.handleDelete(index)}
+                        />
+                    ))}
                 </div>
                 <div className={styles.addBtn}>
                     <FloatingActionButton

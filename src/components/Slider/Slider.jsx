@@ -34,6 +34,7 @@ class Slider extends Component {
             isRight: false,
         }
         this.handleClick = this.handleClick.bind(this)
+        this.handleSort = this.handleSort.bind(this)
     }
 
     componentDidMount() {
@@ -78,6 +79,11 @@ class Slider extends Component {
         }
     }
 
+    handleSort(department) {
+        console.log(department)
+        this.props.onSort(department)
+    }
+
     renderCard(item, index) {
         const { itemWidth, spacing } = this.props
         const {
@@ -95,7 +101,7 @@ class Slider extends Component {
             cursor: 'pointer',
         }
         return (
-            <Card key={index} style={cardStyle}>
+            <Card key={index} style={cardStyle} onClick={() => { this.handleSort(title) }}>
                 <CardMedia style={{ width: `${itemWidth}px` }}>
                     <img src={img} width={itemWidth} height="118" alt="" />
                 </CardMedia>

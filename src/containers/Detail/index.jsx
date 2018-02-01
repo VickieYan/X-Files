@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
-import {
-    Step,
-    Stepper,
-    StepLabel,
-} from 'material-ui/Stepper'
+import { connect } from 'react-redux'
+import { Step, Stepper, StepLabel } from 'material-ui/Stepper'
 import { CSSTransitionGroup } from 'react-transition-group'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
+import { uploadData, logout, submitData } from '../../actions/userAction'
 import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
 import styles from './Detail.scss'
+import axios from 'axios'
 
+@connect(
+    state => state.user,
+    { uploadData, logout, submitData },
+)
 class MyStepper extends Component {
     constructor(props) {
         super(props)
@@ -20,29 +23,63 @@ class MyStepper extends Component {
         }
         this.handleNext = this.handleNext.bind(this)
         this.handlePrev = this.handlePrev.bind(this)
+        this.esc = this.esc.bind(this)
     }
 
     getStepContent(stepIndex) {
+        const { uploadData, contributes, avatar } = this.props
         switch (stepIndex) {
             case 0:
-                return <Step1 key={0} />
+                return <Step1 onUploadData={uploadData} avatar={avatar} key={0} />
             case 1:
                 return <Step2 key={1} />
             case 2:
-                return <Step3 key={2} />
+                return <Step3 onUploadData={uploadData} contributes={contributes} key={2} />
             default:
                 return <Step1 key={3} />
         }
     }
 
+    esc() {
+        this.props.logout(() => { this.props.history.push(this.props.redirectTo) })
+    }
+
     handleNext() {
         window.scrollTo(0, 0)
         const { stepIndex } = this.state
+        const {
+            submitData,
+            sex,
+            isSingle,
+            phoneNumber,
+            hometown,
+            signature,
+            github,
+            linkedin,
+            twitter,
+            hobbies,
+            skills,
+            contributes,
+            department,
+        } = this.props
         this.setState({
             stepIndex: stepIndex + 1,
         })
         if (stepIndex >= 2) {
-            this.props.history.push('./')
+            submitData({
+                Sex: sex,
+                IsSingle: isSingle,
+                Department: department,
+                PhoneNumber: phoneNumber,
+                Hometown: hometown,
+                Signature: signature,
+                GitHub: github,
+                LinkedIn: linkedin,
+                Twitter: twitter,
+                Hobbies: hobbies,
+                Skills: skills,
+                Contributes: contributes,
+            }, () => { this.props.history.push('./') })
         }
     }
 
@@ -87,6 +124,11 @@ class MyStepper extends Component {
                           label={stepIndex === 2 ? 'Finish' : 'Next'}
                           primary
                           onClick={this.handleNext}
+                        />
+                        <RaisedButton
+                          label="退出"
+                          primary
+                          onClick={this.esc}
                         />
                     </div>
                 </div>
