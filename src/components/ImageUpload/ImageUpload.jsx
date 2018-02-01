@@ -10,6 +10,7 @@ class ImageUpload extends Component {
         imgClassName: styles['preview-img'],
         btnClassName: styles['upload-btn'],
     }
+
     constructor(props) {
         super(props)
         // this.state = {

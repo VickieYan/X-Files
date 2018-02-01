@@ -105,6 +105,7 @@ class Edit extends Component {
         const temp = contributes.slice()
         temp.splice(index, 1)
         uploadData({ contributes: temp })
+        this.props.test()
     }
     // formatDate(value) {
     //     if (value) {

@@ -80,7 +80,6 @@ class Slider extends Component {
     }
 
     handleSort(department) {
-        console.log(department)
         this.props.onSort(department)
     }
 
