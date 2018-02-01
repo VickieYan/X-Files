@@ -5,8 +5,8 @@ export default {
     },
     password: {
         // pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-        pattern: /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[~!@#$%^&*])[\da-zA-Z~!@#$%^&*]{3,}$/,
-        errorMsg: '密码至少含有一个字母和一个数字还有一个特殊符号',
+        pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{3,}$/,
+        errorMsg: '密码至少含有一个字母和一个数字',
     },
     checkPw: {
         pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,

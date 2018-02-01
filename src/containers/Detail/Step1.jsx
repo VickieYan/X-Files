@@ -62,7 +62,8 @@ class Step1 extends Component {
 
     renderInfo() {
         const { userinfo } = this.state
-        const textFieldStyle = { width: '400px' }
+        const textFieldStyle = { width: '400px', height: '80px' }
+        const menuStyle = { marginTop: '25px' }
         return (
             <div className={styles.form}>
                 {
@@ -74,6 +75,8 @@ class Step1 extends Component {
                                       key={index}
                                       value={item.num}
                                       style={textFieldStyle}
+                                      menuStyle={menuStyle}
+                                      // underlineStyle={underlineStyle}
                                       onChange={(ev, num) => { this.handleChange('select', index, num) }}
                                     >
                                         {item.options.map((item, index) => (

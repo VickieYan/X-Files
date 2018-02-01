@@ -9,7 +9,7 @@ const initState = {
     displayName: '',
     email: '',
     employeeID: '',
-    department: '',
+    domain: 'WWW Dev',
     company: '',
     telephoneNumber: '',
     title: '',

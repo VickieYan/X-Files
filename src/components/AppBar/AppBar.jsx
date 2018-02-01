@@ -21,9 +21,11 @@ class AppBar extends Component {
     }
 
     handleLogout() {
-        this.props.logout(() => { this.props.history.push('./login') })
+        this.props.logout(() => {
+            this.props.history.push('./login')
+        })
     }
-
+    
     handleClick() {
         this.props.getSelfInfo(() => { this.props.history.push('./edit') })
     }

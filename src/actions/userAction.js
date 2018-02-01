@@ -5,7 +5,7 @@ import {
     UPLOAD_DATA,
     LOGOUT_SUCCESS,
     SUBMIT_SUCCESS,
-    GET_SELF_SUCCESS
+    GET_SELF_SUCCESS,
 } from '../constants/actionType'
 
 function errorMsg(msg) {
@@ -28,14 +28,14 @@ function logoutSuccess() {
     }
 }
 
-function submitSuccess(obj) {
-    return {
-        type: SUBMIT_SUCCESS,
-        payload: {
+// function submitSuccess(obj) {
+//     return {
+//         type: SUBMIT_SUCCESS,
+//         payload: {
 
-        },
-    }
-}
+//         },
+//     }
+// }
 
 function getSelfSuccess(obj) {
     return {
@@ -46,7 +46,7 @@ function getSelfSuccess(obj) {
             displayName: obj.DisplayName,
             email: obj.Email,
             employeeID: obj.EmployeeID,
-            department: obj.Department,
+            domain: obj.Domain,
             company: obj.Company,
             telephoneNumber: obj.TelephoneNumber,
             title: obj.Title,
@@ -171,7 +171,7 @@ export function test() {
         submitData({
             Sex: getState().user.sex,
             IsSingle: getState().user.isSingle,
-            Department: getState().user.department,
+            Domain: getState().user.domain,
             PhoneNumber: getState().user.phoneNumber,
             Hometown: getState().user.hometown,
             Signature: getState().user.signature,

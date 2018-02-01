@@ -24,13 +24,33 @@ class Login extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleBlur = this.handleBlur.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleLogin = this.handleLogin.bind(this)
     }
-
 
     handleClick() {
         this.setState(prevState => ({
             isLogin: !prevState.isLogin,
         }))
+    }
+
+    handleCheck() {
+        const { shortName, password } = this.state
+        const isShortNameValid = validator.shortName.pattern.test(shortName)
+        const isPasswordValid = validator.password.pattern.test(password)
+        this.setState({ isShortNameValid, isPasswordValid },
+            () => {
+                if (this.state.isShortNameValid && this.state.isPasswordValid) {
+                    this.handleLogin(shortName, password)
+                }
+            },
+        )
+    }
+
+    handleLogin(shortName, password) {
+        this.props.login(
+            { ShortName: shortName, Password: password },
+            () => { this.props.history.push(this.props.redirectTo) }
+        )
     }
 
     handleFocus(e) {
@@ -64,15 +84,7 @@ class Login extends Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        const { isShortNameValid, isPasswordValid, shortName, password } = this.state
-        if (isShortNameValid && isPasswordValid) {
-            // submit code here
-            this.props.login(
-                { ShortName: shortName, Password: password },
-                () => { this.props.history.push(this.props.redirectTo) }
-            )
-            // this.props.history.push(this.props.redirectTo)
-        }
+        this.handleCheck()
     }
 
     render() {
@@ -122,7 +134,6 @@ class Login extends Component {
                                 <button
                                   type="submit"
                                   className={styles['form-btn']}
-                                  onClick={this.handleLogin}
                                 >
                                     {action}
                                 </button>

@@ -49,6 +49,7 @@ export function sort(department) {
         axios.post('/info/department', { query: department })
         .then((res) => {
             if (res.data.code === 200) {
+                console.log(res.data.data)
                 dispacth(sortSuccess(res.data.data))
             }
         })

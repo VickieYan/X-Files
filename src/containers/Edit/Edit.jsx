@@ -32,6 +32,7 @@ class Edit extends Component {
         this.handleClose = this.handleClose.bind(this)
         this.handleRequestDelete = this.handleRequestDelete.bind(this)
         this.handleRemove = this.handleRemove.bind(this)
+        this.renderAddExperience = this.renderAddExperience.bind(this)
     }
     handleOpen(type, index) {
         this.setState({
@@ -116,6 +117,33 @@ class Edit extends Component {
     //     }
     //     return '近未来'
     // }
+
+    renderAddExperience() {
+        const { uploadData, contributes } = this.props
+        const newContributes = contributes.slice()
+        const index = contributes.length
+        newContributes.push({
+            startTime: new Date(),
+            endTime: new Date(),
+            duty: '',
+        })
+        uploadData({ contributes: newContributes })
+        return (
+            <div className={styles['dialog-wrap']}>
+                <Memorabilia
+                  index={index}
+                  hasButton
+                  contributes={this.props.contributes}
+                  onUploadData={this.props.uploadData}
+                  startTime={contributes[index].startTime}
+                  endTime={contributes[index].endTime}
+                  text={contributes[index].duty}
+                  style={{ backgroundColor: '#fff', width: '1000px', margin: 'auto auto' }}
+                  onClose={this.handleClose}
+                />
+            </div>
+        )
+    }
 
     renderInfo() {
         const {
@@ -287,7 +315,7 @@ class Edit extends Component {
                               className={styles['add-experience-btn']}
                               style={{ width: 20, height: 20 }}
                               iconStyle={{ marginTop: '-12px' }}
-                              onClick={() => { this.handleOpen('experience') }}
+                              onClick={() => { this.handleOpen('newExperience') }}
                             >
                                 <ContentAdd color="pink" />
                             </IconButton>
@@ -358,7 +386,7 @@ class Edit extends Component {
                 {this.renderSkills()}
                 {this.renderPhotos()}
                 {this.renderExperience()}
-                {this.state.isOpen && this.renderDialog()}
+                {this.state.isOpen && this.renderAddExperience()}
             </div>
         )
     }
