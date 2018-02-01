@@ -23,7 +23,7 @@ class MyStepper extends Component {
         }
         this.handleNext = this.handleNext.bind(this)
         this.handlePrev = this.handlePrev.bind(this)
-        this.esc = this.esc.bind(this)
+        // this.esc = this.esc.bind(this)
     }
 
     getStepContent(stepIndex) {
@@ -40,9 +40,9 @@ class MyStepper extends Component {
         }
     }
 
-    esc() {
-        this.props.logout(() => { this.props.history.push(this.props.redirectTo) })
-    }
+    // esc() {
+    //     this.props.logout(() => { this.props.history.push(this.props.redirectTo) })
+    // }
 
     handleNext() {
         window.scrollTo(0, 0)
@@ -125,11 +125,11 @@ class MyStepper extends Component {
                           primary
                           onClick={this.handleNext}
                         />
-                        <RaisedButton
+                        {/* <RaisedButton
                           label="退出"
                           primary
                           onClick={this.esc}
-                        />
+                        /> */}
                     </div>
                 </div>
             </div>

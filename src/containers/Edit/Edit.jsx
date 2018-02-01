@@ -18,7 +18,7 @@ import styles from './Edit.scss'
 
 @connect(
     state => state.user,
-    { uploadData, submitData, getSelfInfo, test },
+    { uploadData, getSelfInfo, test },
 )
 class Edit extends Component {
     constructor(props) {
@@ -43,7 +43,6 @@ class Edit extends Component {
     handleClose() {
         this.setState({ isOpen: false })
         const {
-            submitData,
             sex,
             isSingle,
             phoneNumber,
@@ -75,7 +74,6 @@ class Edit extends Component {
     handleRequestDelete(index, type) {
         // hanlde here
         const {
-            submitData,
             sex,
             isSingle,
             phoneNumber,
@@ -144,22 +142,23 @@ class Edit extends Component {
         return (
             <EditCard title="Public profile">
                 <div className={styles.fields}>
-                    {data.map((item, index) => <Form key={index} {...item} data={{ ...this.props }} uploadData={uploadData} submitDate={submitData} />)}
+                    {data.map((item, index) => <Form key={index} {...item} data={{ ...this.props }} uploadData={uploadData} submitData={submitData} />)}
                 </div>
                 <div className={styles.avatar}>
-                    <ImageUpload avatar={avatar} />
+                    <ImageUpload avatar={avatar} url="/user/updateAvatar" uploadData={uploadData} />
                 </div>
             </EditCard>
         )
     }
     renderPhotos() {
         const { photos } = this.state
-        const { avatar } = this.props
+        const { avatar, photograph1, photograph2, photograph3, indexShowPhotograph } = this.props
         const { length } = photos
         return (
             <EditCard title="Photo">
                 <div className={styles['photo-wrap']}>
                     <ImageUpload
+                      avatar={indexShowPhotograph}
                       text="更换封面"
                       cropRatio="5:7"
                       className={styles['photo-upload-wrap']}
@@ -167,7 +166,31 @@ class Edit extends Component {
                       imgClassName={styles['preview-img']}
                       btnClassName={styles['photo-upload-btn']}
                     />
-                    {photos.map((photo, index) => (
+                    <ImageUpload
+                      avatar={photograph1}
+                      text="更换图片"
+                      className={styles['photo-upload-wrap']}
+                      previewClassName={styles['photo-preview']}
+                      imgClassName={styles['preview-img']}
+                      btnClassName={styles['photo-upload-btn']}
+                    />
+                    <ImageUpload
+                      avatar={photograph2}
+                      text="更换图片"
+                      className={styles['photo-upload-wrap']}
+                      previewClassName={styles['photo-preview']}
+                      imgClassName={styles['preview-img']}
+                      btnClassName={styles['photo-upload-btn']}
+                    />
+                    <ImageUpload
+                      avatar={photograph3}
+                      text="更换图片"
+                      className={styles['photo-upload-wrap']}
+                      previewClassName={styles['photo-preview']}
+                      imgClassName={styles['preview-img']}
+                      btnClassName={styles['photo-upload-btn']}
+                    />
+                    {/* {photos.map((photo, index) => (
                         <ImageUpload
                           key={index}
                           text="更换图片"
@@ -176,8 +199,8 @@ class Edit extends Component {
                           imgClassName={styles['preview-img']}
                           btnClassName={styles['photo-upload-btn']}
                         />
-                    ))}
-                    {length < 2 &&
+                    ))} */}
+                    {/* {length < 2 &&
                         <ReactCoreImageUpload
                           crop
                           text="+"
@@ -186,7 +209,7 @@ class Edit extends Component {
                           url="http://wsmis053:6141/user/testUpdate" // 服务器上传位置
                           imageUploaded={this.imageuploaded}
                         />
-                    }
+                    } */}
                 </div>
             </EditCard>
         )

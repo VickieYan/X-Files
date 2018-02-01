@@ -5,18 +5,23 @@ import MenuItem from 'material-ui/MenuItem'
 import HomeIcon from 'material-ui/svg-icons/action/account-circle'
 import { connect } from 'react-redux'
 import { search } from '../../actions/infoAction'
-import { getSelfInfo } from '../../actions/userAction'
+import { getSelfInfo, logout } from '../../actions/userAction'
 import Search from '../Search/Search'
 import styles from './AppBar.scss'
 
 @connect(
-    state => state.info,
-    { search, getSelfInfo },
+    state => state,
+    { search, getSelfInfo, logout },
 )
 class AppBar extends Component {
     constructor() {
         super()
         this.handleClick = this.handleClick.bind(this)
+        this.handleLogout = this.handleLogout.bind(this)
+    }
+
+    handleLogout() {
+        this.props.logout(() => { this.props.history.push('./login') })
     }
 
     handleClick() {
@@ -43,7 +48,7 @@ class AppBar extends Component {
                               targetOrigin={{ horizontal: 'right', vertical: 'top' }}
                             >
                                 <MenuItem primaryText="personal center" onClick={this.handleClick} />
-                                <MenuItem primaryText="Sign out" />
+                                <MenuItem primaryText="Sign out" onClick={this.handleLogout} />
                             </IconMenu>
                             {/* <span
                               className={styles.homeIcon}
