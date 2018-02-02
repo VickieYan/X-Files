@@ -1,0 +1,60 @@
+@import '../../styles/_mixins.scss';
+@import '../../styles/_variables.scss';
+
+.main {
+    padding: 30px 0;
+}
+
+.wrap {
+    max-width: $width-base;
+    margin: 0 auto;
+    .base-info-wrap {
+        padding: 0 16px;
+        .img-wrapper {
+            @include center();
+        }
+    }
+    .form {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .btn-more {
+        margin-top: 12px;
+    }
+}
+
+//step2
+.chipWrapper {
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+
+//step3 
+.addBtn {
+    margin-bottom: 40px;
+}
+
+.memorabilia-example {
+    position: relative;
+    width: 100%;
+    margin: 5% 0;
+    padding: 4% 6% 4% 6%;
+    font-family: $font-stack-base;
+    border: 1px solid #e4ecf3;
+    overflow: hidden;
+    transition: all .3s ease;
+    .memorabilia-example-name {
+        font-weight: bold;
+    }
+    .memorabilia-example-title {
+        text-align: center
+    }
+}
+
+.memorabilia-example:hover {
+    box-shadow: 0 26px 40px -24px rgba(0, 36, 100, 0.3);
+    transform: translateY(-6px);
+}

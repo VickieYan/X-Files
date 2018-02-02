@@ -93,7 +93,7 @@ module.exports = {
     plugins: [
         new webpack.optimize.UglifyJsPlugin(),
         new HtmlWebpackPlugin({
-            title: 'X-Files',
+            title: 'X-FILES',
             template: path.resolve(__dirname, 'index.tmpl.html'),
             favicon: path.resolve(__dirname, 'static/images/favicon_1.ico'),
         }),

@@ -1,0 +1,56 @@
+@import '../../styles/variables.scss';
+
+.main {
+    float: left;
+    overflow: hidden;
+    width: 23%;
+    margin: 1%;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+    transition: all .3s ease;
+}
+
+.main:hover {
+    box-shadow: 0 26px 40px -24px rgba(0, 36, 100, 0.3);
+    transform: translateY(-3px);
+    cursor: pointer;
+}
+
+.photo img {
+    width: 100%;
+}
+
+.text {
+    padding:0 8%;
+}
+
+.signature {
+    padding: 10px 0;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.info {
+    padding: 0 0 15px 0;
+    color: $gray;
+}
+
+.name {
+    // font-weight: bold;
+    font-size: 14px;
+    color: black;
+    font-weight: 150;
+
+}
+
+.department {
+    padding-left: 20px;
+    font-size: 6px;
+    color: gray;
+    line-height: 25px;
+}
+
+
+.like {
+    float: right;
+}

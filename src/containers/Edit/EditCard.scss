@@ -1,0 +1,26 @@
+@import '../../styles/variables.scss';
+@import '../../styles/placeholder.scss';
+@import '../../styles/mixins.scss';
+
+.wrap {
+    @extend %edit-card;
+    &:hover {
+        .edit-button-wrap {
+            display: block;
+        }
+    }
+    .head {
+        border-bottom: 1px $edit-border-color solid;
+        .title {
+            font-size: 24px;
+            line-height: 1.5em;
+            font-weight: normal;
+        }
+    }
+    .edit-button-wrap {
+        display: none;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+    }
+}
