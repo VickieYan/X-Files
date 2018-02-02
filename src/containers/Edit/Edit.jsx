@@ -8,7 +8,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton'
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit'
 import Clear from 'material-ui/svg-icons/content/clear'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import { uploadData, submitData, getSelfInfo, test } from '../../actions/userAction'
+import { uploadData, submitData, getSelfInfo, enhanceSubmit, redirectSuccess } from '../../actions/userAction'
 import { AppBar, Form, Card, Memorabilia, ImageUpload } from '../../components/'
 import EditCard from './EditCard'
 import { hobbies, skills } from '../../../static/data/words'
@@ -18,7 +18,7 @@ import styles from './Edit.scss'
 
 @connect(
     state => state.user,
-    { uploadData, getSelfInfo, test },
+    { uploadData, getSelfInfo, enhanceSubmit, redirectSuccess },
 )
 class Edit extends Component {
     constructor(props) {
@@ -32,15 +32,25 @@ class Edit extends Component {
         this.handleClose = this.handleClose.bind(this)
         this.handleRequestDelete = this.handleRequestDelete.bind(this)
         this.handleRemove = this.handleRemove.bind(this)
+        this.handleEnhanceSubmit = this.handleEnhanceSubmit.bind(this)
         // this.renderAddExperience = this.renderAddExperience.bind(this)
+    }
+    componentDidMount() {
+        redirectSuccess('./edit')
     }
     handleOpen(type, index) {
         this.setState({
             isOpen: true,
             dialogType: type,
-            index: index || 0,
+            index,
         })
     }
+
+    handleEnhanceSubmit() {
+        this.setState({ isOpen: false })
+        this.props.enhanceSubmit()
+    }
+
     handleClose() {
         this.setState({ isOpen: false })
         const {
@@ -96,7 +106,7 @@ class Edit extends Component {
         }
         temp.splice(index, 1)
         this.props.uploadData({ [type]: temp })
-        this.props.test()
+        this.props.enhanceSubmit()
     }
     handleRemove() {
         const { contributes, uploadData } = this.props
@@ -104,7 +114,7 @@ class Edit extends Component {
         const temp = contributes.slice()
         temp.splice(index, 1)
         uploadData({ contributes: temp })
-        this.props.test()
+        this.props.enhanceSubmit()
     }
     // formatDate(value) {
     //     if (value) {
@@ -309,8 +319,8 @@ class Edit extends Component {
                     <Timeline>
                         {contributes.map((item, index) => (
                             <Timeline.Item key={index} className={styles['timeline-item']} color="pink">
-                                <h3>{item.duty}</h3>
                                 <span>From {formatDate(item.startTime)} to {formatDate(item.endTime)}</span>
+                                <h3>{item.duty}</h3>
                                 <div className={styles['edit-btn-wrap']}>
                                     <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={() => { this.handleOpen('experience', index) }}>
                                         <EditorModeEdit />
@@ -321,8 +331,7 @@ class Edit extends Component {
                                 </div>
                             </Timeline.Item>
                         ))}
-                        <Timeline.Item color="#ccc">to be continue...</Timeline.Item>
-                        {/* <Timeline.Item className={styles['timeline-item']} color="pink">
+                        <Timeline.Item className={styles['timeline-item']} color="pink">
                             <IconButton
                               tooltip="add experience"
                               className={styles['add-experience-btn']}
@@ -332,7 +341,8 @@ class Edit extends Component {
                             >
                                 <ContentAdd color="pink" />
                             </IconButton>
-                        </Timeline.Item> */}
+                        </Timeline.Item>
+                        <Timeline.Item color="#ccc">to be continue...</Timeline.Item>
                     </Timeline>
                 </div>
             </EditCard>
@@ -340,7 +350,10 @@ class Edit extends Component {
     }
     renderDialog() {
         const { dialogType, index } = this.state
-        const { contributes } = this.props
+        const { contributes, uploadData } = this.props
+        const startTime = index >= 0 ? new Date(contributes[index].startTime) : new Date()
+        const endTime = index >= 0 ? new Date(contributes[index].endTime) : new Date()
+        const duty = index >= 0 ? contributes[index].duty : ''
         switch (dialogType) {
             case 'hobbies':
                 return (
@@ -376,11 +389,13 @@ class Edit extends Component {
                         <Memorabilia
                           index={index}
                           hasButton
-                          contributes={this.props.contributes}
-                          onUploadData={this.props.uploadData}
-                          startTime={new Date(contributes[index].startTime)}
-                          endTime={new Date(contributes[index].endTime)}
-                          text={contributes[index].duty}
+                          contributes={contributes}
+                          onUploadData={uploadData}
+                          enhanceSubmit={enhanceSubmit}
+                          onEnhanceSubmit={this.handleEnhanceSubmit}
+                          startTime={startTime}
+                          endTime={endTime}
+                          text={duty}
                           style={{ backgroundColor: '#fff', width: '1000px', margin: 'auto auto' }}
                           onClose={this.handleClose}
                         />

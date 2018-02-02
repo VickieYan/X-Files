@@ -7,14 +7,46 @@ import styles from './Memorabilia.scss'
 class Memorabilia extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            startTime: new Date(),
+            endTime: new Date(),
+            duty: this.props.text,
+        }
+        this.handleAdd = this.handleAdd.bind(this)
         this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleAdd() {
+        const { onUploadData, onEnhanceSubmit } = this.props
+        const contributes = this.props.contributes.slice()
+        const { startTime, endTime, duty } = this.state
+        const editing = {
+            startTime,
+            endTime,
+            duty,
+        }
+        contributes.push(editing)
+
+        // sort here
+        onUploadData({ contributes })
+        onEnhanceSubmit()
     }
 
     handleChange(type, value) {
         const { onUploadData, contributes, index } = this.props
         const newContributes = contributes.slice()
-        newContributes[index][type] = value
-        onUploadData({ contributes: newContributes })
+
+        // controled components
+        this.setState({ [type]: value })
+
+        if (type !== 'duty') {
+            // sort here
+        }
+
+        if (index >= 0) {
+            newContributes[index][type] = value
+            onUploadData({ contributes: newContributes })
+        }
     }
 
     renderDelButton() {
@@ -30,12 +62,13 @@ class Memorabilia extends Component {
     }
 
     renderButton() {
+        const { index, onClose } = this.props
         return (
             <div className={styles['button-fields']}>
                 <FlatButton
                   primary
                   label="Submit"
-                  onClick={this.props.onClose}
+                  onClick={index >= 0 ? onClose : this.handleAdd}
                 />
             </div>
         )
@@ -46,7 +79,6 @@ class Memorabilia extends Component {
             style,
             startTime,
             endTime,
-            text,
             hasButton,
             isDeletable,
         } = this.props
@@ -66,7 +98,7 @@ class Memorabilia extends Component {
                   hintText="description"
                   multiLine
                   rows={1}
-                  value={text}
+                  value={this.state.duty}
                   onChange={(ev, value) => { this.handleChange('duty', value) }}
                 />
                 {isDeletable && this.renderDelButton()}

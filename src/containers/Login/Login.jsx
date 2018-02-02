@@ -49,7 +49,7 @@ class Login extends Component {
     handleLogin(shortName, password) {
         this.props.login(
             { ShortName: shortName, Password: password },
-            () => { this.props.history.push(this.props.redirectTo) }
+            () => { this.props.history.push(this.props.redirectTo) },
         )
     }
 

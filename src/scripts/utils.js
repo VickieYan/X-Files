@@ -7,3 +7,11 @@ export function formatDate(value) {
     const time = `${year}-${month}-${day}`
     return time
 }
+
+function ascOrder(start, end) {
+    return start - end
+}
+
+export default function compare(property) {
+    return (object1, object2) => ascOrder(object1[property], object2[property])
+}
