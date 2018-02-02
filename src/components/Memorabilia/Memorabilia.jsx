@@ -32,11 +32,6 @@ class Memorabilia extends Component {
     renderButton() {
         return (
             <div className={styles['button-fields']}>
-                {/* <FlatButton
-                  primary
-                  label="Cancel"
-                  onClick={this.props.onClose}
-                /> */}
                 <FlatButton
                   primary
                   label="Submit"
@@ -70,7 +65,7 @@ class Memorabilia extends Component {
                 <TextField
                   hintText="description"
                   multiLine
-                  rows={2}
+                  rows={1}
                   value={text}
                   onChange={(ev, value) => { this.handleChange('duty', value) }}
                 />

@@ -27,16 +27,16 @@ class MyStepper extends Component {
     }
 
     getStepContent(stepIndex) {
-        const { uploadData, contributes, avatar } = this.props
+        const { uploadData } = this.props
         switch (stepIndex) {
             case 0:
-                return <Step1 onUploadData={uploadData} avatar={avatar} key={0} />
+                return <Step1 onUploadData={uploadData} {...this.props} key={0} />
             case 1:
-                return <Step2 key={1} />
+                return <Step2 key={1} {...this.props} />
             case 2:
-                return <Step3 onUploadData={uploadData} contributes={contributes} key={2} />
+                return <Step3 onUploadData={uploadData} {...this.props} key={2} />
             default:
-                return <Step1 key={3} />
+                return <Step1 onUploadData={uploadData} {...this.props} key={0} />
         }
     }
 

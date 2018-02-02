@@ -33,7 +33,7 @@ class Fiche extends Component {
                 <div className={styles.text}>
                     <p className={styles.signature}>{Signature}</p>
                     <div className={styles.info}>
-                        <span>{FullName}</span>
+                        <span className={styles.name}>{FullName}</span>
                         <span className={styles.department}>{Domain}</span>
                         {/* <span className={styles.like}>
                             <Checkbox

@@ -32,14 +32,24 @@
 
 .info {
     padding: 0 0 15px 0;
-    font-size: 12px;
     color: $gray;
+}
+
+.name {
+    // font-weight: bold;
+    font-size: 14px;
+    color: black;
+    font-weight: 150;
+
 }
 
 .department {
     padding-left: 20px;
+    font-size: 6px;
+    color: gray;
     line-height: 25px;
 }
+
 
 .like {
     float: right;

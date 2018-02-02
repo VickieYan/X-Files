@@ -90,7 +90,8 @@ class Login extends Component {
     render() {
         const { isShortNameValid, isPasswordValid, passwordErrorMsg } = this.state
         const action = 'Login'
-        const sign = 'Please Use Your Shortname'
+        const sign = 'Please Use Your '
+        const signHignlight = 'Shortname'
 
         return (
             <div className={styles.container}>
@@ -107,7 +108,7 @@ class Login extends Component {
                           onChange={this.handleChange}
                           onBlur={this.handleBlur}
                           errorText={isShortNameValid === false && validator.shortName.errorMsg}
-                          floatingLabelText="shortName"
+                          floatingLabelText="Shortname"
                           floatingLabelStyle={{ top: '30px' }}
                           floatingLabelFocusStyle={{ fontSize: '20px', color: 'rgba(0, 0, 0, 0.3)', transition: 'all .4s' }}
                           underlineStyle={{ borderBottom: '2px solid #adadad' }}
@@ -140,7 +141,7 @@ class Login extends Component {
                             </div>
                         </div>
                         <div className={styles['sign-wrap']}>
-                            <span className={styles.sign}>{sign}</span>
+                            <span className={styles.sign}>{sign}<span className={styles['sign-highlight']}>{signHignlight}</span></span>
                         </div>
                     </form>
                 </div>

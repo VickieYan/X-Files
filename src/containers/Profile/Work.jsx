@@ -15,18 +15,19 @@ class Work extends Component {
                 </div>
                 <div className={styles.right}>
                     <Button
-                      text="Back to home"
+                      text="Back to profile"
                       className={`${styles.btn} ${styles['btn-back']}`}
                       onClick={() => { onClick('main') }}
                     />
                     <div className={styles.timeline}>
-                        <Timeline pending="to be continue...">
+                        <Timeline>
                             {data.Contributes.map((item, index) => (
                                 <Timeline.Item key={index} color="pink">
                                     <span>From {formatDate(item.startTime)} to {formatDate(item.endTime)}</span>
                                     <h3>{item.duty}</h3>
                                 </Timeline.Item>
                             ))}
+                            <Timeline.Item color="#ccc">to be continue...</Timeline.Item>
                         </Timeline>
                     </div>
                 </div>

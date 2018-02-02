@@ -10,7 +10,7 @@ class Step2 extends Component {
                 <Card
                   name="hobbies"
                   title="请选择感兴趣的话题"
-                  colors={colorsA}
+                  colors={colorsB}
                   words={hobbies}
                 />
                 <Card

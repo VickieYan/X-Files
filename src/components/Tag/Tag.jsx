@@ -13,7 +13,7 @@ import styles from './Tag.scss'
 class Tag extends Component {
     static defaultProps = {
         clickable: true,
-        colors: colorsB,
+        colors: colorsA,
     }
 
     constructor(props) {
@@ -27,11 +27,14 @@ class Tag extends Component {
     }
 
     componentWillMount() {
-        const { name, content } = this.props
-        if (!(this.props[name].indexOf(content) === -1)) {
-            this.setState({ isActive: true })
+        const { name, content, clickable } = this.props
+        if (clickable) {
+            if (!(this.props[name].indexOf(content) === -1)) {
+                this.setState({ isActive: true })
+            }
         }
-        this.state.color === '' ? this.setState({ color: this.getRandomColor() }) : null
+        // this.state.color === '' ? this.setState({ color: this.getRandomColor() }) : null
+        this.setState({ color: this.getRandomColor() })
     }
 
     getRandomColor() {

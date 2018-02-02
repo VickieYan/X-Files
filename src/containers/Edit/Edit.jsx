@@ -169,7 +169,7 @@ class Edit extends Component {
             { type: 'text', label: 'twitter', name: 'twitter', text: twitter },
         ]
         return (
-            <EditCard title="Public profile">
+            <EditCard title="个人中心">
                 <div className={styles.fields}>
                     {data.map((item, index) => <Form key={index} {...item} data={{ ...this.props }} uploadData={uploadData} submitData={submitData} />)}
                 </div>
@@ -184,7 +184,7 @@ class Edit extends Component {
         const { avatar, photograph1, photograph2, photograph3, indexShowPhotograph, uploadData } = this.props
         const { length } = photos
         return (
-            <EditCard title="Photo">
+            <EditCard title="个人相册">
                 <div className={styles['photo-wrap']}>
                     <ImageUpload
                       inputOfFile="IndexShowPhotograph"
@@ -210,7 +210,7 @@ class Edit extends Component {
                       btnClassName={styles['photo-upload-btn']}
                     />
                     <ImageUpload
-                     inputOfFile="Photograph2"
+                      inputOfFile="Photograph2"
                       url="/user/Photograph2"
                       uploadData={uploadData}
                       avatar={photograph2}
@@ -259,7 +259,7 @@ class Edit extends Component {
         const { hobbies } = this.props
         const buttonStyle = { marginLeft: '10px', width: '40px', height: '40px' }
         return (
-            <EditCard title="Hobby">
+            <EditCard title="感兴趣的话题">
                 <div className={styles['chip-wrap']}>
                     {hobbies.map((item, index) => (
                         <Chip
@@ -282,7 +282,7 @@ class Edit extends Component {
         const { skills } = this.props
         const buttonStyle = { marginLeft: '10px', width: '40px', height: '40px' }
         return (
-            <EditCard title="Skill">
+            <EditCard title="技能树">
                 <div className={styles['chip-wrap']}>
                     {skills.map((item, index) => (
                         <Chip
@@ -304,9 +304,9 @@ class Edit extends Component {
     renderExperience() {
         const { contributes } = this.props
         return (
-            <EditCard title="Experience">
+            <EditCard title="工作经历">
                 <div className={styles['timeline-wrap']}>
-                    <Timeline pending="to be continue...">
+                    <Timeline>
                         {contributes.map((item, index) => (
                             <Timeline.Item key={index} className={styles['timeline-item']} color="pink">
                                 <h3>{item.duty}</h3>
@@ -321,6 +321,7 @@ class Edit extends Component {
                                 </div>
                             </Timeline.Item>
                         ))}
+                        <Timeline.Item color="#ccc">to be continue...</Timeline.Item>
                         {/* <Timeline.Item className={styles['timeline-item']} color="pink">
                             <IconButton
                               tooltip="add experience"
@@ -338,8 +339,6 @@ class Edit extends Component {
         )
     }
     renderDialog() {
-
-        console.log(this.state.isOpen)
         const { dialogType, index } = this.state
         const { contributes } = this.props
         switch (dialogType) {

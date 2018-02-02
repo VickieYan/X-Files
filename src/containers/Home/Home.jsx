@@ -38,7 +38,7 @@ class Home extends Component {
         const { sort, members } = this.props
         return (
             <div>
-                <AppBar {...this.props} />
+                <AppBar {...this.props} showSearch />
                 <div className={styles.main}>
                     <Slider
                       data={departments}

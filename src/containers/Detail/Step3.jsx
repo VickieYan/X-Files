@@ -36,12 +36,20 @@ class Step3 extends Component {
         return (
             <div>
                 <div>
+                    <div className={styles['memorabilia-example']}>
+                        <h1 className={styles['memorabilia-example-title']}>工作贡献</h1>
+                        ٩̋(๑˃́ꇴ˂̀๑)举个栗子<br /><br />
+                        <span className={styles['memorabilia-example-name']}>开始时间：</span><br />2017-3-1<br /><br />
+                        <span className={styles['memorabilia-example-name']}>结束时间：</span><br />2017-11-1<br /><br />
+                        <span className={styles['memorabilia-example-name']}>描述：</span><br />参加Higo项目开发。项目初期，从完成一个模块的功能开发到整个框架的设计者和代码贡献者。<br />通过这个项目的锻炼，成为一名掌握从前端到后端技术，具有全栈能力的工程师。
+                    </div>
                     {contributes.map((item, index) => (
                         <Memorabilia
                           key={index}
                           isDeletable
                           index={index}
                           contributes={contributes}
+                          text={item.duty}
                           onUploadData={onUploadData}
                           onDelete={this.handleDelete(index)}
                         />
