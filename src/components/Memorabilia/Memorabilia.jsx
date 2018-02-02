@@ -10,14 +10,14 @@ class Memorabilia extends Component {
         this.state = {
             startTime: new Date(),
             endTime: new Date(),
-            duty: '',
+            duty: this.props.text,
         }
         this.handleAdd = this.handleAdd.bind(this)
         this.handleChange = this.handleChange.bind(this)
     }
 
     handleAdd() {
-        const { onUploadData } = this.props
+        const { onUploadData, onEnhanceSubmit } = this.props
         const contributes = this.props.contributes.slice()
         const { startTime, endTime, duty } = this.state
         const editing = {
@@ -26,7 +26,10 @@ class Memorabilia extends Component {
             duty,
         }
         contributes.push(editing)
+
+        // sort here
         onUploadData({ contributes })
+        onEnhanceSubmit()
     }
 
     handleChange(type, value) {
@@ -36,8 +39,14 @@ class Memorabilia extends Component {
         // controled components
         this.setState({ [type]: value })
 
-        newContributes[index][type] = value
-        onUploadData({ contributes: newContributes })
+        if (type !== 'duty') {
+            // sort here
+        }
+
+        if (index >= 0) {
+            newContributes[index][type] = value
+            onUploadData({ contributes: newContributes })
+        }
     }
 
     renderDelButton() {
@@ -64,7 +73,7 @@ class Memorabilia extends Component {
                 <FlatButton
                   primary
                   label="Submit"
-                  onClick={index ? onClose : this.handleAdd}
+                  onClick={index >= 0 ? onClose : this.handleAdd}
                 />
             </div>
         )
@@ -75,7 +84,6 @@ class Memorabilia extends Component {
             style,
             startTime,
             endTime,
-            text,
             hasButton,
             isDeletable,
         } = this.props
@@ -95,7 +103,7 @@ class Memorabilia extends Component {
                   hintText="description"
                   multiLine
                   rows={2}
-                  value={text}
+                  value={this.state.duty}
                   onChange={(ev, value) => { this.handleChange('duty', value) }}
                 />
                 {isDeletable && this.renderDelButton()}

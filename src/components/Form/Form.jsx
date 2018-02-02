@@ -23,7 +23,6 @@ class Form extends Component {
     handleChange(e) {
         const { uploadData, name } = this.props
         const newValue = e.target.value
-        console.log(newValue)
         this.setState({ value: newValue })
         uploadData({ [name]: newValue })
     }

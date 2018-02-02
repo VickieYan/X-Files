@@ -32,8 +32,8 @@ const initState = {
     skills: [],
     contributes: [
         {
-            startTime: '',
-            endTime: '',
+            startTime: new Date(),
+            endTime: new Date(),
             duty: '',
         },
     ],

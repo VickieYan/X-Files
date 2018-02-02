@@ -176,7 +176,7 @@ export function submitData(data, fn) {
     })
 }
 
-export function test() {
+export function enhanceSubmit() {
     return ((dispatch, getState) => {
         submitData({
             Sex: getState().user.sex,
