@@ -6,11 +6,12 @@ import { AppBar, Fiche, Slider } from '../../components/'
 // import members from '../../../static/data/members'
 import departments from '../../../static/data/departments'
 import { sort, getUserInfo, initInfo } from '../../actions/infoAction'
+import { redirectSuccess } from '../../actions/userAction'
 import styles from './Home.scss'
 
 @connect(
     state => state.info,
-    { sort, getUserInfo, initInfo },
+    { sort, getUserInfo, initInfo, redirectSuccess },
 )
 class Home extends Component {
     constructor(props) {
@@ -21,6 +22,7 @@ class Home extends Component {
     componentDidMount() {
         // console.log(members)
         const { initInfo } = this.props
+        redirectSuccess('./home')
         initInfo(1)
     }
 
@@ -38,7 +40,7 @@ class Home extends Component {
         const { sort, members } = this.props
         return (
             <div>
-                <AppBar {...this.props} />
+                <AppBar {...this.props} showSearch />
                 <div className={styles.main}>
                     <Slider
                       data={departments}

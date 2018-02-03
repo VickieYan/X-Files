@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DatePicker from 'material-ui/DatePicker'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
+import { ascOrder, compare } from '../../scripts/utils'
 import styles from './Memorabilia.scss'
 
 class Memorabilia extends Component {
@@ -28,6 +29,7 @@ class Memorabilia extends Component {
         contributes.push(editing)
 
         // sort here
+        contributes.sort(compare('startTime', ascOrder))
         onUploadData({ contributes })
         onEnhanceSubmit()
     }
@@ -41,6 +43,7 @@ class Memorabilia extends Component {
 
         if (type !== 'duty') {
             // sort here
+            newContributes.sort(compare('startTime', ascOrder))
         }
 
         if (index >= 0) {
@@ -65,11 +68,6 @@ class Memorabilia extends Component {
         const { index, onClose } = this.props
         return (
             <div className={styles['button-fields']}>
-                {/* <FlatButton
-                  primary
-                  label="Cancel"
-                  onClick={this.props.onClose}
-                /> */}
                 <FlatButton
                   primary
                   label="Submit"
@@ -102,7 +100,7 @@ class Memorabilia extends Component {
                 <TextField
                   hintText="description"
                   multiLine
-                  rows={2}
+                  rows={1}
                   value={this.state.duty}
                   onChange={(ev, value) => { this.handleChange('duty', value) }}
                 />

@@ -1,9 +1,20 @@
 import React, { Component } from 'react'
-import { lightBlue50 } from 'material-ui/styles/colors'
+import { lightBlue50, pink50 } from 'material-ui/styles/colors'
+import { colorsA, colorsB, colorsC } from '../../../static/data/color'
 import { Button, Tag } from '../../components/'
 import styles from './Profile.scss'
 
 class About extends Component {
+    constructor(props) {
+        super(props)
+        this.getRandomColor = this.getRandomColor.bind(this)
+    }
+
+    getRandomColor(colors) {
+        const index = Math.floor(colors.length * Math.random())
+        return colors[index]
+    }
+
     render() {
         const { onClick, data } = this.props
         return (
@@ -17,7 +28,7 @@ class About extends Component {
                 <div className={`${styles.right} ${styles.about}`}>
                     <div>
                         <Button
-                          text="Back to home"
+                          text="Back to profile"
                           className={`${styles.btn} ${styles['btn-back']}`}
                           onClick={() => { onClick('main') }}
                         />
@@ -28,7 +39,7 @@ class About extends Component {
                             <li>{`${data.Hometown}`}</li>
                             <li>{`${data.PhoneNumber}`}</li>
                             <li>{`${data.Email}`}</li>
-                            <li>{`${data.IsSingle ? '万年单身狗　丑拒' : '已有女票 比你漂亮'}`}</li>
+                            <li>{`${data.IsSingle === '是' ? '万年单身狗　丑拒' : '已有女票 比你漂亮'}`}</li>
                         </ul>
                     </div>
                     <div className={styles.tags}>
@@ -37,6 +48,7 @@ class About extends Component {
                               name="hobbies"
                               key={index}
                               content={item}
+                              backgroundColor={this.getRandomColor(colorsA)}
                               clickable={false}
                             />
                             ))}
@@ -45,7 +57,7 @@ class About extends Component {
                               name="skills"
                               key={index}
                               content={item}
-                              backgroundColor={lightBlue50}
+                              backgroundColor={this.getRandomColor(colorsA)}
                               clickable={false}
                             />
                             ))}

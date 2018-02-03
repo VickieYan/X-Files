@@ -5,7 +5,7 @@ export const hobbies = ['历史', '旅行', '手绘', '摄影', '电影',
 ]
 
 export const skills = ['HTML', 'CSS', 'JavaScript', 'Node.js', 'MySQL',
-'jQuery', 'Bootstrap', 'Angular.js', 'Ajax', 'JAVA',
+'jQuery', 'Bootstrap', 'Angular.js', 'JAVA',
 'C++', 'Python', 'PHP', 'Android', 'Ruby',
-'PS', 'Excel', 'C#', 'C', 'Swift',
+'PS', 'Excel', 'C#', 'C', 'Swift', 'Oracle', 'HBase', 'SQL Server', 'Redis', 'Hive',
 ]

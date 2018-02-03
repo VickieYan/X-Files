@@ -103,6 +103,9 @@
         font-size: 13px;
         .sign {
             color: $gray;
+            .sign-highlight {
+                font-weight: bold;
+            }
         }
     }
 }

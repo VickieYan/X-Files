@@ -12,13 +12,13 @@ class Step1 extends Component {
         this.state = {
             userinfo: [
                 {
-                    type: 'select', label: '性别', name: 'sex', options: ['男', '女', '其他'], num: 0,
+                    type: 'select', label: '性别', name: 'sex', options: ['男', '女', '其他'],
                 },
                 {
-                    type: 'select', label: '单身', name: 'isSingle', options: ['是', '否'], num: 0,
+                    type: 'select', label: '单身', name: 'isSingle', options: ['是', '否'],
                 },
                 {
-                    type: 'select', label: '部门', name: 'domain', options: ['WWW Dev', 'SSL Dev', 'Bigdata Dev', 'WWW Test', 'SSL Test'], num: 0,
+                    type: 'select', label: '部门', name: 'domain', options: ['WWW Dev', 'SSL Dev', 'Bigdata Dev', 'WWW Test', 'SSL Test'],
                 },
                 { type: 'text', label: '手机号码', name: 'phoneNumber' },
                 { type: 'text', label: '家乡', name: 'hometown' },
@@ -67,15 +67,18 @@ class Step1 extends Component {
         return (
             <div className={styles.form}>
                 {
-                  userinfo.map((item, index) => {
-                      switch (item.type) {
-                          case 'select':
+                    userinfo.map((item, index) => {
+                        switch (item.type) {
+                            case 'select':
+                            var getOptionIndex = userinfo[index].options.indexOf(this.props[item.name])
+                            var selectValue = getOptionIndex === -1 ? null : getOptionIndex
                                 return (
                                     <SelectField
                                       key={index}
-                                      value={item.num}
+                                      value={selectValue}
                                       style={textFieldStyle}
                                       menuStyle={menuStyle}
+                                      floatingLabelText={item.label}
                                       // underlineStyle={underlineStyle}
                                       onChange={(ev, num) => { this.handleChange('select', index, num) }}
                                     >
@@ -93,6 +96,7 @@ class Step1 extends Component {
                                     <TextField
                                       key={index}
                                       name={item.name}
+                                      value={this.props[item.name]}
                                       style={textFieldStyle}
                                       floatingLabelText={item.label}
                                       onChange={(ev, value) => { this.handleChange('text', index, value) }}

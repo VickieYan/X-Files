@@ -6,6 +6,15 @@ class Search extends Component {
     constructor(props) {
         super(props)
         this.handleClick = this.handleClick.bind(this)
+        this.handleKeydown = this.handleKeydown.bind(this)
+    }
+
+    handleKeydown(e) {
+        const { onSearch } = this.props
+        const { value } = this.input
+        if (e.keyCode === 13) {
+            onSearch(value)
+        }
     }
 
     handleClick() {
@@ -21,6 +30,7 @@ class Search extends Component {
                   ref={(el) => { this.input = el }}
                   className={styles.search}
                   placeholder="搜索"
+                  onKeyDown={this.handleKeydown}
                 />
                 <div
                   className={styles.icon}

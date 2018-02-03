@@ -3,6 +3,7 @@ import {
     BrowserRouter as Router,
     Route,
     Switch,
+    Redirect,
 } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { CSSTransitionGroup } from 'react-transition-group'

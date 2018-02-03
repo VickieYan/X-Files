@@ -39,10 +39,13 @@ class AppBar extends Component {
                 </div>
                 <div className={styles.main}>
                     <ul className={styles.nav}>
-                        <li onClick={() => { this.props.history.push('./') }}>首页</li>
-                        <li>
-                            <Search onSearch={search} />
-                        </li>
+                        {/* <li onClick={() => { this.props.history.push('./') }}>首页</li> */}
+                        {
+                            this.props.showSearch &&
+                            <li>
+                                <Search onSearch={search} />
+                            </li>
+                        }
                         <li className={styles.center}>
                             <IconMenu
                               iconButtonElement={<IconButton><HomeIcon /></IconButton>}
@@ -52,12 +55,6 @@ class AppBar extends Component {
                                 <MenuItem primaryText="personal center" onClick={this.handleClick} />
                                 <MenuItem primaryText="Sign out" onClick={this.handleLogout} />
                             </IconMenu>
-                            {/* <span
-                              className={styles.homeIcon}
-                              onClick={this.handleClick}
-                            >
-                                <HomeIcon />
-                            </span> */}
                         </li>
                     </ul>
                 </div>

@@ -115,28 +115,6 @@ export function login({ ShortName, Password }, fn) {
             }
         }).then(fn)
     })
-    // vk-simdata
-    // const res = {
-    //     msg: '登录成功',
-    //     code: 200,
-    //     info: {
-    //         shortName: 'vy67',
-    //         fullName: 'Vickie.W.Yan',
-    //         displayName: 'Vickie',
-    //         emial: 'Vickie.W.Yan@newegg.com',
-    //         employeeID: '418570912',
-    //         department: 'MIS',
-    //         company: 'Newegg',
-    //         telephoneNumber: '17761237141',
-    //         title: 'software',
-    //         groups: 'WWW',
-    //     },
-    // }
-
-    // // 登录成功
-    // if (res.code === 200) {
-    //     return loginSuccess(res.info)
-    // }
 }
 
 export function logout(fn) {

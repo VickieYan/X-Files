@@ -8,11 +8,6 @@ class Card extends Component {
     renderButton() {
         return (
             <div className={styles['button-fields']}>
-                {/* <FlatButton
-                  primary
-                  label="Cancel"
-                  onClick={this.props.onClose}
-                /> */}
                 <FlatButton
                   primary
                   label="Submit"
