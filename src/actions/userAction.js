@@ -73,14 +73,14 @@ function getSelfSuccess(obj) {
     }
 }
 
-export function redirectSuccess(redirectTo) {
-    return {
-        type: REDIRECT_SUCCESS,
-        payload: {
-            redirectTo,
-        },
-    }
-}
+// export function redirectSuccess(redirectTo) {
+//     return {
+//         type: REDIRECT_SUCCESS,
+//         payload: {
+//             redirectTo,
+//         },
+//     }
+// }
 
 // actionCreator
 export function check(fn) {

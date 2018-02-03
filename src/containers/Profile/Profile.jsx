@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransitionGroup } from 'react-transition-group'
 import { getUserInfo, current } from '../../actions/infoAction'
-import { redirectSuccess } from '../../actions/userAction'
 import { AppBar } from '../../components/'
 import Main from './Main'
 import About from './About'
@@ -13,7 +12,7 @@ import styles from './Profile.scss'
 
 @connect(
     state => state.info,
-    { getUserInfo, current, redirectSuccess },
+    { getUserInfo, current },
 )
 class Profile extends Component {
     constructor(props) {
@@ -47,7 +46,7 @@ class Profile extends Component {
         const shortName = path.slice(index)
         this.props.getUserInfo(shortName)
         // focus here
-        this.props.redirectSuccess(path)
+        // this.props.redirectSuccess(path)
     }
 
     handleClick(name) {

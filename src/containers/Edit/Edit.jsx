@@ -8,7 +8,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton'
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit'
 import Clear from 'material-ui/svg-icons/content/clear'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import { uploadData, submitData, getSelfInfo, enhanceSubmit, redirectSuccess } from '../../actions/userAction'
+import { uploadData, submitData, getSelfInfo, enhanceSubmit } from '../../actions/userAction'
 import { AppBar, Form, Card, Memorabilia, ImageUpload } from '../../components/'
 import EditCard from './EditCard'
 import { hobbies, skills } from '../../../static/data/words'
@@ -18,7 +18,7 @@ import styles from './Edit.scss'
 
 @connect(
     state => state.user,
-    { uploadData, getSelfInfo, enhanceSubmit, redirectSuccess },
+    { uploadData, getSelfInfo, enhanceSubmit },
 )
 class Edit extends Component {
     constructor(props) {
@@ -36,7 +36,7 @@ class Edit extends Component {
         // this.renderAddExperience = this.renderAddExperience.bind(this)
     }
     componentDidMount() {
-        redirectSuccess('./edit')
+        // redirectSuccess('./edit')
     }
     handleOpen(type, index) {
         this.setState({
