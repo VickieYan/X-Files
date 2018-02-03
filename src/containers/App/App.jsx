@@ -8,7 +8,7 @@ import {
 import { Provider } from 'react-redux'
 import { CSSTransitionGroup } from 'react-transition-group'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import { blueGrey700, white } from 'material-ui/styles/colors'
+import { blueGrey500, white } from 'material-ui/styles/colors'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import store from '../../store/store'
 import AuthRoute from '../../components/AuthRoute/authroute'
@@ -25,8 +25,8 @@ class App extends Component {
     render() {
         const muiTheme = getMuiTheme({
             palette: {
-                primary1Color: blueGrey700,
-                textColor: blueGrey700,
+                primary1Color: blueGrey500,
+                textColor: blueGrey500,
                 alternateTextColor: white,
             },
             appBar: {
@@ -37,6 +37,9 @@ class App extends Component {
             <Provider store={store}>
                 <MuiThemeProvider muiTheme={muiTheme}>
                     <div className={styles.container}>
+                        {
+                            // store.getState().user.fetchUser && <LinearProgress mode="indeterminate" />
+                        }
                         <Router>
                             <Route render={({ location }) => (
                                 <CSSTransitionGroup
@@ -44,7 +47,7 @@ class App extends Component {
                                   transitionEnterTimeout={300}
                                   transitionLeaveTimeout={300}
                                 >
-                                    <AuthRoute />
+                                    {/* <AuthRoute /> */}
                                     <Switch key={location.key} location={location}>
                                         <Route exact path="/" component={Home} location={location} />
                                         <Route path="/login" component={Login} location={location} />

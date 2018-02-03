@@ -49,6 +49,8 @@ class Step3 extends Component {
                           isDeletable
                           index={index}
                           contributes={contributes}
+                          startTime={item.startTime}
+                          endTime={item.endTime}
                           text={item.duty}
                           onUploadData={onUploadData}
                           onDelete={this.handleDelete(index)}

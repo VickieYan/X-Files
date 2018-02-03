@@ -7,6 +7,9 @@ import {
     SUBMIT_SUCCESS,
     GET_SELF_SUCCESS,
     REDIRECT_SUCCESS,
+    FETCH_USER_START,
+    FETCH_USER_SUCCESS,
+    FETCH_USER_FAILURE
 } from '../constants/actionType'
 
 function errorMsg(msg) {
@@ -28,15 +31,6 @@ function logoutSuccess() {
         type: LOGOUT_SUCCESS,
     }
 }
-
-// function submitSuccess(obj) {
-//     return {
-//         type: SUBMIT_SUCCESS,
-//         payload: {
-
-//         },
-//     }
-// }
 
 function getSelfSuccess(obj) {
     return {
@@ -70,6 +64,26 @@ function getSelfSuccess(obj) {
             skills: obj.Skills,
             contributes: obj.Contributes,
         },
+    }
+}
+
+export function fetchUserStart(index) {
+    return {
+        type: FETCH_USER_START,
+        payload: index,
+    }
+}
+
+export function fetchUserSuccess() {
+    return {
+        type: FETCH_USER_SUCCESS,
+        payload: -1,
+    }
+}
+
+export function fetchUserFailure() {
+    return {
+        type: FETCH_USER_FAILURE,
     }
 }
 

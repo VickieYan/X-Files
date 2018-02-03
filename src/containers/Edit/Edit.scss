@@ -2,6 +2,9 @@
 @import '../../styles/placeholder.scss';
 @import '../../styles/mixins.scss';
 
+
+
+
 .wrap {
     box-sizing: border-box;
     @include size(100%, 100%);
@@ -35,15 +38,16 @@
             // height: 0px;
             margin-right: 10px;
             .photo-preview {
+                position: relative;
                 display: inline-block;
-                @include size(150px, 150px);
+                @include size(150px, 210px);
                 overflow: hidden;
                 border-radius: 2px;
                 box-shadow: 0 0 10px $gray-light;
                 .preview-img {
                     float: left;
                     width: 150px;
-                    height: 150px;
+                    height: 210px;
                 }
             }
             .photo-upload-btn {

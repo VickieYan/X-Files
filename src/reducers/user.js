@@ -1,8 +1,18 @@
-import { LOGIN_SUCCESS, UPLOAD_DATA, LOGOUT_SUCCESS, GET_SELF_SUCCESS, REDIRECT_SUCCESS } from '../constants/actionType'
+import {
+    LOGIN_SUCCESS,
+    UPLOAD_DATA,
+    LOGOUT_SUCCESS,
+    GET_SELF_SUCCESS,
+    REDIRECT_SUCCESS,
+    FETCH_USER_START,
+    FETCH_USER_SUCCESS,
+    FETCH_USER_FAILURE,
+} from '../constants/actionType'
 
 const initState = {
     redirectTo: './login',
     msg: '',
+    fetchUser: -1,
     // 默认数据
     shortName: '',
     fullName: '',
@@ -51,6 +61,10 @@ export default function user(state = initState, action) {
             return { ...state, ...action.payload }
         case REDIRECT_SUCCESS:
             return { ...state, ...action.payload }
+        case FETCH_USER_START:
+            return { ...state, fetchUser: action.payload }
+        case FETCH_USER_SUCCESS:
+            return { ...state, fetchUser: action.payload }
         default:
             return state
     }

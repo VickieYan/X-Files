@@ -4,7 +4,7 @@ import { Step, Stepper, StepLabel } from 'material-ui/Stepper'
 import { CSSTransitionGroup } from 'react-transition-group'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
-import { uploadData, logout, submitData } from '../../actions/userAction'
+import { uploadData, logout, submitData, fetchUserStart, fetchUserSuccess } from '../../actions/userAction'
 import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
@@ -13,7 +13,7 @@ import axios from 'axios'
 
 @connect(
     state => state.user,
-    { uploadData, logout, submitData },
+    { uploadData, logout, submitData, fetchUserStart, fetchUserSuccess },
 )
 class MyStepper extends Component {
     constructor(props) {
@@ -61,6 +61,10 @@ class MyStepper extends Component {
             skills,
             contributes,
             domain,
+            indexShowPhotograph,
+            photograph1,
+            photograph2,
+            photograph3,
         } = this.props
         this.setState({
             stepIndex: stepIndex + 1,
@@ -79,6 +83,10 @@ class MyStepper extends Component {
                 Hobbies: hobbies,
                 Skills: skills,
                 Contributes: contributes,
+                IndexShowPhotograph: indexShowPhotograph,
+                Photograph1: photograph1,
+                Photograph2: photograph2,
+                Photograph3: photograph3,
             }, () => { this.props.history.push('./') })
         }
     }

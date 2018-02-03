@@ -32,6 +32,7 @@ class Slider extends Component {
             offset: 0,
             isLeft: true,
             isRight: false,
+            activeIndex:-1,
         }
         this.handleClick = this.handleClick.bind(this)
         this.handleSort = this.handleSort.bind(this)
@@ -79,11 +80,15 @@ class Slider extends Component {
         }
     }
 
-    handleSort(department) {
+    handleSort(department, index) {
+        this.setState({
+            activeIndex: index,
+        })
         this.props.onSort(department)
     }
 
     renderCard(item, index) {
+        const { activeIndex } = this.state
         const { itemWidth, spacing } = this.props
         const {
             title,
@@ -99,8 +104,12 @@ class Slider extends Component {
             backgroundColor: background,
             cursor: 'pointer',
         }
+        const activeStyle = index === activeIndex ?
+        {
+            boxShadow: '0 0 10px #fc6767',
+        } : null
         return (
-            <Card key={index} style={cardStyle} onClick={() => { this.handleSort(title) }}>
+            <Card key={index} style={{ ...cardStyle,  ...activeStyle }} onClick={() => { this.handleSort(title, index) }}>
                 <CardMedia style={{ width: `${itemWidth}px` }}>
                     <img src={img} width={itemWidth} height="118" alt="" />
                 </CardMedia>

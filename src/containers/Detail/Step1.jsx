@@ -3,7 +3,7 @@ import TextField from 'material-ui/TextField'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import { ImageUpload } from '../../components/'
-// import validator from '../../scripts/validator'
+import EditCard from '../Edit/EditCard'
 import styles from './Detail.scss'
 
 class Step1 extends Component {
@@ -52,10 +52,19 @@ class Step1 extends Component {
     }
 
     renderAvatar() {
-        const { avatar, onUploadData } = this.props
+        const { avatar, onUploadData, fetchUser, fetchUserStart, fetchUserSuccess } = this.props
         return (
             <div className={styles['img-wrapper']}>
-                <ImageUpload avatar={avatar} uploadData={onUploadData} url="/user/updateAvatar" inputOfFile="Avatar" />
+                <ImageUpload
+                  num={1}
+                  fetchUser={fetchUser}
+                  fetchUserStart={fetchUserStart}
+                  fetchUserSuccess={fetchUserSuccess}
+                  avatar={avatar}
+                  uploadData={onUploadData}
+                  url="/user/updateAvatar"
+                  inputOfFile="Avatar"
+                />
             </div>
         )
     }
@@ -111,29 +120,84 @@ class Step1 extends Component {
         )
     }
 
-    // handleChangePhone(event) {
-    //   const { pattern, errorMsg } = validator.tel
-    //   const phone = event.target.value.trim()
-    //   const isValid = pattern.test(phone)
-    //   const phoneErrorText = !isValid ? errorMsg : null
-
-    //   this.setState({ phoneErrorText })
-    // }
-
-    // handleChangeEmail(event) {
-    //   const { pattern, errorMsg } = validator.email
-    //   const email = event.target.value.trim()
-    //   const isValid = pattern.test(email)
-    //   const emailErrorText = !isValid ? errorMsg : null
-
-    //   this.setState({ emailErrorText })
-    // }
+    renderPhoto() {
+        const {
+            photograph1, photograph2, photograph3, indexShowPhotograph, uploadData, fetchUserStart, fetchUserSuccess, fetchUser,
+        } = this.props
+        return (
+            <div className={styles.photo}>
+                <div className={styles['photo-wrap']}>
+                    <ImageUpload
+                      num={2}
+                      fetchUser={fetchUser}
+                      fetchUserStart={fetchUserStart}
+                      fetchUserSuccess={fetchUserSuccess}
+                      inputOfFile="IndexShowPhotograph"
+                      url="/user/IndexShowPhotograph"
+                      uploadData={uploadData}
+                      avatar={indexShowPhotograph}
+                      text="更换封面"
+                      cropRatio="5:7"
+                      className={styles['photo-upload-wrap']}
+                      previewClassName={styles['photo-preview']}
+                      imgClassName={styles['preview-img']}
+                      btnClassName={styles['photo-upload-btn']}
+                    />
+                    <ImageUpload
+                      num={3}
+                      fetchUser={fetchUser}
+                      fetchUserStart={fetchUserStart}
+                      fetchUserSuccess={fetchUserSuccess}
+                      inputOfFile="Photograph1"
+                      url="/user/Photograph1"
+                      uploadData={uploadData}
+                      avatar={photograph1}
+                      text="更换图片1"
+                      className={styles['photo-upload-wrap']}
+                      previewClassName={styles['photo-preview']}
+                      imgClassName={styles['preview-img']}
+                      btnClassName={styles['photo-upload-btn']}
+                    />
+                    <ImageUpload
+                      num={4}
+                      fetchUserStart={fetchUserStart}
+                      fetchUserSuccess={fetchUserSuccess}
+                      inputOfFile="Photograph2"
+                      url="/user/Photograph2"
+                      uploadData={uploadData}
+                      avatar={photograph2}
+                      text="更换图片2"
+                      className={styles['photo-upload-wrap']}
+                      previewClassName={styles['photo-preview']}
+                      imgClassName={styles['preview-img']}
+                      btnClassName={styles['photo-upload-btn']}
+                    />
+                    <ImageUpload
+                      num={5}
+                      fetchUser={fetchUser}
+                      fetchUserStart={fetchUserStart}
+                      fetchUserSuccess={fetchUserSuccess}
+                      inputOfFile="Photograph3"
+                      url="/user/Photograph3"
+                      uploadData={uploadData}
+                      avatar={photograph3}
+                      text="更换图片3"
+                      className={styles['photo-upload-wrap']}
+                      previewClassName={styles['photo-preview']}
+                      imgClassName={styles['preview-img']}
+                      btnClassName={styles['photo-upload-btn']}
+                    />
+                </div>
+            </div>
+        )
+    }
 
     render() {
         return (
             <div>
                 {this.renderAvatar()}
                 {this.renderInfo()}
+                {this.renderPhoto()}
             </div>
         )
     }

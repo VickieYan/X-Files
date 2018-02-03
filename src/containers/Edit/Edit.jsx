@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ReactCoreImageUpload from 'react-core-image-upload'
+import LinearProgress from 'material-ui/LinearProgress'
 import { Timeline } from 'antd'
 import Chip from 'material-ui/Chip'
 import IconButton from 'material-ui/IconButton'
@@ -8,7 +9,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton'
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit'
 import Clear from 'material-ui/svg-icons/content/clear'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import { uploadData, submitData, getSelfInfo, enhanceSubmit, redirectSuccess } from '../../actions/userAction'
+import { uploadData, submitData, getSelfInfo, enhanceSubmit, redirectSuccess, fetchUserStart, fetchUserSuccess } from '../../actions/userAction'
 import { AppBar, Form, Card, Memorabilia, ImageUpload } from '../../components/'
 import EditCard from './EditCard'
 import { hobbies, skills } from '../../../static/data/words'
@@ -18,7 +19,7 @@ import styles from './Edit.scss'
 
 @connect(
     state => state.user,
-    { uploadData, getSelfInfo, enhanceSubmit, redirectSuccess },
+    { uploadData, getSelfInfo, enhanceSubmit, redirectSuccess, fetchUserStart, fetchUserSuccess },
 )
 class Edit extends Component {
     constructor(props) {
@@ -116,44 +117,7 @@ class Edit extends Component {
         uploadData({ contributes: temp })
         this.props.enhanceSubmit()
     }
-    // formatDate(value) {
-    //     if (value) {
-    //         const date = new Date(value)
-    //         const year = date.getFullYear()
-    //         const month = date.getMonth() + 1
-    //         const day = date.getDate()
-    //         const time = `${year}-${month}-${day}`
-    //         return time
-    //     }
-    //     return '近未来'
-    // }
-
-    // renderAddExperience() {
-    //     const { uploadData, contributes } = this.props
-    //     const newContributes = contributes.slice()
-    //     const index = contributes.length
-    //     newContributes.push({
-    //         startTime: new Date(),
-    //         endTime: new Date(),
-    //         duty: '',
-    //     })
-    //     uploadData({ contributes: newContributes })
-    //     return (
-    //         <div className={styles['dialog-wrap']}>
-    //             <Memorabilia
-    //               index={index}
-    //               hasButton
-    //               contributes={this.props.contributes}
-    //               onUploadData={this.props.uploadData}
-    //               startTime={contributes[index].startTime}
-    //               endTime={contributes[index].endTime}
-    //               text={contributes[index].duty}
-    //               style={{ backgroundColor: '#fff', width: '1000px', margin: 'auto auto' }}
-    //               onClose={this.handleClose}
-    //             />
-    //         </div>
-    //     )
-    // }
+    
 
     renderInfo() {
         const {
@@ -167,6 +131,7 @@ class Edit extends Component {
             twitter,
             avatar,
             uploadData,
+            fetchUser,
         } = this.props
         const data = [
             { type: 'radio', label: '性别', name: 'sex', text: sex, options: ['男', '女'] },
@@ -184,19 +149,30 @@ class Edit extends Component {
                     {data.map((item, index) => <Form key={index} {...item} data={{ ...this.props }} uploadData={uploadData} submitData={submitData} />)}
                 </div>
                 <div className={styles.avatar}>
-                    <ImageUpload avatar={this.props.avatar} url="/user/updateAvatar" uploadData={uploadData} inputOfFile="Avatar" />
+                    <ImageUpload
+                      num={6}
+                      fetchUser={fetchUser}
+                      fetchUserStart={fetchUserStart}
+                      fetchUserSuccess={fetchUserSuccess}
+                      avatar={this.props.avatar}
+                      url="/user/updateAvatar"
+                      uploadData={uploadData}
+                      inputOfFile="Avatar"
+                    />
                 </div>
             </EditCard>
         )
     }
     renderPhotos() {
-        const { photos } = this.state
-        const { avatar, photograph1, photograph2, photograph3, indexShowPhotograph, uploadData } = this.props
-        const { length } = photos
+        const { photograph1, photograph2, photograph3, indexShowPhotograph, uploadData, fetchUserStart, fetchUserSuccess, fetchUser } = this.props
         return (
             <EditCard title="个人相册">
                 <div className={styles['photo-wrap']}>
                     <ImageUpload
+                      num={7}
+                      fetchUser={fetchUser}
+                      fetchUserStart={fetchUserStart}
+                      fetchUserSuccess={fetchUserSuccess}
                       inputOfFile="IndexShowPhotograph"
                       url="/user/IndexShowPhotograph"
                       uploadData={uploadData}
@@ -209,6 +185,10 @@ class Edit extends Component {
                       btnClassName={styles['photo-upload-btn']}
                     />
                     <ImageUpload
+                      num={8}
+                      fetchUser={fetchUser}
+                      fetchUserStart={fetchUserStart}
+                      fetchUserSuccess={fetchUserSuccess}
                       inputOfFile="Photograph1"
                       url="/user/Photograph1"
                       uploadData={uploadData}
@@ -220,6 +200,10 @@ class Edit extends Component {
                       btnClassName={styles['photo-upload-btn']}
                     />
                     <ImageUpload
+                      num={9}
+                      fetchUser={fetchUser}
+                      fetchUserStart={fetchUserStart}
+                      fetchUserSuccess={fetchUserSuccess}
                       inputOfFile="Photograph2"
                       url="/user/Photograph2"
                       uploadData={uploadData}
@@ -231,6 +215,10 @@ class Edit extends Component {
                       btnClassName={styles['photo-upload-btn']}
                     />
                     <ImageUpload
+                      num={10}
+                      fetchUser={fetchUser}
+                      fetchUserStart={fetchUserStart}
+                      fetchUserSuccess={fetchUserSuccess}
                       inputOfFile="Photograph3"
                       url="/user/Photograph3"
                       uploadData={uploadData}
@@ -241,26 +229,6 @@ class Edit extends Component {
                       imgClassName={styles['preview-img']}
                       btnClassName={styles['photo-upload-btn']}
                     />
-                    {/* {photos.map((photo, index) => (
-                        <ImageUpload
-                          key={index}
-                          text="更换图片"
-                          className={styles['photo-upload-wrap']}
-                          previewClassName={styles['photo-preview']}
-                          imgClassName={styles['preview-img']}
-                          btnClassName={styles['photo-upload-btn']}
-                        />
-                    ))} */}
-                    {/* {length < 2 &&
-                        <ReactCoreImageUpload
-                          crop
-                          text="+"
-                          className={styles['upload-photo-btn']}
-                          inputOfFile="avatar" // 上传服务器对应表单name
-                          url="http://wsmis053:6141/user/testUpdate" // 服务器上传位置
-                          imageUploaded={this.imageuploaded}
-                        />
-                    } */}
                 </div>
             </EditCard>
         )
@@ -408,6 +376,17 @@ class Edit extends Component {
     render() {
         return (
             <div className={styles.wrap}>
+                {/* <div className={styles['loading-wrap']}>
+                    <div div className={styles.loading}>
+                        <div className="sk-folding-cube">
+                            <div className="sk-cube1 sk-cube" />
+                            <div className="sk-cube2 sk-cube" />
+                            <div className="sk-cube4 sk-cube" />
+                            <div className="sk-cube3 sk-cube" />
+                        </div>
+                    </div>
+                </div> */}
+                {/* { this.props.fetchUser && <LinearProgress mode="indeterminate" color="pink" style={{ position: 'fixed', top: '0px', zIndex:100 }} /> } */}
                 <AppBar {...this.props} />
                 {this.renderInfo()}
                 {this.renderHobbies()}
