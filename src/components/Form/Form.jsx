@@ -61,7 +61,6 @@ class Form extends Component {
     }
 
     renderContent() {
-        const { value } = this.state
         const { type, name } = this.props
         const props = {
             text: {
@@ -70,7 +69,7 @@ class Form extends Component {
                 spellCheck: false,
                 onChange: this.handleChange,
                 onBlur: this.handleBlur,
-                defaultValue: value,
+                defaultValue: this.props.text,
             },
             multiLine: {
                 multiLine: true,
@@ -81,7 +80,7 @@ class Form extends Component {
                 name,
                 onChange: this.handleChange,
                 onBlur: this.handleBlur,
-                defaultValue: value,
+                defaultValue: this.props.text,
             },
         }
 
@@ -120,7 +119,7 @@ class Form extends Component {
         )
     }
     render() {
-        const { isEditing, value } = this.state
+        const { isEditing } = this.state
         const { label } = this.props
         return (
             <div className={styles.form}>
