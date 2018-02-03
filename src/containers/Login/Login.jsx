@@ -27,6 +27,11 @@ class Login extends Component {
         this.handleLogin = this.handleLogin.bind(this)
     }
 
+    componentDidMount() {
+        // record path
+        sessionStorage.setItem('route', './Login')
+    }
+
     handleClick() {
         this.setState(prevState => ({
             isLogin: !prevState.isLogin,

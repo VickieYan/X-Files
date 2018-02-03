@@ -23,9 +23,10 @@ class Step1 extends Component {
                 { type: 'text', label: '手机号码', name: 'phoneNumber' },
                 { type: 'text', label: '家乡', name: 'hometown' },
                 { type: 'text', label: '个性签名', name: 'signature' },
-                { type: 'text', label: 'github', name: 'github' },
-                { type: 'text', label: 'linkedin', name: 'linkedin' },
-                { type: 'text', label: 'twitter', name: 'twitter' },
+                { type: 'text', label: 'GitLab/GitHub', name: 'github' },
+                { type: 'text', label: 'Confluence', name: 'linkedin' },
+                { type: 'text', label: '微博', name: 'twitter' },
+                // { type: 'text', label: '微信', name: 'twitter' },
             ],
         }
         this.handleChange = this.handleChange.bind(this)

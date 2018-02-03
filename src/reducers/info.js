@@ -3,21 +3,11 @@ import {
     SORT_SUCCESS,
     INIT_SUCCESS,
     GET_SUCCESS,
+    LOAD_MORE_SUCCESS,
 } from '../constants/actionType'
 
 const initState = {
-    members: [
-        {
-            ShortName: '',
-            EName: '',
-            Signature: '',
-            Domain: '',
-            Job: '',
-            PhoneNumber: '',
-            Photograph: '',
-            Visit: '',
-        },
-    ],
+    members: [],
     current: [],
 }
 export default function info(state = initState, action) {
@@ -30,6 +20,8 @@ export default function info(state = initState, action) {
             return { ...state, members: action.payload }
         case GET_SUCCESS:
             return { ...state, current: action.payload }
+        case LOAD_MORE_SUCCESS:
+            return { ...state, members: state.members.concat(action.payload) }
         default:
             return state
     }

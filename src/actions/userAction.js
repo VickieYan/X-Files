@@ -158,6 +158,7 @@ export function getSelfInfo(fn) {
 }
 
 export function submitData(data, fn) {
+    console.log(data)
     axios.post('/user/updateUser', { ...data })
     .then((res) => {
         if (res.data.code === 200) {

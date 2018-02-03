@@ -9,7 +9,6 @@ class Form extends Component {
         super(props)
         this.state = {
             isEditing: false,
-            value: this.props.text,
         }
         this.handleClick = this.handleClick.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -130,7 +129,7 @@ class Form extends Component {
                     {!isEditing
                         ? (
                             <div>
-                                <span className={styles.name}>{value}</span>
+                                <span className={styles.name}>{this.props.text}</span>
                                 <button
                                   type="button"
                                   className={styles['modify-button']}

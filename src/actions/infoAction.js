@@ -4,6 +4,7 @@ import {
     GET_SUCCESS,
     SORT_SUCCESS,
     INIT_SUCCESS,
+    LOAD_MORE_SUCCESS,
 } from '../constants/actionType'
 
 function searchSuccess(data) {
@@ -34,6 +35,13 @@ function initSuccess(data) {
     }
 }
 
+function loadMoreSuccess(data) {
+    return {
+        type: LOAD_MORE_SUCCESS,
+        payload: data,
+    }
+}
+
 export function search(keyword) {
     // TODO err
     return ((dispacth) => {
@@ -58,9 +66,18 @@ export function sort(department) {
 export function initInfo(page) {
     return ((dispacth) => {
         axios.post('/info/indexShow', { query: page })
-        .then((res) => {
-                // console.log(res.data.info.data)
+            .then((res) => {
                 dispacth(initSuccess(res.data.info.data))
+            })
+    })
+}
+
+export function loadMore(page) {
+    console.log(1111)
+    return ((dispacth) => {
+        axios.post('/info/indexShow', { query: page })
+            .then((res) => {
+                dispacth(loadMoreSuccess(res.data.info.data))
             })
     })
 }

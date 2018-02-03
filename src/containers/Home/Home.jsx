@@ -5,23 +5,43 @@ import { AppBar, Fiche, Slider } from '../../components/'
 // import { info, info2 } from '../../../static/data/info'
 // import members from '../../../static/data/members'
 import departments from '../../../static/data/departments'
-import { sort, getUserInfo, initInfo } from '../../actions/infoAction'
+import { sort, getUserInfo, initInfo, loadMore } from '../../actions/infoAction'
 import styles from './Home.scss'
 
 @connect(
     state => state.info,
-    { sort, getUserInfo, initInfo },
+    { sort, getUserInfo, initInfo, loadMore },
 )
 class Home extends Component {
     constructor(props) {
         super(props)
         this.handleClick = this.handleClick.bind(this)
+        this.handleLayout = this.handleLayout.bind(this)
     }
 
     componentDidMount() {
         // console.log(members)
-        const { initInfo } = this.props
-        initInfo(1)
+        const { initInfo, loadMore } = this.props
+        initInfo(10)
+
+        // record path
+        sessionStorage.setItem('route', './')
+
+        // 检测是否触底
+        document.addEventListener('scroll', () => {
+            let scrollTop = 0
+            scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+            // console.log(Math.floor(scrollTop) + "滑轮高度")
+            // console.log(window.innerHeight + "页面当前高度")
+            // console.log(document.body.scrollHeight + "总高度")
+            console.log(Math.round(scrollTop) + window.innerHeight === document.body.scrollHeight)
+            if (Math.floor(scrollTop) + window.innerHeight + 1 >= document.body.scrollHeight) {
+                loadMore(2)
+            }
+        })
+    }
+
+    handleLayout() {
     }
 
     handleClick(index) {
@@ -49,6 +69,7 @@ class Home extends Component {
                     <Masonry
                       options={masonryOptions}
                       updateOnEachImageLoad={false}
+                      onImagesLoaded={this.handleLayout}
                     >
                         {members.map((item, index) => (
                             <Fiche

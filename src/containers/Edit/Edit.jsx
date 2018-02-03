@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ReactCoreImageUpload from 'react-core-image-upload'
-import LinearProgress from 'material-ui/LinearProgress'
 import { Timeline } from 'antd'
 import Chip from 'material-ui/Chip'
 import IconButton from 'material-ui/IconButton'
@@ -27,7 +25,6 @@ class Edit extends Component {
         this.state = {
             isOpen: false,
             dialogType: null,
-            photos: ['1'],
         }
         this.handleOpen = this.handleOpen.bind(this)
         this.handleClose = this.handleClose.bind(this)
@@ -36,9 +33,13 @@ class Edit extends Component {
         this.handleEnhanceSubmit = this.handleEnhanceSubmit.bind(this)
         // this.renderAddExperience = this.renderAddExperience.bind(this)
     }
-    componentDidMount() {
-        redirectSuccess('./edit')
+
+    componentWillMount() {
+        // record path
+        sessionStorage.setItem('route', './edit')
+        this.props.getSelfInfo()
     }
+
     handleOpen(type, index) {
         this.setState({
             isOpen: true,
@@ -84,7 +85,6 @@ class Edit extends Component {
         })
     }
     handleRequestDelete(index, type) {
-        // hanlde here
         const {
             sex,
             isSingle,
@@ -117,7 +117,6 @@ class Edit extends Component {
         uploadData({ contributes: temp })
         this.props.enhanceSubmit()
     }
-    
 
     renderInfo() {
         const {
@@ -139,9 +138,9 @@ class Edit extends Component {
             { type: 'text', label: '电话', name: 'phoneNumber', text: phoneNumber },
             { type: 'text', label: '邮箱', name: 'email', text: email },
             { type: 'multiLine', label: '个人签名', name: 'signature', text: signature },
-            { type: 'text', label: 'linkedin', name: 'linkedin', text: linkedin },
-            { type: 'text', label: 'github', name: 'github', text: github },
-            { type: 'text', label: 'twitter', name: 'twitter', text: twitter },
+            { type: 'text', label: 'Confluence', name: 'linkedin', text: linkedin },
+            { type: 'text', label: 'GitLab/GitHub', name: 'github', text: github },
+            { type: 'text', label: '微博', name: 'twitter', text: twitter },
         ]
         return (
             <EditCard title="个人中心">
@@ -376,17 +375,6 @@ class Edit extends Component {
     render() {
         return (
             <div className={styles.wrap}>
-                {/* <div className={styles['loading-wrap']}>
-                    <div div className={styles.loading}>
-                        <div className="sk-folding-cube">
-                            <div className="sk-cube1 sk-cube" />
-                            <div className="sk-cube2 sk-cube" />
-                            <div className="sk-cube4 sk-cube" />
-                            <div className="sk-cube3 sk-cube" />
-                        </div>
-                    </div>
-                </div> */}
-                {/* { this.props.fetchUser && <LinearProgress mode="indeterminate" color="pink" style={{ position: 'fixed', top: '0px', zIndex:100 }} /> } */}
                 <AppBar {...this.props} />
                 {this.renderInfo()}
                 {this.renderHobbies()}

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DatePicker from 'material-ui/DatePicker'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
+import { ascOrderTime, compare } from '../../scripts/utils'
 import styles from './Memorabilia.scss'
 
 class Memorabilia extends Component {
@@ -25,9 +26,12 @@ class Memorabilia extends Component {
             endTime,
             duty,
         }
+
         contributes.push(editing)
 
         // sort here
+        console.log(contributes)
+        contributes.sort(compare('startTime', ascOrderTime))
         onUploadData({ contributes })
         onEnhanceSubmit()
     }
@@ -41,6 +45,7 @@ class Memorabilia extends Component {
 
         if (type !== 'duty') {
             // sort here
+            newContributes.sort(compare('startTime', ascOrderTime))
         }
 
         if (index >= 0) {

@@ -9,7 +9,6 @@ import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
 import styles from './Detail.scss'
-import axios from 'axios'
 
 @connect(
     state => state.user,
@@ -23,7 +22,11 @@ class MyStepper extends Component {
         }
         this.handleNext = this.handleNext.bind(this)
         this.handlePrev = this.handlePrev.bind(this)
-        // this.esc = this.esc.bind(this)
+    }
+
+    componentDidMount() {
+        // record path
+        sessionStorage.setItem('route', './detail')
     }
 
     getStepContent(stepIndex) {
