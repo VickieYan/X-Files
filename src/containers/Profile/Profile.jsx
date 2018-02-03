@@ -45,8 +45,11 @@ class Profile extends Component {
         const index = path.lastIndexOf('/') + 1
         const shortName = path.slice(index)
         this.props.getUserInfo(shortName)
+
         // focus here
-        // this.props.redirectSuccess(path)
+        const currentPath = this.props.location.pathname
+        const pathIndex = currentPath.lastIndexOf('/')
+        sessionStorage.setItem('route', `.${currentPath.slice(pathIndex)}`)
     }
 
     handleClick(name) {

@@ -49,7 +49,6 @@ export function sort(department) {
         axios.post('/info/department', { query: department })
         .then((res) => {
             if (res.data.code === 200) {
-                console.log(res.data.data)
                 dispacth(sortSuccess(res.data.data))
             }
         })
@@ -60,7 +59,7 @@ export function initInfo(page) {
     return ((dispacth) => {
         axios.post('/info/indexShow', { query: page })
             .then((res) => {
-                dispacth(initSuccess(res.data.data))
+                dispacth(initSuccess(res.data.info.data))
             })
     })
 }

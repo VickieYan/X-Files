@@ -138,12 +138,14 @@ export function getSelfInfo(fn) {
     return ((dispatch) => {
         axios.get('/user/person')
         .then((res) => {
+            console.log(res.data.data)
             dispatch(getSelfSuccess(res.data.data))
         }).then(fn)
     })
 }
 
 export function submitData(data, fn) {
+    console.log(data)
     axios.post('/user/updateUser', { ...data })
     .then((res) => {
         if (res.data.code === 200) {

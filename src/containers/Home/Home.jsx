@@ -6,12 +6,11 @@ import { AppBar, Fiche, Slider } from '../../components/'
 // import members from '../../../static/data/members'
 import departments from '../../../static/data/departments'
 import { sort, getUserInfo, initInfo } from '../../actions/infoAction'
-import { redirectSuccess } from '../../actions/userAction'
 import styles from './Home.scss'
 
 @connect(
     state => state.info,
-    { sort, getUserInfo, initInfo, redirectSuccess },
+    { sort, getUserInfo, initInfo },
 )
 class Home extends Component {
     constructor(props) {
@@ -22,8 +21,11 @@ class Home extends Component {
     componentDidMount() {
         // console.log(members)
         const { initInfo } = this.props
-        redirectSuccess('./home')
+        // redirectSuccess('./home')
         initInfo(1)
+
+        // record path
+        sessionStorage.setItem('route', './')
     }
 
     handleClick(index) {

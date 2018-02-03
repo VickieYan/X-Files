@@ -48,6 +48,8 @@ class Step3 extends Component {
                           key={index}
                           isDeletable
                           index={index}
+                          startTime={item.startTime}
+                          endTime={item.endTime}
                           contributes={contributes}
                           text={item.duty}
                           onUploadData={onUploadData}

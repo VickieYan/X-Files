@@ -18,6 +18,7 @@ class AppBar extends Component {
         super()
         this.handleClick = this.handleClick.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
+        this.handleBackhome = this.handleBackhome.bind(this)
     }
 
     handleLogout() {
@@ -25,16 +26,31 @@ class AppBar extends Component {
             this.props.history.push('./login')
         })
     }
-    
+
+    handleBackhome() {
+        const currentPath = sessionStorage.getItem('route')
+        if (currentPath === './edit' || currentPath === './') {
+            this.props.history.push('./')
+        } else {
+            console.log(sessionStorage.getItem('route'))
+            this.props.history.push('../../')
+        }
+    }
+
     handleClick() {
-        this.props.getSelfInfo(() => { this.props.history.push('./edit') })
+        const currentPath = sessionStorage.getItem('route')
+        if (currentPath === './edit' || currentPath === './') {
+            this.props.history.push('./edit')
+        } else {
+            this.props.history.push('../edit')
+        }
     }
 
     render() {
         const { search } = this.props
         return (
             <div className={styles.background}>
-                <div className={styles.logo} onClick={() => { this.props.history.push('./') }}>
+                <div className={styles.logo} onClick={this.handleBackhome}>
                     <img alt="" src="../../../static/images/xfiles.png" />
                 </div>
                 <div className={styles.main}>

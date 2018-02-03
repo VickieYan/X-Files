@@ -4,7 +4,7 @@ import { Step, Stepper, StepLabel } from 'material-ui/Stepper'
 import { CSSTransitionGroup } from 'react-transition-group'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
-import { uploadData, logout, submitData, redirectSuccess } from '../../actions/userAction'
+import { uploadData, logout, submitData } from '../../actions/userAction'
 import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
@@ -12,7 +12,7 @@ import styles from './Detail.scss'
 
 @connect(
     state => state.user,
-    { uploadData, logout, submitData, redirectSuccess },
+    { uploadData, logout, submitData },
 )
 class MyStepper extends Component {
     constructor(props) {
@@ -22,10 +22,6 @@ class MyStepper extends Component {
         }
         this.handleNext = this.handleNext.bind(this)
         this.handlePrev = this.handlePrev.bind(this)
-    }
-
-    componentDidMount() {
-        redirectSuccess('./detail')
     }
 
     getStepContent(stepIndex) {

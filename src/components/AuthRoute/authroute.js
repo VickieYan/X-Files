@@ -11,7 +11,9 @@ import { login, check } from '../../actions/userAction'
 // 检测路由
 class AuthRoute extends Component {
     componentDidMount() {
-        this.props.check(() => { this.props.history.push(this.props.redirectTo) })
+        const currentPath = sessionStorage.getItem('route')
+        console.log(currentPath)
+        this.props.check(() => { this.props.history.push(currentPath || this.props.redirectTo) })
     }
 
     render() {

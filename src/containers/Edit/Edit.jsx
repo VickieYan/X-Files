@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ReactCoreImageUpload from 'react-core-image-upload'
 import { Timeline } from 'antd'
 import Chip from 'material-ui/Chip'
 import IconButton from 'material-ui/IconButton'
@@ -35,9 +34,13 @@ class Edit extends Component {
         this.handleEnhanceSubmit = this.handleEnhanceSubmit.bind(this)
         // this.renderAddExperience = this.renderAddExperience.bind(this)
     }
-    componentDidMount() {
-        // redirectSuccess('./edit')
+
+    componentWillMount() {
+        // record path
+        sessionStorage.setItem('route', './edit')
+        this.props.getSelfInfo()
     }
+
     handleOpen(type, index) {
         this.setState({
             isOpen: true,
