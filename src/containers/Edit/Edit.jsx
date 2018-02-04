@@ -109,9 +109,8 @@ class Edit extends Component {
         this.props.uploadData({ [type]: temp })
         this.props.enhanceSubmit()
     }
-    handleRemove() {
+    handleRemove(index) {
         const { contributes, uploadData } = this.props
-        const { index } = this.state
         const temp = contributes.slice()
         temp.splice(index, 1)
         uploadData({ contributes: temp })
@@ -133,14 +132,30 @@ class Edit extends Component {
             fetchUser,
         } = this.props
         const data = [
-            { type: 'radio', label: '性别', name: 'sex', text: sex, options: ['男', '女'] },
-            { type: 'radio', label: '是否单身', name: 'isSingle', text: isSingle, options: ['是', '否'] },
-            { type: 'text', label: '电话', name: 'phoneNumber', text: phoneNumber },
-            { type: 'text', label: '邮箱', name: 'email', text: email },
-            { type: 'multiLine', label: '个人签名', name: 'signature', text: signature },
-            { type: 'text', label: 'Confluence', name: 'linkedin', text: linkedin },
-            { type: 'text', label: 'GitLab/GitHub', name: 'github', text: github },
-            { type: 'text', label: '微博', name: 'twitter', text: twitter },
+            {
+                type: 'radio', label: '性别', name: 'sex', text: sex, options: ['男', '女'],
+            },
+            {
+                type: 'radio', label: '是否单身', name: 'isSingle', text: isSingle, options: ['是', '否'],
+            },
+            {
+                type: 'text', label: '电话', name: 'phoneNumber', text: phoneNumber,
+            },
+            {
+                type: 'text', label: '邮箱', name: 'email', text: email,
+            },
+            {
+                type: 'multiLine', label: '个人签名', name: 'signature', text: signature,
+            },
+            {
+                type: 'text', label: 'Confluence', name: 'linkedin', text: linkedin,
+            },
+            {
+                type: 'text', label: 'GitLab/GitHub', name: 'github', text: github,
+            },
+            {
+                type: 'text', label: '微博', name: 'twitter', text: twitter,
+            },
         ]
         return (
             <EditCard title="个人中心">
@@ -163,7 +178,16 @@ class Edit extends Component {
         )
     }
     renderPhotos() {
-        const { photograph1, photograph2, photograph3, indexShowPhotograph, uploadData, fetchUserStart, fetchUserSuccess, fetchUser } = this.props
+        const {
+            photograph1,
+            photograph2,
+            photograph3,
+            indexShowPhotograph,
+            uploadData,
+            fetchUserStart,
+            fetchUserSuccess,
+            fetchUser,
+        } = this.props
         return (
             <EditCard title="个人相册">
                 <div className={styles['photo-wrap']}>
@@ -215,6 +239,7 @@ class Edit extends Component {
                     />
                     <ImageUpload
                       num={10}
+
                       fetchUser={fetchUser}
                       fetchUserStart={fetchUserStart}
                       fetchUserSuccess={fetchUserSuccess}
@@ -289,10 +314,10 @@ class Edit extends Component {
                                 <span>From {formatDate(item.startTime)} to {formatDate(item.endTime)}</span>
                                 <h3>{item.duty}</h3>
                                 <div className={styles['edit-btn-wrap']}>
-                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={() => { this.handleOpen('experience', index) }}>
+                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={() => this.handleOpen('experience', index)}>
                                         <EditorModeEdit />
                                     </IconButton>
-                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={this.handleRemove}>
+                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={() => this.handleRemove(index)}>
                                         <Clear />
                                     </IconButton>
                                 </div>
