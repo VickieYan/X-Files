@@ -312,12 +312,13 @@ class Edit extends Component {
                         {contributes.map((item, index) => (
                             <Timeline.Item key={index} className={styles['timeline-item']} color="pink">
                                 <span>From {formatDate(item.startTime)} to {formatDate(item.endTime)}</span>
-                                <h3>{item.duty}</h3>
+                                {item.duty !== '' && <br />}
+                                <h3 className={styles.duty}>{item.duty}</h3>
                                 <div className={styles['edit-btn-wrap']}>
-                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={() => this.handleOpen('experience', index)}>
+                                    <IconButton className={styles['edit-btn']} iconStyle={{ marginLeft: '-8px', verticalAlign: '-5px' }} onClick={() => this.handleOpen('experience', index)}>
                                         <EditorModeEdit />
                                     </IconButton>
-                                    <IconButton className={styles['edit-btn']} iconStyle={{ verticalAlign: '-5px' }} onClick={() => this.handleRemove(index)}>
+                                    <IconButton className={styles['edit-btn']} iconStyle={{ marginLeft: '-8px', verticalAlign: '-5px' }} onClick={() => this.handleRemove(index)}>
                                         <Clear />
                                     </IconButton>
                                 </div>
