@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import TextField from 'material-ui/TextField'
 import { connect } from 'react-redux'
-import { login } from '../../actions/userAction'
+import { login, setErrorMsg } from '../../actions/userAction'
 import validator from '../../scripts/validator'
 import styles from './Login.scss'
 
 @connect(
     state => state.user,
-    { login },
+    { login, setErrorMsg },
 )
 class Login extends Component {
     constructor() {
@@ -17,7 +17,6 @@ class Login extends Component {
             password: '',
             isShortNameValid: null,
             isPasswordValid: null,
-            passwordErrorMsg: validator.password.errorMsg,
         }
         this.handleClick = this.handleClick.bind(this)
         this.handleFocus = this.handleFocus.bind(this)
@@ -66,6 +65,8 @@ class Login extends Component {
             password: 'isPasswordValid',
         }[target.name]
 
+        console.log(setErrorMsg)
+        this.props.setErrorMsg(0)
         this.setState({ [statusType]: null })
     }
 
@@ -93,11 +94,12 @@ class Login extends Component {
     }
 
     render() {
-        const { isShortNameValid, isPasswordValid, passwordErrorMsg } = this.state
+        const { isShortNameValid, isPasswordValid } = this.state
+        const passwordErrorMsg = validator.password.errorMsg[this.props.msg]
+        console.log(passwordErrorMsg)
         const action = 'Login'
         const sign = 'Please Use Your '
         const signHignlight = 'Shortname'
-
         return (
             <div className={styles.container}>
                 <div className={styles.wrap}>
@@ -127,7 +129,7 @@ class Login extends Component {
                           onFocus={this.handleFocus}
                           onChange={this.handleChange}
                           onBlur={this.handleBlur}
-                          errorText={isPasswordValid === false && passwordErrorMsg}
+                          errorText={(isPasswordValid === false || this.props.msg === 1) && passwordErrorMsg}
                           floatingLabelText="Password"
                           floatingLabelStyle={{ top: '30px' }}
                           floatingLabelFocusStyle={{ fontSize: '20px', color: 'rgba(0, 0, 0, 0.3)', transition: 'all .4s' }}

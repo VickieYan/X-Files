@@ -5,8 +5,30 @@ import styles from './Search.scss'
 class Search extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            index: 0,
+            words: ['姓名', '爱好', '技能', '家乡', '学校', '单身'],
+        }
         this.handleClick = this.handleClick.bind(this)
         this.handleKeydown = this.handleKeydown.bind(this)
+    }
+
+    componentDidMount() {
+        setInterval(() => {
+            this.setState(prevState => ({
+                index: (prevState.index + 1) % prevState.words.length,
+            }))
+            // this.setState((prevState) => {
+            //     if (prevState.index + 1 < prevState.words.length) {
+            //         return ({
+            //             index: prevState.index + 1,
+            //           })
+            //     }
+            //     return ({
+            //         index: 0,
+            //     })
+            // })
+        }, 3000)
     }
 
     handleKeydown(e) {
@@ -29,7 +51,7 @@ class Search extends Component {
                 <input
                   ref={(el) => { this.input = el }}
                   className={styles.search}
-                  placeholder="搜索"
+                  placeholder={this.state.words[this.state.index]}
                   onKeyDown={this.handleKeydown}
                 />
                 <div

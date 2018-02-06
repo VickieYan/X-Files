@@ -1,4 +1,5 @@
 import {
+    ERROR_MSG,
     LOGIN_SUCCESS,
     UPLOAD_DATA,
     LOGOUT_SUCCESS,
@@ -11,7 +12,7 @@ import {
 
 const initState = {
     redirectTo: './login',
-    msg: '',
+    msg: 0,
     fetchUser: -1,
     // 默认数据
     shortName: '',
@@ -51,6 +52,8 @@ const initState = {
 
 export default function user(state = initState, action) {
     switch (action.type) {
+        case ERROR_MSG:
+            return { ...state, ...action.payload }
         case LOGIN_SUCCESS:
             return { ...state, ...action.payload }
         case LOGOUT_SUCCESS:
