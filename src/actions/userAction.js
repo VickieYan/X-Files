@@ -12,10 +12,12 @@ import {
     FETCH_USER_FAILURE
 } from '../constants/actionType'
 
-function errorMsg(msg) {
+export function setErrorMsg(msg) {
     return {
         type: ERROR_MSG,
-        msg,
+        payload: {
+            msg,
+        },
     }
 }
 
@@ -114,9 +116,6 @@ export function check(fn) {
 }
 
 export function login({ ShortName, Password }, fn) {
-    if (!ShortName || !Password) {
-        return errorMsg('用户名和密码必须输入')
-    }
     return ((dispatch) => {
         axios.post('/user/signin', { ShortName, Password })
         .then((res) => {
@@ -126,6 +125,10 @@ export function login({ ShortName, Password }, fn) {
             }
             if (res.data.code === 403) {
                 dispatch(loginSuccess({ shortName: res.data.info, redirectTo: './detail' }))
+            }
+            if (res.data.code === 404 || res.data.code === 500) {
+                dispatch(setErrorMsg(1))
+                return new Promise(() => {})
             }
         }).then(fn)
     })
@@ -146,7 +149,6 @@ export function uploadData(obj) {
         payload: obj,
     }
 }
-
 
 export function getSelfInfo(fn) {
     return ((dispatch) => {

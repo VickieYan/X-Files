@@ -6,7 +6,7 @@ export default {
     password: {
         // pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
         pattern: /^[A-Za-z\d。~!@#$%\^\+\*&\\\/\?\|:\.<>{}() ';=",]{5,}$/,
-        errorMsg: '密码至少五位',
+        errorMsg: ['密码至少五位', '密码错误, 请重新输入'],
     },
     checkPw: {
         pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,

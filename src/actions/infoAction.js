@@ -73,7 +73,6 @@ export function initInfo(page) {
 }
 
 export function loadMore(page) {
-    console.log(1111)
     return ((dispacth) => {
         axios.post('/info/indexShow', { query: page })
             .then((res) => {
