@@ -15,30 +15,38 @@ import styles from './Home.scss'
 class Home extends Component {
     constructor(props) {
         super(props)
+        this.currentPage = 1
         this.handleClick = this.handleClick.bind(this)
         this.handleLayout = this.handleLayout.bind(this)
+        this.handleScroll = this.handleScroll.bind(this)
     }
 
     componentDidMount() {
         // console.log(members)
         const { initInfo, loadMore } = this.props
-        initInfo(10)
+        initInfo(1)
 
         // record path
         sessionStorage.setItem('route', './')
 
         // 检测是否触底
-        document.addEventListener('scroll', () => {
-            let scrollTop = 0
-            scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-            // console.log(Math.floor(scrollTop) + "滑轮高度")
-            // console.log(window.innerHeight + "页面当前高度")
-            // console.log(document.body.scrollHeight + "总高度")
-            console.log(Math.round(scrollTop) + window.innerHeight === document.body.scrollHeight)
-            if (Math.floor(scrollTop) + window.innerHeight + 1 >= document.body.scrollHeight) {
-                loadMore(2)
-            }
-        })
+        document.addEventListener('scroll', this.handleScroll)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('scroll', this.handleScroll)
+    }
+
+    handleScroll() {
+        let scrollTop = 0
+        scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+        // console.log(Math.floor(scrollTop) + "滑轮高度")
+        // console.log(window.innerHeight + "页面当前高度")
+        // console.log(document.body.scrollHeight + "总高度")
+        // console.log(Math.round(scrollTop) + window.innerHeight === document.body.scrollHeight)
+        if (Math.floor(scrollTop) + window.innerHeight + 1 >= document.body.scrollHeight) {
+            this.props.loadMore(++this.currentPage)
+        }
     }
 
     handleLayout() {

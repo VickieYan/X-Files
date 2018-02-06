@@ -35,59 +35,66 @@ function initSuccess(data) {
     }
 }
 
-function loadMoreSuccess(data) {
+function loadMoreSuccess(data, nowPage) {
     return {
         type: LOAD_MORE_SUCCESS,
-        payload: data,
+        payload: {
+            data,
+            nowPage,
+        },
     }
 }
 
 export function search(keyword) {
     // TODO err
-    return ((dispacth) => {
+    return ((dispatch) => {
         axios.post('/info/search', { query: keyword })
             .then((res) => {
-                dispacth(searchSuccess(res.data.data))
+                console.log(res)
+                if (res.data.code !== 200) {
+                    dispatch(searchSuccess(res.data.data))
+                }
             })
         })
     }
 
 export function sort(department) {
-    return ((dispacth) => {
+    return ((dispatch) => {
         axios.post('/info/department', { query: department })
         .then((res) => {
             if (res.data.code === 200) {
-                dispacth(sortSuccess(res.data.data))
+                dispatch(sortSuccess(res.data.data))
             }
         })
     })
 }
 
 export function initInfo(page) {
-    return ((dispacth) => {
-        axios.post('/info/indexShow', { query: page })
+    return ((dispatch) => {
+        axios.post('/info/indexShow', { page })
             .then((res) => {
-                dispacth(initSuccess(res.data.info.data))
+                dispatch(initSuccess(res.data.info.data))
             })
     })
 }
 
 export function loadMore(page) {
-    console.log(1111)
-    return ((dispacth) => {
-        axios.post('/info/indexShow', { query: page })
+    return ((dispatch) => {
+        axios.post('/info/indexShow', { page })
             .then((res) => {
-                dispacth(loadMoreSuccess(res.data.info.data))
+                if (page <= res.data.info.allPage) {
+                    dispatch(loadMoreSuccess(res.data.info.data, page))
+                }
             })
     })
 }
 
 export function getUserInfo(ShortName) {
     // TODO err
-    return ((dispacth) => {
+    return ((dispatch) => {
         axios.post('/user/info', { query: ShortName })
             .then((res) => {
-                dispacth(getSuccess(res.data.data))
+                dispatch(getSuccess(res.data.data))
             })
     })
 }

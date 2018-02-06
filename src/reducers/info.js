@@ -7,6 +7,7 @@ import {
 } from '../constants/actionType'
 
 const initState = {
+    nowPage: 1,
     members: [],
     current: [],
 }
@@ -21,7 +22,7 @@ export default function info(state = initState, action) {
         case GET_SUCCESS:
             return { ...state, current: action.payload }
         case LOAD_MORE_SUCCESS:
-            return { ...state, members: state.members.concat(action.payload) }
+            return { ...state, members: state.members.concat(action.payload.data), nowPage: action.payload.nowPage }
         default:
             return state
     }
