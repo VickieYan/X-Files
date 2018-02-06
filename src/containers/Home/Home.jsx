@@ -17,7 +17,6 @@ class Home extends Component {
         super(props)
         this.currentPage = 1
         this.handleClick = this.handleClick.bind(this)
-        this.handleLayout = this.handleLayout.bind(this)
         this.handleScroll = this.handleScroll.bind(this)
     }
 
@@ -49,11 +48,7 @@ class Home extends Component {
         }
     }
 
-    handleLayout() {
-    }
-
     handleClick(index) {
-        // members[index].ShortName 用短命向后台请求数据
         const { history, members } = this.props
         const shortName = members[index].ShortName
         history.push(`./profile/${shortName}`)
@@ -77,7 +72,6 @@ class Home extends Component {
                     <Masonry
                       options={masonryOptions}
                       updateOnEachImageLoad={false}
-                      onImagesLoaded={this.handleLayout}
                     >
                         {members.map((item, index) => (
                             <Fiche

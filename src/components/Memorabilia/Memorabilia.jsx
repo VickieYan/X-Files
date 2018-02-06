@@ -28,9 +28,6 @@ class Memorabilia extends Component {
         }
 
         contributes.push(editing)
-
-        // sort here
-        console.log(contributes)
         contributes.sort(compare('startTime', ascOrderTime))
         onUploadData({ contributes })
         onEnhanceSubmit()
@@ -43,18 +40,22 @@ class Memorabilia extends Component {
         // controled components
         this.setState({ [type]: value })
 
-        if (type !== 'duty') {
-            // sort here
-            newContributes.sort(compare('startTime', ascOrderTime))
-        }
-
+        // if (type !== 'duty') {
+        //     // sort here
+        //     newContributes.sort(compare('startTime', ascOrderTime))
+        //     console.log(newContributes)
+        // }
         if (index >= 0) {
             newContributes[index][type] = value
+            if (type !== 'duty') {
+                newContributes.sort(compare('startTime', ascOrderTime))
+            }
             onUploadData({ contributes: newContributes })
         }
     }
 
     renderDelButton() {
+        console.log(this.props.onDelete)
         return (
             <div className={styles['btn-wrap']}>
                 <FlatButton

@@ -94,12 +94,16 @@
                     display: inline-block;
                 }
             }
+            .duty {
+                display: inline-block;
+            }
             .edit-btn-wrap {
-                display: none;
+                display: inline-block;
                 margin-top: -20px;
+                margin-left: 10px;
                 .edit-btn {
-                    width: 20px!important;
-                    height: 20px!important;
+                    width: 30px!important;
+                    height: 30px!important;
                 }
             }
             .add-experience-btn {

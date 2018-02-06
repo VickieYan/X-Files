@@ -44,7 +44,7 @@ class App extends Component {
                                   transitionEnterTimeout={300}
                                   transitionLeaveTimeout={300}
                                 >
-                                    <AuthRoute />
+                                    {/* <AuthRoute /> */}
                                     <Switch key={location.key} location={location}>
                                         <Route exact path="/" component={Home} location={location} />
                                         <Route path="/login" component={Login} location={location} />
