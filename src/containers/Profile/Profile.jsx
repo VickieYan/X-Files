@@ -23,7 +23,7 @@ class Profile extends Component {
                 name: 'main',
                 component: Main,
             }, {
-                name: 'about',
+                name: 'about me',
                 component: About,
             }, {
                 name: 'hobby',

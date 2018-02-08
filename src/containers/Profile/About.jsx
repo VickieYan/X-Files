@@ -17,6 +17,7 @@ class About extends Component {
 
     render() {
         const { onClick, data } = this.props
+        const text = data.Sex === '女' ? '已有男票 比你帅' : '已有女票 比你漂亮'
         return (
             <div className={styles.main}>
                 <div className={styles.left}>
@@ -38,8 +39,16 @@ class About extends Component {
                             <li>{`${data.Title}`}</li>
                             <li>{`${data.Hometown}`}</li>
                             <li>{`${data.PhoneNumber}`}</li>
+                            <li>{`${data.School}`}</li>
                             <li>{`${data.Email}`}</li>
-                            <li>{`${data.IsSingle === '是' ? '万年单身狗　丑拒' : '已有女票 比你漂亮'}`}</li>
+                            <li>{`${data.IsSingle === '是' ? '万年单身狗　丑拒' : text}`}</li>
+                            {
+                                data.WeChat !== '' &&
+                                <li>
+                                    <img className={styles.wechat} alt="" src="http://www.haotu.net/up/2833/512/chn_wechat.png" />
+                                    {`${data.WeChat}`}
+                                </li>
+                            }
                         </ul>
                     </div>
                     <div className={styles.tags}>

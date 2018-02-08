@@ -50,7 +50,16 @@
     line-height: 25px;
 }
 
+.like-wrap {
+    float: right;
+}
 
 .like {
-    float: right;
+    float: left;
+}
+
+.like-number {
+    display: inline-block;
+    margin-left: -10px;
+    padding-top: 3px;
 }

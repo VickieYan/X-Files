@@ -23,6 +23,8 @@ class Step1 extends Component {
                 { type: 'text', label: '手机号码', name: 'phoneNumber' },
                 { type: 'text', label: '家乡', name: 'hometown' },
                 { type: 'text', label: '个性签名', name: 'signature' },
+                { type: 'text', label: '毕业院校', name: 'school' },
+                { type: 'text', label: '微信', name: 'wechat' },
                 { type: 'text', label: 'GitLab/GitHub', name: 'github' },
                 { type: 'text', label: 'Confluence', name: 'linkedin' },
                 { type: 'text', label: '微博', name: 'twitter' },
@@ -108,6 +110,7 @@ class Step1 extends Component {
                                       name={item.name}
                                       value={this.props[item.name]}
                                       style={textFieldStyle}
+                                      maxLength={100}
                                       floatingLabelText={item.label}
                                       onChange={(ev, value) => { this.handleChange('text', index, value) }}
                                     />

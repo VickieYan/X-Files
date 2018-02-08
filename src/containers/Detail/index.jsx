@@ -10,6 +10,8 @@ import Step2 from './Step2'
 import Step3 from './Step3'
 import styles from './Detail.scss'
 
+const getUser = state => state.user
+
 @connect(
     state => state.user,
     { uploadData, logout, submitData, fetchUserStart, fetchUserSuccess },
@@ -68,6 +70,8 @@ class MyStepper extends Component {
             photograph1,
             photograph2,
             photograph3,
+            school,
+            wechat,
         } = this.props
         this.setState({
             stepIndex: stepIndex + 1,
@@ -90,6 +94,8 @@ class MyStepper extends Component {
                 Photograph1: photograph1,
                 Photograph2: photograph2,
                 Photograph3: photograph3,
+                School: school,
+                WeChat: wechat,
             }, () => { this.props.history.push('./') })
         }
     }

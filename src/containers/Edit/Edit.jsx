@@ -17,7 +17,9 @@ import styles from './Edit.scss'
 
 @connect(
     state => state.user,
-    { uploadData, getSelfInfo, enhanceSubmit, redirectSuccess, fetchUserStart, fetchUserSuccess },
+    {
+ uploadData, getSelfInfo, enhanceSubmit, redirectSuccess, fetchUserStart, fetchUserSuccess,
+},
 )
 class Edit extends Component {
     constructor(props) {
@@ -68,6 +70,8 @@ class Edit extends Component {
             skills,
             contributes,
             department,
+            wechat,
+            school,
         } = this.props
         submitData({
             Sex: sex,
@@ -82,6 +86,8 @@ class Edit extends Component {
             Hobbies: hobbies,
             Skills: skills,
             Contributes: contributes,
+            WeChat: wechat,
+            School: school,
         })
     }
     handleRequestDelete(index, type) {
@@ -98,6 +104,8 @@ class Edit extends Component {
             skills,
             contributes,
             department,
+            wechat,
+            school,
         } = this.props
         let temp = null
         if (type === 'hobbies') {
@@ -130,6 +138,9 @@ class Edit extends Component {
             avatar,
             uploadData,
             fetchUser,
+            hometown,
+            wechat,
+            school,
         } = this.props
         const data = [
             {
@@ -137,6 +148,12 @@ class Edit extends Component {
             },
             {
                 type: 'radio', label: '是否单身', name: 'isSingle', text: isSingle, options: ['是', '否'],
+            },
+            {
+                type: 'text', label: '毕业院校', name: 'school', text: school,
+            },
+            {
+                type: 'text', label: '家乡', name: 'hometown', text: hometown,
             },
             {
                 type: 'text', label: '电话', name: 'phoneNumber', text: phoneNumber,
@@ -148,13 +165,16 @@ class Edit extends Component {
                 type: 'multiLine', label: '个人签名', name: 'signature', text: signature,
             },
             {
+                type: 'text', label: '微信', name: 'wechat', text: wechat,
+            },
+            {
+                type: 'text', label: '微博', name: 'twitter', text: twitter,
+            },
+            {
                 type: 'text', label: 'Confluence', name: 'linkedin', text: linkedin,
             },
             {
                 type: 'text', label: 'GitLab/GitHub', name: 'github', text: github,
-            },
-            {
-                type: 'text', label: '微博', name: 'twitter', text: twitter,
             },
         ]
         return (

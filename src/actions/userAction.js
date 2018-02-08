@@ -9,7 +9,7 @@ import {
     REDIRECT_SUCCESS,
     FETCH_USER_START,
     FETCH_USER_SUCCESS,
-    FETCH_USER_FAILURE
+    FETCH_USER_FAILURE,
 } from '../constants/actionType'
 
 export function setErrorMsg(msg) {
@@ -65,6 +65,8 @@ function getSelfSuccess(obj) {
             hobbies: obj.Hobbies,
             skills: obj.Skills,
             contributes: obj.Contributes,
+            wechat: obj.WeChat,
+            school: obj.School,
         },
     }
 }
@@ -121,7 +123,7 @@ export function login({ ShortName, Password }, fn) {
         .then((res) => {
             // dispatch(loginSuccess(res.data))
             if (res.data.code === 200) {
-                dispatch(loginSuccess({ shortName: res.data.info, redirectTo: './' }))
+                dispatch(loginSuccess({ shortName: ShortName, redirectTo: './' }))
             }
             if (res.data.code === 403) {
                 dispatch(loginSuccess({ shortName: res.data.info, redirectTo: './detail' }))
@@ -160,7 +162,6 @@ export function getSelfInfo(fn) {
 }
 
 export function submitData(data, fn) {
-    console.log(data)
     axios.post('/user/updateUser', { ...data })
     .then((res) => {
         if (res.data.code === 200) {
@@ -186,7 +187,8 @@ export function enhanceSubmit() {
             Hobbies: getState().user.hobbies,
             Skills: getState().user.skills,
             Contributes: getState().user.contributes,
+            WeChat: getState().user.wechat,
+            School: getState().user.school,
         })
-        // console.log(getState().user.skills)
     })
 }

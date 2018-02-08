@@ -18,16 +18,6 @@ class Search extends Component {
             this.setState(prevState => ({
                 index: (prevState.index + 1) % prevState.words.length,
             }))
-            // this.setState((prevState) => {
-            //     if (prevState.index + 1 < prevState.words.length) {
-            //         return ({
-            //             index: prevState.index + 1,
-            //           })
-            //     }
-            //     return ({
-            //         index: 0,
-            //     })
-            // })
         }, 3000)
     }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import IconMenu from 'material-ui/IconMenu'
 import IconButton from 'material-ui/IconButton'
 import MenuItem from 'material-ui/MenuItem'
@@ -11,7 +12,9 @@ import styles from './AppBar.scss'
 
 @connect(
     state => state,
-    { search, getSelfInfo, logout, uploadData },
+    {
+ search, getSelfInfo, logout, uploadData,
+},
 )
 class AppBar extends Component {
     constructor() {
@@ -19,6 +22,8 @@ class AppBar extends Component {
         this.handleClick = this.handleClick.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
         this.handleBackhome = this.handleBackhome.bind(this)
+        this.handleILike = this.handleILike.bind(this)
+        this.handleLikeMe = this.handleLikeMe.bind(this)
     }
 
     handleLogout() {
@@ -85,6 +90,26 @@ class AppBar extends Component {
         }
     }
 
+    handleILike() {
+        const currentPath = sessionStorage.getItem('route')
+        if (currentPath === './iLike' || currentPath === './edit' || currentPath === './') {
+            this.props.history.push('./iLike')
+        } else {
+            this.props.history.push('../iLike')
+        }
+        this.props.history.push('./iLike')
+    }
+
+    handleLikeMe() {
+        const currentPath = sessionStorage.getItem('route')
+        if (currentPath === './likeMe' || currentPath === './edit' || currentPath === './') {
+            this.props.history.push('./likeMe')
+        } else {
+            this.props.history.push('../likeMe')
+        }
+        this.props.history.push('./likeMe')
+    }
+
     render() {
         const { search } = this.props
         return (
@@ -94,7 +119,7 @@ class AppBar extends Component {
                 </div>
                 <div className={styles.main}>
                     <ul className={styles.nav}>
-                        {/* <li onClick={() => { this.props.history.push('./') }}>首页</li> */}
+                        <li onClick={this.handleBackhome}>首页</li>
                         {
                             this.props.showSearch &&
                             <li>
@@ -108,6 +133,8 @@ class AppBar extends Component {
                               targetOrigin={{ horizontal: 'right', vertical: 'top' }}
                             >
                                 <MenuItem primaryText="个人中心" onClick={this.handleClick} />
+                                <MenuItem primaryText="谁赞过我" onClick={this.handleLikeMe} />
+                                <MenuItem primaryText="我赞过谁" onClick={this.handleILike} />
                                 <MenuItem primaryText="退出" onClick={this.handleLogout} />
                             </IconMenu>
                         </li>
@@ -118,4 +145,4 @@ class AppBar extends Component {
     }
 }
 
-export default AppBar
+export default withRouter(AppBar)

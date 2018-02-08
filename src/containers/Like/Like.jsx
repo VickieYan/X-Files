@@ -5,7 +5,7 @@ import axios from 'axios'
 import { AppBar, Fiche, Slider } from '../../components/'
 import departments from '../../../static/data/departments'
 import { sort, getUserInfo, initInfo, loadMore, updateLike } from '../../actions/infoAction'
-import styles from './Home.scss'
+import styles from './Like.scss'
 
 @connect(
     state => state,
@@ -13,11 +13,13 @@ import styles from './Home.scss'
  sort, getUserInfo, initInfo, loadMore, updateLike,
 },
 )
-class Home extends Component {
+class Like extends Component {
     constructor(props) {
         super(props)
         this.state = {
             likedUsers: [],
+            users: [],
+            msg: '',
         }
         this.currentPage = 1
         this.handleClick = this.handleClick.bind(this)
@@ -28,32 +30,57 @@ class Home extends Component {
 
     componentDidMount() {
         const { initInfo, loadMore } = this.props
-        const initLike = () => {
-            const { shortName } = this.props.user
-            // 获取user点赞过的用户
+        const { shortName } = this.props.user
+        // 拉取用户列表
+        const userList = []
+        if (this.props.location.pathname === '/likeMe') {
+            axios.post('/info/getGet', { query: shortName })
+            .then((res) => {
+                const users = res.data.data.Get
+                if (users.length > 0) {
+                    users.forEach((item) => {
+                        axios.post('/user/info', { query: item })
+                        .then((res2) => {
+                            userList.push(res2.data.data)
+                        })
+                        .then(() => {
+                            this.setState({
+                                users: userList,
+                            })
+                        })
+                    })
+                } else {
+                    this.setState({
+                        users: [],
+                    })
+                }
+            })
+        } else {
             axios.post('/info/giveGet', { query: shortName })
             .then((res) => {
-                this.setState({
-                    likedUsers: res.data.data.Give,
-                })
+                const users = res.data.data.Give
+                if (users.length > 0) {
+                    users.forEach((item) => {
+                        axios.post('/user/info', { query: item })
+                        .then((res2) => {
+                            userList.push(res2.data.data)
+                        })
+                        .then(() => {
+                            this.setState({
+                                users: userList,
+                            })
+                        })
+                    })
+                } else {
+                    this.setState({
+                        users: [],
+                        msg: '查无此人ก็ʕ•͡ᴥ•ʔ ก้',
+                    })
+                }
             })
         }
-        const initLikeNum = () => {
-            // 获取每个用户的被赞数
-            const { members } = this.props.info
-            members.forEach((item, index) => {
-                axios.post('/info/getNumber', { query: item.ShortName })
-                .then((res) => {
-                    const { members } = this.props.info
-                    const { updateLike } = this.props
-                    const temp = members.slice()
-                    temp[index].LikedNum = res.data.data.GetNumber
-                    updateLike(temp)
-                })
-            })
-        }
-        // 初始化首页
-        initInfo(1, initLike, initLikeNum)
+
+
         sessionStorage.setItem('route', './')
         document.addEventListener('scroll', this.handleScroll)
     }
@@ -72,8 +99,8 @@ class Home extends Component {
 
     handleClick(index) {
         const { history } = this.props
-        const { members } = this.props.info
-        const shortName = members[index].ShortName
+        const { users } = this.state
+        const shortName = users[index].ShortName
         history.push(`./profile/${shortName}`)
     }
 
@@ -97,30 +124,23 @@ class Home extends Component {
         const masonryOptions = {
             transitionDuration: 0,
         }
-        const { sort } = this.props
-        const { members } = this.props.info
+        const { sort } = this.props.info
+        const { users, msg } = this.state
         return (
             <div>
-                <AppBar {...this.props.info} showSearch />
+                <AppBar {...this.props.info} />
                 <div className={styles.main}>
-                    <Slider
-                      data={departments}
-                      itemWidth={210}
-                      spacing={8}
-                      onSort={sort}
-                    />
-                    { members.length === 0 ? '查无此人ก็ʕ•͡ᴥ•ʔ ก้' :
+                    { users.length === 0 ? msg :
                     <Masonry
                       options={masonryOptions}
                       updateOnEachImageLoad={false}
                     >
-                        {members.map((item, index) => {
+                        {users.map((item, index) => {
                           const { likedUsers } = this.state
                           return (
                               <Fiche
                                 {...this.props}
                               //   likedNum={res.data.data.GetNumber}
-                                showLike
                                 isLiked={likedUsers.indexOf(item.ShortName) !== -1}
                                 key={index}
                                 data={item}
@@ -132,11 +152,10 @@ class Home extends Component {
                       })}
                     </Masonry>
                     }
-
                 </div>
             </div>
         )
     }
 }
 
-export default Home
+export default Like

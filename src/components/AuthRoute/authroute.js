@@ -12,7 +12,6 @@ import { login, check } from '../../actions/userAction'
 class AuthRoute extends Component {
     componentDidMount() {
         const currentPath = sessionStorage.getItem('route')
-        // console.log(currentPath)
         this.props.check(() => { this.props.history.push(currentPath || this.props.redirectTo) })
         // this.props.check(() => { this.props.history.push(this.props.redirectTo) })
     }

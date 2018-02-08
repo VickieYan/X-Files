@@ -42,6 +42,8 @@ class Form extends Component {
             contributes,
             department,
             email,
+            wechat,
+            school,
         } = this.props.data
         this.props.submitData({
             Sex: sex,
@@ -57,6 +59,8 @@ class Form extends Component {
             Skills: skills,
             Contributes: contributes,
             Email: email,
+            WeChat: wechat,
+            School: school,
         })
     }
 
@@ -76,6 +80,7 @@ class Form extends Component {
                 spellCheck: false,
                 row: 1,
                 rowsMax: 2,
+                maxLength: 100,
                 autoFocus: true,
                 name,
                 onChange: this.handleChange,

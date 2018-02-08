@@ -40,11 +40,6 @@ class Memorabilia extends Component {
         // controled components
         this.setState({ [type]: value })
 
-        // if (type !== 'duty') {
-        //     // sort here
-        //     newContributes.sort(compare('startTime', ascOrderTime))
-        //     console.log(newContributes)
-        // }
         if (index >= 0) {
             newContributes[index][type] = value
             if (type !== 'duty') {
@@ -55,7 +50,6 @@ class Memorabilia extends Component {
     }
 
     renderDelButton() {
-        console.log(this.props.onDelete)
         return (
             <div className={styles['btn-wrap']}>
                 <FlatButton

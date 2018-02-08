@@ -9,7 +9,7 @@ class Main extends Component {
         //     name: 'Nana',
         //     signature: '我们不肯探索自己本身的价值，我们过分看重他人在自己生命里的参与。于是，孤独不再美好，失去了他人，我们惶惑不安。',
         // }
-        const group = ['about', 'work']
+        const group = ['about me', 'work']
         const { data } = this.props
         return (
             <div className={styles.main}>
@@ -20,7 +20,7 @@ class Main extends Component {
                     <div className={styles.logo}>
                         <img alt="" src="../../../static/images/logo.png" />
                     </div>
-                    <h4>i am {data.FullName}</h4>
+                    <h4>i am {data.FullName && data.FullName.split('.')[0]}</h4>
                     <p>{data.Signature}</p>
                     <div className={styles['btn-group']}>
                         {

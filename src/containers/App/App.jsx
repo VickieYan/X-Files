@@ -18,6 +18,7 @@ import {
     Login,
     Detail,
     Profile,
+    Like,
 } from '../index'
 import styles from './App.scss'
 
@@ -44,13 +45,15 @@ class App extends Component {
                                   transitionEnterTimeout={300}
                                   transitionLeaveTimeout={300}
                                 >
-                                    {/* <AuthRoute /> */}
+                                    <AuthRoute />
                                     <Switch key={location.key} location={location}>
                                         <Route exact path="/" component={Home} location={location} />
                                         <Route path="/login" component={Login} location={location} />
                                         <Route path="/detail" component={Detail} location={location} />
                                         <Route path="/profile/:shortName" component={Profile} location={location} />
                                         <Route path="/edit" component={Edit} location={location} />
+                                        <Route path="/iLike" component={Like} location={location} />
+                                        <Route path="/likeMe" component={Like} location={location} />
                                     </Switch>
                                 </CSSTransitionGroup>
                             )}

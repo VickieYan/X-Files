@@ -39,6 +39,8 @@ const initState = {
     github: '',
     linkedin: '',
     twitter: '',
+    wechat: '',
+    school: '',
     hobbies: [],
     skills: [],
     contributes: [

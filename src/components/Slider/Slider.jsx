@@ -32,7 +32,7 @@ class Slider extends Component {
             offset: 0,
             isLeft: true,
             isRight: false,
-            activeIndex:-1,
+            activeIndex: -1,
         }
         this.handleClick = this.handleClick.bind(this)
         this.handleSort = this.handleSort.bind(this)
@@ -109,7 +109,7 @@ class Slider extends Component {
             boxShadow: '0 0 10px #fc6767',
         } : null
         return (
-            <Card key={index} style={{ ...cardStyle,  ...activeStyle }} onClick={() => { this.handleSort(title, index) }}>
+            <Card key={index} style={{ ...cardStyle, ...activeStyle }} onClick={() => { this.handleSort(title, index) }}>
                 <CardMedia style={{ width: `${itemWidth}px` }}>
                     <img src={img} width={itemWidth} height="118" alt="" />
                 </CardMedia>

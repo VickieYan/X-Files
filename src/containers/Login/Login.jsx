@@ -65,7 +65,6 @@ class Login extends Component {
             password: 'isPasswordValid',
         }[target.name]
 
-        console.log(setErrorMsg)
         this.props.setErrorMsg(0)
         this.setState({ [statusType]: null })
     }
@@ -96,7 +95,6 @@ class Login extends Component {
     render() {
         const { isShortNameValid, isPasswordValid } = this.state
         const passwordErrorMsg = validator.password.errorMsg[this.props.msg]
-        console.log(passwordErrorMsg)
         const action = 'Login'
         const sign = 'Please Use Your '
         const signHignlight = 'Shortname'

@@ -3,8 +3,10 @@ import {
     SEARCH_SUCCESS,
     GET_SUCCESS,
     SORT_SUCCESS,
+    SORT_FAILURE,
     INIT_SUCCESS,
     LOAD_MORE_SUCCESS,
+    UPDATE_LIKE,
 } from '../constants/actionType'
 
 function searchSuccess(data) {
@@ -50,7 +52,6 @@ export function search(keyword) {
     return ((dispatch) => {
         axios.post('/info/search', { query: keyword })
             .then((res) => {
-                console.log(res)
                 if (res.data.code !== 200) {
                     dispatch(searchSuccess(res.data.data))
                 }
@@ -64,18 +65,32 @@ export function sort(department) {
         .then((res) => {
             if (res.data.code === 200) {
                 dispatch(sortSuccess(res.data.data))
+            } else {
+                dispatch({
+                    type: SORT_FAILURE,
+                })
             }
         })
     })
 }
 
-export function initInfo(page) {
+export function initInfo(page, fn, fn2) {
     return ((dispatch) => {
         axios.post('/info/indexShow', { page })
             .then((res) => {
                 dispatch(initSuccess(res.data.info.data))
             })
+            .then(fn).then(fn2)
     })
+}
+
+export function updateLike(newArr) {
+    return {
+        type: UPDATE_LIKE,
+        payload: {
+            newArr,
+        },
+    }
 }
 
 export function loadMore(page) {
