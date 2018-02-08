@@ -7,6 +7,7 @@ import {
     INIT_SUCCESS,
     LOAD_MORE_SUCCESS,
     UPDATE_LIKE,
+    SEARCH_FAILURE,
 } from '../constants/actionType'
 
 function searchSuccess(data) {
@@ -52,7 +53,11 @@ export function search(keyword) {
     return ((dispatch) => {
         axios.post('/info/search', { query: keyword })
             .then((res) => {
-                if (res.data.code !== 200) {
+                if (res.data.code === 200 || res.data.code === 404 || res.data.code === 500) {
+                    dispatch({
+                        type: SEARCH_FAILURE,
+                    })
+                } else {
                     dispatch(searchSuccess(res.data.data))
                 }
             })

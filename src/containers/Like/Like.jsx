@@ -52,6 +52,7 @@ class Like extends Component {
                 } else {
                     this.setState({
                         users: [],
+                        msg: '查无此人ก็ʕ•͡ᴥ•ʔ ก้',
                     })
                 }
             })

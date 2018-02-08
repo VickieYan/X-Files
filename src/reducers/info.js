@@ -1,5 +1,6 @@
 import {
     SEARCH_SUCCESS,
+    SEARCH_FAILURE,
     SORT_SUCCESS,
     SORT_FAILURE,
     INIT_SUCCESS,
@@ -17,6 +18,8 @@ export default function info(state = initState, action) {
     switch (action.type) {
         case SEARCH_SUCCESS:
             return { ...state, members: action.payload }
+        case SEARCH_FAILURE:
+            return { ...state, members: [] }
         case SORT_SUCCESS:
             return { ...state, members: action.payload }
         case SORT_FAILURE:
