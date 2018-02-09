@@ -18,6 +18,11 @@ src: url('../../../static/fonts/JosefinSans-Italic.ttf'),
     bottom: 0;
 }
 
+.like-btn {
+    position: absolute;
+    right: 0;
+}
+
 .main {
     position: absolute;
     left: 50%;
@@ -73,7 +78,7 @@ src: url('../../../static/fonts/JosefinSans-Italic.ttf'),
     p {
         overflow: hidden;
         height: 260px;
-        padding:20px 80px;
+        padding:5px 80px 20px;
         margin-bottom: 40px;//增加按钮时修改此处
         font-family: '微软雅黑';
         font-style: italic;

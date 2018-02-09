@@ -1,14 +1,73 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import Checkbox from 'material-ui/Checkbox'
+import ActionFavorite from 'material-ui/svg-icons/action/favorite'
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 import { Button, Icon } from '../../components/'
 import logos from '../../../static/data/logo'
 import styles from './Profile.scss'
 
 class Main extends Component {
+    constructor() {
+        super()
+        this.state = {
+            checked: false,
+        }
+        this.handleClick = this.handleClick.bind(this)
+        this.handleUnLike = this.handleUnLike.bind(this)
+        this.handleLike = this.handleLike.bind(this)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { shortName, data } = nextProps
+        axios.post('../info/giveGet', { query: shortName })
+        .then((res) => {
+            if (res.data.code === 200 && res.data.data) {
+                this.setState({
+                    checked: res.data.data.Give.indexOf(data.ShortName) !== -1,
+                })
+            }
+        })
+    }
+
+    handleClick(e) {
+        this.setState((oldState, props) => {
+            if (oldState.checked) {
+                this.handleUnLike()
+            } else {
+                this.handleLike()
+            }
+            return {
+                checked: !oldState.checked,
+            }
+        })
+        e.stopPropagation()
+    }
+
+    handleLike() {
+        const { updateLike, shortName } = this.props
+        const { ShortName } = this.props.data
+        axios.post('/info/giveGood', { from: shortName, to: ShortName })
+    }
+
+    handleUnLike() {
+        const { updateLike, shortName } = this.props
+        const { ShortName } = this.props.data
+        axios.post('/info/deleteGood', { from: shortName, to: ShortName })
+    }
+
     render() {
-        // const data = {
-        //     name: 'Nana',
-        //     signature: '我们不肯探索自己本身的价值，我们过分看重他人在自己生命里的参与。于是，孤独不再美好，失去了他人，我们惶惑不安。',
-        // }
+        const mStyles = {
+            block: {
+                maxWidth: 200,
+            },
+            icon: {
+                fill: '#FF5252',
+            },
+            checkbox: {
+                marginBottom: 16,
+            },
+        }
         const group = ['about me', 'work']
         const { data } = this.props
         return (
@@ -49,6 +108,16 @@ class Main extends Component {
                             })
                         }
                     </div>
+                </div>
+                <div className={styles['like-btn']}>
+                    <Checkbox
+                      checked={this.state.checked}
+                      iconStyle={mStyles.icon}
+                      checkedIcon={<ActionFavorite />}
+                      uncheckedIcon={<ActionFavoriteBorder />}
+                      style={mStyles.checkbox}
+                      onClick={this.handleClick}
+                    />
                 </div>
             </div>
         )

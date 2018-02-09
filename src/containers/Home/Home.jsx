@@ -28,14 +28,24 @@ class Home extends Component {
 
     componentDidMount() {
         const { initInfo, loadMore } = this.props
+        // const { updateLike } = this.props
+        // const { members } = this.props.info
+        // const temp = members.slice()
         const initLike = () => {
             const { shortName } = this.props.user
             // 获取user点赞过的用户
             axios.post('/info/giveGet', { query: shortName })
             .then((res) => {
-                this.setState({
-                    likedUsers: res.data.data.Give,
+                console.log(members)
+                members.forEach((item, index) => {
+                    res.data.data.Give.indexOf(item.ShortName)
+                    // members[index].isLiked = res.data.data.Give.indexOf(item.ShortName) !== -1
+                    temp[index].isLiked = res.data.data.Give.indexOf(item.ShortName) !== -1
+                    updateLike(temp)
                 })
+                // this.setState({
+                //     likedUsers: res.data.data.Give,
+                // })
             })
         }
         const initLikeNum = () => {
@@ -116,11 +126,14 @@ class Home extends Component {
                     >
                         {members.map((item, index) => {
                           const { likedUsers } = this.state
+                          const { shortName } = this.props.user
                           return (
                               <Fiche
                                 {...this.props}
                               //   likedNum={res.data.data.GetNumber}
                                 showLike
+                                // shortName={shortName}
+                                // index={index}
                                 isLiked={likedUsers.indexOf(item.ShortName) !== -1}
                                 key={index}
                                 data={item}

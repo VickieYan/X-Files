@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransitionGroup } from 'react-transition-group'
-import { getUserInfo, current } from '../../actions/infoAction'
+import { getUserInfo, curren, updateLike } from '../../actions/infoAction'
 import { AppBar } from '../../components/'
 import Main from './Main'
 import About from './About'
@@ -11,8 +11,8 @@ import Work from './Work'
 import styles from './Profile.scss'
 
 @connect(
-    state => state.info,
-    { getUserInfo, current },
+    state => state,
+    { getUserInfo, updateLike },
 )
 class Profile extends Component {
     constructor(props) {
@@ -58,10 +58,12 @@ class Profile extends Component {
 
     render() {
         const { currentPage, group } = this.state
-        const { current } = this.props
+        const { current } = this.props.info
+        const { shortName } = this.props.user
+        const { updateLike } = this.props
         return (
             <div>
-                <AppBar {...this.props} />
+                <AppBar {...this.props.info} />
                 <div className={styles.wrap}>
                     <CSSTransitionGroup
                       transitionName="fade"
@@ -72,6 +74,8 @@ class Profile extends Component {
                             const Specifystory = item.component
                             return currentPage === item.name &&
                                 <Specifystory
+                                  updateLike={updateLike}
+                                  shortName={shortName}
                                   key={index}
                                   onClick={this.handleClick}
                                   data={current}

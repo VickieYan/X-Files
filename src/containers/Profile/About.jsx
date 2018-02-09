@@ -45,7 +45,7 @@ class About extends Component {
                             {
                                 data.WeChat !== '' &&
                                 <li>
-                                    <img className={styles.wechat} alt="" src="http://www.haotu.net/up/2833/512/chn_wechat.png" />
+                                    <img className={styles.wechat} alt="" src="../../../static/images/logo/wechat.png" />
                                     {`${data.WeChat}`}
                                 </li>
                             }
